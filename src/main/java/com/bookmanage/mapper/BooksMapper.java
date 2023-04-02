@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface booksMapper {
+public interface BooksMapper {
     public List<Map<String, Object>> getAllBooks();
 
     public List<Map<String, Object>> getBooksByTypes(String booktype);

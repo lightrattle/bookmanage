@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface borrowsMapper {
+public interface BorrowsMapper {
     public List<Map<String, Object>> getBorrowsListByUserid(int userid);
 
     public List<Map<String, Object>> getBorrowsListByBookid(int bookid);

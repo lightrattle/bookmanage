@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface recomMapper {
+public interface RecomMapper {
     public List<Map<String, Object>> getRecomListByBooktype(String booktype);
 
     public List<Map<String, Object>> getRecomListByUserid(int userid);

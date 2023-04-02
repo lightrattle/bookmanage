@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface commentsMapper {
+public interface CommentsMapper {
     public List<Map<String, Object>> getCommentsListByUserid(int userid);
 
     public List<Map<String, Object>> getCommentsListByBookid(int bookid);

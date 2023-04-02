@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 @Mapper
-public interface infoMapper {
+public interface InfoMapper {
     public List<Map<String, Object>> getInfoList();
 
     public boolean insertOneInfo(int bookid, Date infotime);
