@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bookmanage.mapper.borrowsMapper">
+    <select id="getBorrowsListByUserid" resultType="java.util.HashMap">
+        select * from borrows where userid = #{userid}
+    </select>
 
+    <select id="getBorrowsListByBookid" resultType="java.util.HashMap">
+        select * from borrows where bookid = #{bookid}
+    </select>
+
+    <select id="getBorrowsListByStatus" resultType="java.util.HashMap">
+        select * from borrows where status = #{status}
+    </select>
+
+    <insert id="insertOneBorrow">
+        insert into `borrows`(userid, lendtime, bookid) values (#{userid}, #{lendtime}, #{bookid})
+    </insert>
+
+    <update id="updateOneStatus">
+        update `borrows` set
+            status = 1
+                where userid = #{userid} and bookid = #{bookid}
+    </update>
 </mapper>

@@ -2,7 +2,7 @@ package com.bookmanage.entity;
 
 import java.util.Date;
 
-public class comments {
+public class Comments {
     private int commentid;
     private int userid;
     private Date commenttime;

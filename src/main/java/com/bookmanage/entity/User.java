@@ -1,6 +1,6 @@
 package com.bookmanage.entity;
 
-public class user {
+public class User {
     private int userid;
     private String username;
     private String password;

@@ -65,6 +65,7 @@ create table `recom`(
     `major` varchar(64) character set utf8 collate utf8_general_ci not null,
     `develop` varchar(64) character set utf8 collate utf8_general_ci not null,
     `bookid` int(10) not null references books(`bookid`),
+    `reason` varchar(64) character set utf8 collate utf8_general_ci not null,
     primary key (`recomid`) using btree
 ) engine = innodb character set = utf8 collate = utf8_general_ci row_format = compact;
 

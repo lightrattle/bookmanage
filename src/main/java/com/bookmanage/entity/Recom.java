@@ -1,11 +1,13 @@
 package com.bookmanage.entity;
 
-public class recom {
+public class Recom {
     private int recomid;
     private int userid;
     private String major;
     private String develop;
     private int bookid;
+
+    private String reason;
 
     public int getRecomid() {
         return recomid;
@@ -45,5 +47,13 @@ public class recom {
 
     public void setBookid(int bookid) {
         this.bookid = bookid;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

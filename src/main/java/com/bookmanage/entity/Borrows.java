@@ -2,7 +2,7 @@ package com.bookmanage.entity;
 
 import java.util.Date;
 
-public class borrows {
+public class Borrows {
     private int borrowid;
     private int userid;
     private Date lendtime;

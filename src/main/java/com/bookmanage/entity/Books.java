@@ -1,6 +1,6 @@
 package com.bookmanage.entity;
 
-public class books {
+public class Books {
     private int bookid;
     private String bookname;
     private String booktype;

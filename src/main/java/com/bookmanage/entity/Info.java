@@ -2,7 +2,7 @@ package com.bookmanage.entity;
 
 import java.util.Date;
 
-public class info {
+public class Info {
     private int infoid;
     private int bookid;
     private Date infotime;
