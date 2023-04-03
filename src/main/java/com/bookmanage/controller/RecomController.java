@@ -7,10 +7,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping(value = "/recom", method={RequestMethod.GET, RequestMethod.POST})
 @EnableAutoConfiguration
 public class RecomController {
     @Autowired
     private RecomService recomService;
+
+    @RequestMapping("/getRecomListByBooktype")
+    public List<Map<String, Object>> getRecomListByBooktype(String booktype){
+        return recomService.getRecomListByBooktype(booktype);
+    }
+
+    @RequestMapping("/getRecomListByUserid")
+    public List<Map<String, Object>> getRecomListByUserid(int userid){
+        return recomService.getRecomListByUserid(userid);
+    }
+
+    @RequestMapping("/getRecomListByMajor")
+    public List<Map<String, Object>> getRecomListByMajor(String major){
+        return recomService.getRecomListByMajor(major);
+    }
+
+    @RequestMapping("/getRecomListByMajorAndDevelop")
+    public List<Map<String, Object>> getRecomListByMajorAndDevelop(String major, String develop){
+        return recomService.getRecomListByMajorAndDevelop(major, develop);
+    }
+
+    @RequestMapping("/getRecomListByBookid")
+    public List<Map<String, Object>> getRecomListByBookid(int bookid){
+        return recomService.getRecomListByBookid(bookid);
+    }
+
+    @RequestMapping("/insertOneRecom")
+    public boolean insertOneRecom(int userid, String major, String develop, int bookid, String reason){
+        return recomService.insertOneRecom(userid, major, develop, bookid, reason);
+    }
+
+    @RequestMapping("/deleteOneRecom")
+    public boolean deleteOneRecom(int recomid){
+        return recomService.deleteOneRecom(recomid);
+    }
 }
