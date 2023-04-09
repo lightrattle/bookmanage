@@ -5,6 +5,40 @@
     <title>login</title>
 </head>
 <body>
-
+<label for="username">用户名:</label><input type="text" id="username" required placeholder="用户名"><br>
+<label for="password">密&nbsp;&nbsp;&nbsp;码:</label><input type="password" id="password" required placeholder="密码"><br>
+<button type="button" class="ui-button" id="tologin">登录</button>
 </body>
+<script>
+    $(document).on('click', '#tologin' , function () {
+        var result;
+        $.ajax({
+            url: "/user/loginUser",
+            type: "post",
+            data: {
+                username: $("#username").val(),
+                password: $("#password").val()
+            },
+            dataType: "json",
+            async: false,
+            success: function (data) {
+                result = data;
+            },
+            error: function (errorMsg) {
+                alert("error!" + errorMsg);
+                console.log(errorMsg);
+            }
+        });
+        localStorage.setItem("loginUser", result['loginUser']);
+        localStorage.setItem("userid", result['userid']);
+        localStorage.setItem("status", result['status']);
+        alert(result['msg']);
+        location.href ='/home.html';
+    });
+    $(document).keydown(function(event){
+        if(event.keyCode === 13){
+            document.getElementById("tologin").click();
+        }
+    });
+</script>
 </html>

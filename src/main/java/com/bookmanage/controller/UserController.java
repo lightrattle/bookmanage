@@ -8,6 +8,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,24 +21,29 @@ public class UserController {
 
     @PostMapping("/loginUser")
     //登录功能
-    public String loginUser(@RequestParam("username") String username, @RequestParam("password") String password,
+    public Map<String, Object> loginUser(@RequestParam("username") String username, @RequestParam("password") String password,
                             Model model, HttpSession session){
+        Map<String, Object> map = new HashMap<>();
         User user = userService.loginUser(username, password);
         if(user != null){//成功
             model.addAttribute("msg","登录完成！ 欢迎你！ "+user.getUsername());
+            model.addAttribute("loginUser", username);
+            model.addAttribute("userid", user.getUserid());
+            map.put("msg","登录成功！ 欢迎你！"+user.getUsername());
+            map.put("loginUser", username);
+            map.put("userid", user.getUserid());
             session.setAttribute("loginUser", username);
             session.setAttribute("userid",user.getUserid());
-            return "<script>" +
-                    "alert('登录完成！');" +
-                    "location.href='/home.html';" +
-                    "</script>";
-        }else{
-            model.addAttribute("msg", "登录出错！用户名或密码错误！");
+            return map;
+        }else {
+            model.addAttribute("msg", "登录失败！用户名或密码错误！");
+            model.addAttribute("loginUser", null);
+            model.addAttribute("userid",null);
+            map.put("msg", "登录失败！用户名或密码错误！");
+            map.put("loginUser", null);
+            map.put("userid", null);
+            return map;
         }
-        return "<script>" +
-                "alert('登录出错！');" +
-                "location.href='/login.html';" +
-                "</script>";
     }
     @PostMapping("/createUser")
     //注册功能，保存数据

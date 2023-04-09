@@ -30,11 +30,7 @@
                bookname, booktype, lendnum, image, allnum, intro, remainnum
         from recom, books where books.bookid = recom.bookid and recom.bookid = #{bookid}
     </select>
-<!--    public List<Map<String, Object>> getBooksByRecomAndUserid(int userid);-->
 
-<!--    public List<Map<String, Object>> getBooksByRecomAndMajor(String major);-->
-
-<!--    public List<Map<String, Object>> getBooksByRecomAndDevelop(String develop);-->
     <select id="getBooksByRecomAndUserid" resultType="java.util.HashMap">
         select recomid, userid, major, develop, books.bookid, reason,
                bookname, booktype, lendnum, image, allnum, intro, remainnum
