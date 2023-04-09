@@ -17,6 +17,12 @@ public interface RecomMapper {
 
     public List<Map<String, Object>> getRecomListByBookid(int bookid);
 
+    public List<Map<String, Object>> getBooksByRecomAndUserid(int userid);
+
+    public List<Map<String, Object>> getBooksByRecomAndMajor(String major);
+
+    public List<Map<String, Object>> getBooksByRecomAndDevelop(String major, String develop);
+
     public boolean insertOneRecom(int userid, String major, String develop, int bookid, String reason);
 
     public boolean deleteOneRecom(int recomid);

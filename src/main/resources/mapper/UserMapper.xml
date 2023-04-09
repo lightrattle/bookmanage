@@ -8,4 +8,20 @@
     <insert id="createUser">
         insert into user (nickname, username, password, status) value (#{nickname},#{username},#{password}, 2)
     </insert>
+
+    <delete id="removeUser">
+        delete from user where userid =#{userid}
+    </delete>
+
+    <select id="getUsernameByUserid" resultType="String">
+        select username from user where userid = #{userid}
+    </select>
+
+    <select id="getUseridByUsername" resultType="Integer">
+        select userid from user where username = #{username}
+    </select>
+
+    <select id="getUsernameForRecom" resultType="java.util.HashMap">
+        select userid, username, nickname, status, maxlend, lended from user where status = 1
+    </select>
 </mapper>

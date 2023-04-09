@@ -30,6 +30,28 @@
                bookname, booktype, lendnum, image, allnum, intro, remainnum
         from recom, books where books.bookid = recom.bookid and recom.bookid = #{bookid}
     </select>
+<!--    public List<Map<String, Object>> getBooksByRecomAndUserid(int userid);-->
+
+<!--    public List<Map<String, Object>> getBooksByRecomAndMajor(String major);-->
+
+<!--    public List<Map<String, Object>> getBooksByRecomAndDevelop(String develop);-->
+    <select id="getBooksByRecomAndUserid" resultType="java.util.HashMap">
+        select recomid, userid, major, develop, books.bookid, reason,
+               bookname, booktype, lendnum, image, allnum, intro, remainnum
+        from recom, books where books.bookid = recom.bookid and recom.userid = #{userid}
+    </select>
+
+    <select id="getBooksByRecomAndMajor" resultType="java.util.HashMap">
+        select recomid, userid, major, develop, books.bookid, reason,
+               bookname, booktype, lendnum, image, allnum, intro, remainnum
+        from recom, books where books.bookid = recom.bookid and recom.major = #{major}
+    </select>
+
+    <select id="getBooksByRecomAndDevelop" resultType="java.util.HashMap">
+        select recomid, userid, major, develop, books.bookid, reason,
+               bookname, booktype, lendnum, image, allnum, intro, remainnum
+        from recom, books where books.bookid = recom.bookid and recom.major = #{major} and recom.develop = #{develop}
+    </select>
 
     <insert id="insertOneRecom">
         insert into `recom`(userid, major, develop, bookid, reason)

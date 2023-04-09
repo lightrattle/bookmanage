@@ -27,6 +27,11 @@ public class RecomController {
         return recomService.getRecomListByUserid(userid);
     }
 
+    @RequestMapping("/getRecomListByUsername")
+    public List<Map<String, Object>> getRecomListByUsername(String username){
+        return recomService.getRecomListByUsername(username);
+    }
+
     @RequestMapping("/getRecomListByMajor")
     public List<Map<String, Object>> getRecomListByMajor(String major){
         return recomService.getRecomListByMajor(major);

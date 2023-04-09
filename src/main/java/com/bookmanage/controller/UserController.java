@@ -8,6 +8,9 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping(value = "/user", method={RequestMethod.GET, RequestMethod.POST})
 @EnableAutoConfiguration
@@ -51,11 +54,21 @@ public class UserController {
                 "</script>";
     }
 
-    @RequestMapping("/logout")
+    @RequestMapping("/logout")//退出登录
     public String logout(HttpSession session) {
         session.invalidate();
         return "<script>" +
                 "location.href='/login.html';" +
                 "</script>";
+    }
+
+    @PostMapping("/removeUser")
+    public boolean removeUser(int userid) {
+        return userService.removeUser(userid);
+    }
+
+    @RequestMapping("/getUsernameForRecom")
+    public List<Map<String, Object>> getUsernameForRecom(){
+        return userService.getUsernameForRecom();
     }
 }

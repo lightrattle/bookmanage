@@ -8,9 +8,11 @@ import java.util.Map;
 
 @Service
 public interface InfoServiceImpl {
-    List<Map<String, Object>> getInfoList();
+    List<Map<String, Object>> getInfoListForNew();
 
-    boolean insertOneInfo(int bookid, Date infotime);
+    List<Map<String, Object>> getInfoListForUser(int userid);
+
+    boolean insertOneInfo(int bookid, int judeg, Date infotime, String infocontent);
 
     boolean deleteOneInfo(int infoid);
 }

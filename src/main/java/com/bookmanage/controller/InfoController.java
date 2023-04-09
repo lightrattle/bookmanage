@@ -18,14 +18,19 @@ public class InfoController {
     @Autowired
     private InfoService infoService;
 
-    @RequestMapping("/getInfoList")
-    public List<Map<String, Object>> getInfoList(){
-        return infoService.getInfoList();
+    @RequestMapping("/getInfoListForNew")
+    public List<Map<String, Object>> getInfoListForNew(){
+        return infoService.getInfoListForNew();
+    }
+
+    @RequestMapping("/getInfoListForUser")
+    public List<Map<String, Object>> getInfoListForUser(int userid){
+        return infoService.getInfoListForUser(userid);
     }
 
     @RequestMapping("/insertOneInfo")
-    public boolean insertOneInfo(int bookid, Date infotime){
-        return infoService.insertOneInfo(bookid, infotime);
+    public boolean insertOneInfo(int bookid, int judge, Date infotime, String infocontent){
+        return infoService.insertOneInfo(bookid, judge, infotime, infocontent);
     }
 
     @RequestMapping("/deleteOneInfo")

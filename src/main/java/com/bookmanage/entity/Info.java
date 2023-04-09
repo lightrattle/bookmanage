@@ -7,6 +7,8 @@ public class Info {
     private int bookid;
     private Date infotime;
 
+    private String infocontent;
+
     public int getInfoid() {
         return infoid;
     }
@@ -29,5 +31,13 @@ public class Info {
 
     public void setInfotime(Date infotime) {
         this.infotime = infotime;
+    }
+
+    public String getInfocontent() {
+        return infocontent;
+    }
+
+    public void setInfocontent(String infocontent) {
+        this.infocontent = infocontent;
     }
 }

@@ -72,8 +72,10 @@ create table `recom`(
 drop table if exists `info`;
 create table `info`(
     `infoid` int(10) not null auto_increment,
+    `judge` int(1) not null,/*0为新书启动通知， 1为给用户通知*/
     `bookid` int(10) not null references books(`bookid`),
     `infotime` datetime not null,
+    `infocontent` varchar(256) character set utf8 collate utf8_general_ci not null,
     primary key (`infoid`) using btree
 ) engine = innodb character set = utf8 collate = utf8_general_ci row_format = compact;
 

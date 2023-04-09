@@ -13,6 +13,9 @@ public interface RecomServiceImpl {
 
     public List<Map<String, Object>> getRecomListByUserid(int userid);
 
+    public List<Map<String, Object>> getRecomListByUsername(String username);
+
+
     public List<Map<String, Object>> getRecomListByMajor(String major);
 
     public List<Map<String, Object>> getRecomListByMajorAndDevelop(String major, String develop);

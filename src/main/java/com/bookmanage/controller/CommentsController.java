@@ -18,22 +18,22 @@ public class CommentsController {
     @Autowired
     private CommentsService commentsService;
 
-    @RequestMapping("/getCommentsListByUserid")
+    @RequestMapping("/getCommentsListByUserid")//查看某用户对书的评论
     public List<Map<String, Object>> getCommentsListByUserid(int userid){
         return commentsService.getCommentsListByUserid(userid);
     }
 
-    @RequestMapping("/getCommentsListByBookid")
+    @RequestMapping("/getCommentsListByBookid")//根据书获取ID
     public List<Map<String, Object>> getCommentsListByBookid(int bookid){
         return commentsService.getCommentsListByBookid(bookid);
     }
 
-    @RequestMapping("/insertOneComment")
+    @RequestMapping("/insertOneComment")//评论
     public boolean insertOneComment(int userid, Date commenttime, int bookid, String content){
         return commentsService.insertOneComment(userid, commenttime, bookid, content);
     }
 
-    @RequestMapping("/deleteOneComment")
+    @RequestMapping("/deleteOneComment")//删除评论
     public boolean deleteOneComment(int userid, int bookid, String content){
         return commentsService.deleteOneComment(userid, bookid, content);
     }

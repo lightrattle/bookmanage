@@ -8,9 +8,11 @@ import java.util.Map;
 
 @Mapper
 public interface InfoMapper {
-    public List<Map<String, Object>> getInfoList();
+    public List<Map<String, Object>> getInfoListForNew();
 
-    public boolean insertOneInfo(int bookid, Date infotime);
+    public List<Map<String, Object>> getInfoListForUser();
+
+    public boolean insertOneInfo(int bookid, int judge, Date infotime, String infocontent);
 
     public boolean deleteOneInfo(int infoid);
 }

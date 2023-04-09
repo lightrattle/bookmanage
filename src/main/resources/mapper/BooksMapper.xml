@@ -18,6 +18,10 @@
         values(#{bookname}, #{booktype}, #{image}, #{allnum}, #{intro}, #{allnum})
     </insert>
 
+    <select id="getlatestBookid" resultType="Integer">
+        select * from books order by bookid desc limit 0,1
+    </select>
+
     <update id="updateLendnum">
         update `books` set
             lendnum = lendnum + 1,

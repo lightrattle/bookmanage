@@ -15,5 +15,9 @@ public interface BooksMapper {
 
     public boolean insertOneBook(String bookname, String booktype, String image, int allnum, String intro);
 
+    public Integer getlatestBookid();
+
     public boolean updateLendnum(int bookid);
+
+    public boolean deleteOneBook(int bookid);
 }

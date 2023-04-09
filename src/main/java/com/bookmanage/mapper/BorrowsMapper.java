@@ -14,6 +14,8 @@ public interface BorrowsMapper {
 
     public List<Map<String, Object>> getBorrowsListByStatus(int status);
 
+    public List<Map<String, Object>> getUsersByBooktype(String booktype);
+
     public boolean insertOneBorrow(int userid, Date lendtime, int bookid);
 
     public boolean updateOneStatus(int userid, int bookid);
