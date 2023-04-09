@@ -24,6 +24,8 @@ public class UserController {
     public Map<String, Object> loginUser(@RequestParam("username") String username, @RequestParam("password") String password,
                             Model model, HttpSession session){
         Map<String, Object> map = new HashMap<>();
+        System.out.println(username);
+        System.out.println(password);
         User user = userService.loginUser(username, password);
         if(user != null){//成功
             model.addAttribute("msg","登录完成！ 欢迎你！ "+user.getUsername());

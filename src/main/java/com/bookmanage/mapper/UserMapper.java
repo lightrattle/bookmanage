@@ -13,6 +13,7 @@ public interface UserMapper {
     String getUsernameByUserid(int userid);
 
     Integer getUseridByUsername(String username);
+
     boolean createUser (String nickname,String username,String password);
     boolean removeUser(int userid);
 

@@ -9,6 +9,7 @@ import java.util.Map;
 @Service
 public interface UserServiceImpl {
     User loginUser (String username, String password);
+
     boolean createUser (String nickname, String username, String password);
 
     boolean removeUser(int userid);

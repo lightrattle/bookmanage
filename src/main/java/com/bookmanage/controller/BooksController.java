@@ -1,11 +1,16 @@
 package com.bookmanage.controller;
 
 import com.bookmanage.service.impl.BooksService;
+import com.bookmanage.utils.MultipartFileToFile;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.List;
 import java.util.Map;
@@ -60,6 +65,14 @@ public class BooksController {
     @RequestMapping("/insertOneBook")//插入一条书数据
     public boolean insertOneBook(String bookname, String booktype, String image, int allnum, String intro){
         return booksService.insertOneBook(bookname, booktype, image, allnum, intro);
+    }
+    @RequestMapping("/insertOneBookImage")
+    public String insertOneBookImage(HttpServletRequest request, HttpServletRequest response, HttpSession session){
+        MultipartHttpServletRequest multipartRequest=(MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartRequest.getFile("file");
+        assert multipartFile != null;
+        MultipartFileToFile.saveMultipartFile(multipartFile, "src/main/resources/static/images");
+        return MultipartFileToFile.saveMultipartFile(multipartFile, "target/classes/static/images");
     }
 
     @RequestMapping("/updateLendnum")//借阅一次
