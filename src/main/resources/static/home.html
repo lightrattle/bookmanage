@@ -82,32 +82,32 @@
                 console.log(e);
             }
         });
-    });
-    $(document).on('click', '#tologgout', function () {
-        $.ajax({
-            url: "user/logout",
-            type: "post",
-            data: {},
-            dataType: "json",
-            async: false,
-            success: function(data){
-                localStorage.setItem("loginUser", "");
-                localStorage.setItem("userid", "");
-                localStorage.setItem("status", "");
-                alert("退出登录成功！");
-            },
-            error: function (error) {}
+        $(document).on('click', '#tologgout', function () {
+            $.ajax({
+                url: "user/logout",
+                type: "post",
+                data: {},
+                dataType: "json",
+                async: false,
+                success: function(data){
+                    localStorage.setItem("loginUser", "");
+                    localStorage.setItem("userid", "");
+                    localStorage.setItem("status", "");
+                    alert("退出登录成功！");
+                },
+                error: function (error) {}
+            });
+            location.reload();
         });
-        location.reload();
-    });
-    $(document).on('click', '#fresh', function(){
-        location.reload();
-    });
-    $("#extro").on('click', function(){
-        location.href="extro.html"
-    });
-    $("#search").on('click', function(){
-        location.href="search.html";
+        $(document).on('click', '#fresh', function(){
+            location.reload();
+        });
+        $("#extro").on('click', function(){
+            location.href="extro.html"
+        });
+        $("#search").on('click', function(){
+            location.href="search.html";
+        });
     });
 </script>
 </body>

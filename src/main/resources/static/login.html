@@ -17,38 +17,40 @@
 <button type="button" class="ui-button" id="back">返回</button>
 </body>
 <script>
-    $(document).on('click', '#tologin' , function () {
-        var result;
-        $.ajax({
-            url: "/user/loginUser",
-            type: "post",
-            data: {
-                username: $("#username").val(),
-                password: $("#password").val()
-            },
-            dataType: "json",
-            async: false,
-            success: function (data) {
-                result = data;
-            },
-            error: function (errorMsg) {
-                alert("error!" + errorMsg);
-                console.log(errorMsg);
+    $(document).ready(function(){
+        $(document).on('click', '#tologin' , function () {
+            var result;
+            $.ajax({
+                url: "/user/loginUser",
+                type: "post",
+                data: {
+                    username: $("#username").val(),
+                    password: $("#password").val()
+                },
+                dataType: "json",
+                async: false,
+                success: function (data) {
+                    result = data;
+                },
+                error: function (errorMsg) {
+                    alert("error!" + errorMsg);
+                    console.log(errorMsg);
+                }
+            });
+            localStorage.setItem("loginUser", result['loginUser']);
+            localStorage.setItem("userid", result['userid']);
+            localStorage.setItem("status", result['status']);
+            alert(result['msg']);
+            location.href ='/home.html';
+        });
+        $(document).keydown(function(event){
+            if(event.keyCode === 13){
+                document.getElementById("tologin").click();
             }
         });
-        localStorage.setItem("loginUser", result['loginUser']);
-        localStorage.setItem("userid", result['userid']);
-        localStorage.setItem("status", result['status']);
-        alert(result['msg']);
-        location.href ='/home.html';
-    });
-    $(document).keydown(function(event){
-        if(event.keyCode === 13){
-            document.getElementById("tologin").click();
-        }
-    });
-    $("#back").on('click', function(){
-        location.href="index.html";
+        $("#back").on('click', function(){
+            location.href="index.html";
+        });
     });
 </script>
 </html>

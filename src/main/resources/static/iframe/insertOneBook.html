@@ -28,57 +28,59 @@
 </div>
 </body>
 <script>
-    $(document).on('click', '#sureInsert', function(){
-        var bookname = $("#bookname").val();
-        var classify = $("#insertclassify").val();
-        var imagestring;
-        var formData = new FormData();
-        formData.set("file", document.getElementById('insertimage').files[0]);
-        var allnum = $("#allnum").val();
-        var intro = $("#intro").val();
-        $.ajax({
-            url: "../books/insertOneBookImage",
-            type: "post",
-            data: formData,
-            async: false,
-            cache: false,
-            processData: false,   // 不处理发送的数据
-            contentType: false,   // 不设置Content-Type请求头
-            success:function (data) {
-                $("#path").text(data);
-                console.log(data);
-            },
-            error: function(error){
-                imagestring = "";
-                alert("上传图片出错！" + error);
-            }
+    $(document).ready(function(){
+        $(document).on('click', '#sureInsert', function(){
+            var bookname = $("#bookname").val();
+            var classify = $("#insertclassify").val();
+            var imagestring;
+            var formData = new FormData();
+            formData.set("file", document.getElementById('insertimage').files[0]);
+            var allnum = $("#allnum").val();
+            var intro = $("#intro").val();
+            $.ajax({
+                url: "../books/insertOneBookImage",
+                type: "post",
+                data: formData,
+                async: false,
+                cache: false,
+                processData: false,   // 不处理发送的数据
+                contentType: false,   // 不设置Content-Type请求头
+                success:function (data) {
+                    $("#path").text(data);
+                    console.log(data);
+                },
+                error: function(error){
+                    imagestring = "";
+                    alert("上传图片出错！" + error);
+                }
+            });
+            $.ajax({
+                url: "../books/insertOneBook",
+                type: "post",
+                data: {
+                    bookname: bookname,
+                    booktype: classify,
+                    allnum: allnum,
+                    intro: intro,
+                    image: $("#path").text()
+                },
+                async: false,
+                success:function (data) {
+                    alert("上传成功！");
+                    $("#showimage").attr("src", "");
+                    $("#path").text("");
+                }
+            });
         });
-        $.ajax({
-            url: "../books/insertOneBook",
-            type: "post",
-            data: {
-                bookname: bookname,
-                booktype: classify,
-                allnum: allnum,
-                intro: intro,
-                image: $("#path").text()
-            },
-            async: false,
-            success:function (data) {
-                alert("上传成功！");
-                $("#showimage").attr("src", "");
-                $("#path").text("");
-            }
-        });
+        document.getElementById("insertimage").onchange = function(){
+            var file = this.files;
+            var reader = new FileReader();
+            reader.readAsDataURL(file[0]);
+            reader.onload = function () {
+                var image = document.getElementById("showimage");
+                image.src = reader.result;
+            };
+        }
     });
-    document.getElementById("insertimage").onchange = function(){
-        var file = this.files;
-        var reader = new FileReader();
-        reader.readAsDataURL(file[0]);
-        reader.onload = function () {
-            var image = document.getElementById("showimage");
-            image.src = reader.result;
-        };
-    }
 </script>
 </html>

@@ -32,164 +32,166 @@
   </div>
 </body>
 <script>
-  $.ajax({
-    url: "/recom/getExtroName",
-    type: "post",
-    data: {},
-    dataType: "json",
-    async: false,
-    success: function(data){
-      var pthis = $("#extroName").empty();
-      for(var i = 0; i < data.length; i++){
-        pthis.append("<option value='" + data[i].username + "'>" + data[i].username + "</option>");
-      }
-    },
-    error: function(e){
-      console.log(e);
-    }
-  });
-  $.ajax({
-    url: "/recom/getExtroMajor",
-    type: "post",
-    data: {},
-    dataType: "json",
-    async: false,
-    success: function(data){
-      var pthis = $("#extroMajor").empty();
-      for(var i = 0; i < data.length; i++){
-        pthis.append("<option value='" + data[i].major + "'>" + data[i].major + "</option>");
-      }
-    },
-    error: function(e){
-      console.log(e);
-    }
-  });
-  $.ajax({
-    url: "/recom/getExtroDevelop",
-    type: "post",
-    data: {},
-    dataType: "json",
-    async: false,
-    success: function(data){
-      var pthis = $("#extroDevelop").empty();
-      for(var i = 0; i < data.length; i++){
-        pthis.append("<option value='" + data[i].develop + "'>" + data[i].develop + "</option>");
-      }
-    },
-    error: function(e){
-      console.log(e);
-    }
-  });
-  function showBooks(data){
-    var pthis = $("#show").empty();
-    for(var i = 0; i < data.length; i++){
-      pthis.append("<div>" +
-              "专业:<input disabled type='text' value='" + data[i].major + "'>" +
-              "<input disabled type='text' value='" + data[i].username + "'>" +
-              "推荐书目:<input disabled type='text' value='" + data[i].bookname + "'>" +
-              "发展方向:<input disabled type='text' value='" + data[i].develop + "'>" +
-              "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
-              "余量:<input disabled type='text' value='" + data[i].remainnum + "'><br>" +
-              "<img style='height: 100px;width: 75px' alt='图书封面' src='./images/" + data[i].image + "'><<br>" +
-              "<textarea disabled>" + data[i].reason + "</textarea><br>" +
-              "</div>");
-    }
-  }
-  $.ajax({
-    url: "/books/getBookByRecom",
-    type: "get",
-    data: {},
-    dataType: "json",
-    async: false,
-    sucess: function(data){
-      showBooks(data);
-    },
-    error: function(e){
-      console.log(e);
-    }
-  });
-  $("#booktype").on('change', function(){
-    var booktype=$("#booktype").val();
+  $(document).ready(function(){
     $.ajax({
-      url: "/books/getBooksByRecomAndBooktype",
+      url: "/recom/getExtroName",
+      type: "post",
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function(data){
+        var pthis = $("#extroName").empty();
+        for(var i = 0; i < data.length; i++){
+          pthis.append("<option value='" + data[i].username + "'>" + data[i].username + "</option>");
+        }
+      },
+      error: function(e){
+        console.log(e);
+      }
+    });
+    $.ajax({
+      url: "/recom/getExtroMajor",
+      type: "post",
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function(data){
+        var pthis = $("#extroMajor").empty();
+        for(var i = 0; i < data.length; i++){
+          pthis.append("<option value='" + data[i].major + "'>" + data[i].major + "</option>");
+        }
+      },
+      error: function(e){
+        console.log(e);
+      }
+    });
+    $.ajax({
+      url: "/recom/getExtroDevelop",
+      type: "post",
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function(data){
+        var pthis = $("#extroDevelop").empty();
+        for(var i = 0; i < data.length; i++){
+          pthis.append("<option value='" + data[i].develop + "'>" + data[i].develop + "</option>");
+        }
+      },
+      error: function(e){
+        console.log(e);
+      }
+    });
+    function showBooks(data){
+      var pthis = $("#show").empty();
+      for(var i = 0; i < data.length; i++){
+        pthis.append("<div>" +
+                "专业:<input disabled type='text' value='" + data[i].major + "'>" +
+                "<input disabled type='text' value='" + data[i].username + "'>" +
+                "推荐书目:<input disabled type='text' value='" + data[i].bookname + "'>" +
+                "发展方向:<input disabled type='text' value='" + data[i].develop + "'>" +
+                "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
+                "余量:<input disabled type='text' value='" + data[i].remainnum + "'><br>" +
+                "<img style='height: 100px;width: 75px' alt='图书封面' src='./images/" + data[i].image + "'><<br>" +
+                "<textarea disabled>" + data[i].reason + "</textarea><br>" +
+                "</div>");
+      }
+    }
+    $.ajax({
+      url: "/books/getBookByRecom",
       type: "get",
-      data: {
-        booktype: booktype
-      },
+      data: {},
       dataType: "json",
       async: false,
-      success: function(data){
-        showBooks(data);
-      },
-      error: function(e){
-        console.log(e)
-      }
-    });
-  });
-  $("#extroName").on('change', function(){
-    var extroName=$("#extroName").val();
-    var extroMajor=$("#extroMajor").val();
-    var extroDevelop=$("#extroDevelop").val();
-    $.ajax({
-      url: "/recom/getRecomListByUsernameAndMajorAndDevelop",
-      type: "post",
-      data: {
-        username: extroName,
-        major: extroMajor,
-        develop: extroDevelop
-      },
-      dataType: "json",
-      async: false,
-      success: function(data){
+      sucess: function(data){
         showBooks(data);
       },
       error: function(e){
         console.log(e);
       }
     });
-  });
-  $("#extroMajor").on('change', function(){
-    var extroName=$("#extroName").val();
-    var extroMajor=$("#extroMajor").val();
-    var extroDevelop=$("#extroDevelop").val();
-    $.ajax({
-      url: "/recom/getRecomListByUsernameAndMajorAndDevelop",
-      type: "post",
-      data: {
-        username: extroName,
-        major: extroMajor,
-        develop: extroDevelop
-      },
-      dataType: "json",
-      async: false,
-      success: function(data){
-        showBooks(data);
-      },
-      error: function(e){
-        console.log(e);
-      }
+    $("#booktype").on('change', function(){
+      var booktype=$("#booktype").val();
+      $.ajax({
+        url: "/books/getBooksByRecomAndBooktype",
+        type: "get",
+        data: {
+          booktype: booktype
+        },
+        dataType: "json",
+        async: false,
+        success: function(data){
+          showBooks(data);
+        },
+        error: function(e){
+          console.log(e)
+        }
+      });
     });
-  });
-  $("#extroDevelop").on('change', function(){
-    var extroName=$("#extroName").val();
-    var extroMajor=$("#extroMajor").val();
-    var extroDevelop=$("#extroDevelop").val();
-    $.ajax({
-      url: "/recom/getRecomListByUsernameAndMajorAndDevelop",
-      type: "post",
-      data: {
-        username: extroName,
-        major: extroMajor,
-        develop: extroDevelop
-      },
-      dataType: "json",
-      async: false,
-      success: function(data){
-        showBooks(data);
-      },
-      error: function(e){
-        console.log(e);
-      }
+    $("#extroName").on('change', function(){
+      var extroName=$("#extroName").val();
+      var extroMajor=$("#extroMajor").val();
+      var extroDevelop=$("#extroDevelop").val();
+      $.ajax({
+        url: "/recom/getRecomListByUsernameAndMajorAndDevelop",
+        type: "post",
+        data: {
+          username: extroName,
+          major: extroMajor,
+          develop: extroDevelop
+        },
+        dataType: "json",
+        async: false,
+        success: function(data){
+          showBooks(data);
+        },
+        error: function(e){
+          console.log(e);
+        }
+      });
+    });
+    $("#extroMajor").on('change', function(){
+      var extroName=$("#extroName").val();
+      var extroMajor=$("#extroMajor").val();
+      var extroDevelop=$("#extroDevelop").val();
+      $.ajax({
+        url: "/recom/getRecomListByUsernameAndMajorAndDevelop",
+        type: "post",
+        data: {
+          username: extroName,
+          major: extroMajor,
+          develop: extroDevelop
+        },
+        dataType: "json",
+        async: false,
+        success: function(data){
+          showBooks(data);
+        },
+        error: function(e){
+          console.log(e);
+        }
+      });
+    });
+    $("#extroDevelop").on('change', function(){
+      var extroName=$("#extroName").val();
+      var extroMajor=$("#extroMajor").val();
+      var extroDevelop=$("#extroDevelop").val();
+      $.ajax({
+        url: "/recom/getRecomListByUsernameAndMajorAndDevelop",
+        type: "post",
+        data: {
+          username: extroName,
+          major: extroMajor,
+          develop: extroDevelop
+        },
+        dataType: "json",
+        async: false,
+        success: function(data){
+          showBooks(data);
+        },
+        error: function(e){
+          console.log(e);
+        }
+      });
     });
   });
 </script>

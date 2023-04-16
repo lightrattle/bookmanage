@@ -20,43 +20,45 @@
     <input id="back" type="button" class="ui-button" value="返回">
 </div>
 <script>
-    $(document).keydown(function(event){
-        if(event.keyCode === 13){
-            document.getElementById("sure").click();
-        }
-    });
-    $("sure").on('click', function(){
-        var nickname=$("#nickname").val();
-        var username=$("#username").val();
-        var password=$("#password").val();
-        var passagain=$("#papasswordAgainssword").val();
-        $.ajax({
-            url: "/user/createUser",
-            type: "post",
-            data: {
-                nickname: nickname,
-                username: username,
-                password: password,
-                password_2: passagain
-            },
-            dataType: "json",
-            async: false,
-            success: function(data){
-                if(data === "login.html"){
-                    alert("注册成功！");
-                }
-                else if(data === "createUser.html"){
-                    alert("注册出错！");
-                }
-                location.href=data;
-            },
-            error: function(e){
-                console.log(e);
+    $(document).ready(function(){
+        $(document).keydown(function(event){
+            if(event.keyCode === 13){
+                document.getElementById("sure").click();
             }
         });
-    });
-    $("#back").on('click', function(){
-        location.href="index.html";
+        $("sure").on('click', function(){
+            var nickname=$("#nickname").val();
+            var username=$("#username").val();
+            var password=$("#password").val();
+            var passagain=$("#papasswordAgainssword").val();
+            $.ajax({
+                url: "/user/createUser",
+                type: "post",
+                data: {
+                    nickname: nickname,
+                    username: username,
+                    password: password,
+                    password_2: passagain
+                },
+                dataType: "json",
+                async: false,
+                success: function(data){
+                    if(data === "login.html"){
+                        alert("注册成功！");
+                    }
+                    else if(data === "createUser.html"){
+                        alert("注册出错！");
+                    }
+                    location.href=data;
+                },
+                error: function(e){
+                    console.log(e);
+                }
+            });
+        });
+        $("#back").on('click', function(){
+            location.href="index.html";
+        });
     });
 </script>
 </body>

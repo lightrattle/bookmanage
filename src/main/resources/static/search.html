@@ -21,44 +21,46 @@
 </div>
 </body>
 <script>
-    $("#sureSearch").on('click', function(){
-        var bookname = $("#bookname").val();
-        $.ajax({
-            url: "/books/getBooksByBookname",
-            type: "post",
-            data: {
-                bookname: bookname
-            },
-            dataType: "json",
-            async: false,
-            success: function(data){
-                var pthis = $("#result").empty();
-                for(var i = 0; i < data.length; i++){
-                    pthis.append("<div class='detail'>" +
-                        "<input disabled type='text' id='oneBook_" + data[i].bookid + "' value='"
-                        + data[i].bookname + "'>" +
-                        "图书类别:<input disabled type='text' value='" + data[i].booktype + "'>" +
-                        "历史借阅:<input disabled type='number' value='" + data[i].lendnum + "'>" +
-                        "剩余数量:<input disabled type='number' value='" + data[i].remainnum + "'>" +
-                        "<img src='/images/" + data[i].image + "' alt='图书封面' style='width: 75px;height: 100px'>" +
-                        "<textarea disabled style='border: 1px solid #000'>" + data[i].intro + "</textarea>" +
-                        "</div>");
+    $(document).ready(function(){
+        $("#sureSearch").on('click', function(){
+            var bookname = $("#bookname").val();
+            $.ajax({
+                url: "/books/getBooksByBookname",
+                type: "post",
+                data: {
+                    bookname: bookname
+                },
+                dataType: "json",
+                async: false,
+                success: function(data){
+                    var pthis = $("#result").empty();
+                    for(var i = 0; i < data.length; i++){
+                        pthis.append("<div class='detail'>" +
+                            "<input disabled type='text' id='oneBook_" + data[i].bookid + "' value='"
+                            + data[i].bookname + "'>" +
+                            "图书类别:<input disabled type='text' value='" + data[i].booktype + "'>" +
+                            "历史借阅:<input disabled type='number' value='" + data[i].lendnum + "'>" +
+                            "剩余数量:<input disabled type='number' value='" + data[i].remainnum + "'>" +
+                            "<img src='/images/" + data[i].image + "' alt='图书封面' style='width: 75px;height: 100px'>" +
+                            "<textarea disabled style='border: 1px solid #000'>" + data[i].intro + "</textarea>" +
+                            "</div>");
+                    }
+                },
+                error: function(e){
+                    console.log(e);
                 }
-            },
-            error: function(e){
-                console.log(e);
-            }
+            });
         });
-    });
-    $(".detail").on('click', function(){
-        localStorage.setItem("bookid", $(this).children("input").eq(0).attr("id").split("_")[1]);
-        localStorage.setItem("bookname", $(this).children("input").eq(0).val());
-        localStorage.setItem("booktype", $(this).children("input").eq(1).val());
-        localStorage.setItem("lendnum", $(this).children("input").eq(2).val());
-        localStorage.setItem("remainnum", $(this).children("input").eq(3).val());
-        localStorage.setItem("image", ".."+$(this).find("img").attr("src"));
-        localStorage.setItem("intro", $(this).find("textarea").val());
-        location.href="./iframe/detail.html";
+        $(".detail").on('click', function(){
+            localStorage.setItem("bookid", $(this).children("input").eq(0).attr("id").split("_")[1]);
+            localStorage.setItem("bookname", $(this).children("input").eq(0).val());
+            localStorage.setItem("booktype", $(this).children("input").eq(1).val());
+            localStorage.setItem("lendnum", $(this).children("input").eq(2).val());
+            localStorage.setItem("remainnum", $(this).children("input").eq(3).val());
+            localStorage.setItem("image", ".."+$(this).find("img").attr("src"));
+            localStorage.setItem("intro", $(this).find("textarea").val());
+            location.href="./iframe/detail.html";
+        });
     });
 </script>
 </html>

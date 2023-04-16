@@ -22,58 +22,60 @@
     </div>
 </div>
 <script>
-    $.ajax({
-        url: "/books/getBooksOfLendnum",
-        type: "get",
-        data: {},
-        dataType: "json",
-        async: false,
-        success: function(data){
-            var pthis = $(document).find("#show");
-            for(var i = 0; i < data.length; i++){
-                var oneDiv = $("<div></div>");
-                oneDiv.append("<input disabled type='text' id='book_" + data[i].bookid +"' value='" + data[i].bookname + "'>" +
-                    "<input disabled type='text' value='" + data[i].booktype + "'>" +
-                    "<input disabled type='text' value='热度:" + data[i].lendnum + "'>" +
-                    "<input disabled type='text' value='剩余数量:" + data[i].remainnum + "'><br>" +
-                    "<img alt='图书封面' src='" + data[i].image + "'><br>" +
-                    "<input disabled type='text' value='" + data[i].intro + "'><br>");
-                pthis.append(oneDiv);
+    $(document).ready(function(){
+        $.ajax({
+            url: "/books/getBooksOfLendnum",
+            type: "get",
+            data: {},
+            dataType: "json",
+            async: false,
+            success: function(data){
+                var pthis = $(document).find("#show");
+                for(var i = 0; i < data.length; i++){
+                    var oneDiv = $("<div></div>");
+                    oneDiv.append("<input disabled type='text' id='book_" + data[i].bookid +"' value='" + data[i].bookname + "'>" +
+                        "<input disabled type='text' value='" + data[i].booktype + "'>" +
+                        "<input disabled type='text' value='热度:" + data[i].lendnum + "'>" +
+                        "<input disabled type='text' value='剩余数量:" + data[i].remainnum + "'><br>" +
+                        "<img alt='图书封面' src='" + data[i].image + "'><br>" +
+                        "<input disabled type='text' value='" + data[i].intro + "'><br>");
+                    pthis.append(oneDiv);
+                }
+            },
+            error: function(error){
+                console.log(error);
             }
-        },
-        error: function(error){
-            console.log(error);
-        }
-    });
-    $("#login").on('click', ()=>{
-        location.href="login.html";
-    });
-    $.ajax({
-        url: "/info/getInfoListForNew",
-        type: "post",
-        data: {},
-        dataType: "json",
-        async: false,
-        success: function(data){
-            var pthis=$("#newContent");
-            for(var i = 0; i < data.length; i++){
-                var oneDiv = $("<div></div>");
-                oneDiv.append("时间:<input type='datetime' disabled value='" + data[i].infotime+ "'>" +
-                    "新书:<input disabled type='text' value='" + data[i].bookname + "'>" +
-                    "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
-                    "<textarea id='info_" + data[i].infoid + "' disabled " +
-                    "style='width:100%;height: 75px;resize: none;overflow-y: scroll'>"
-                    + data[i].infocontent +"</textarea>" +
-                    "简介:<input disabled type='text' value='" + data[i].intro + "'>");
-                pthis.append(oneDiv);
+        });
+        $("#login").on('click', ()=>{
+            location.href="login.html";
+        });
+        $.ajax({
+            url: "/info/getInfoListForNew",
+            type: "post",
+            data: {},
+            dataType: "json",
+            async: false,
+            success: function(data){
+                var pthis=$("#newContent");
+                for(var i = 0; i < data.length; i++){
+                    var oneDiv = $("<div></div>");
+                    oneDiv.append("时间:<input type='datetime' disabled value='" + data[i].infotime+ "'>" +
+                        "新书:<input disabled type='text' value='" + data[i].bookname + "'>" +
+                        "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
+                        "<textarea id='info_" + data[i].infoid + "' disabled " +
+                        "style='width:100%;height: 75px;resize: none;overflow-y: scroll'>"
+                        + data[i].infocontent +"</textarea>" +
+                        "简介:<input disabled type='text' value='" + data[i].intro + "'>");
+                    pthis.append(oneDiv);
+                }
+            },
+            error: function(e){
+                console.log(e);
             }
-        },
-        error: function(e){
-            console.log(e);
-        }
-    });
-    $("#search").on('click', function(){
-        location.href="search.html";
+        });
+        $("#search").on('click', function(){
+            location.href="search.html";
+        });
     });
 </script>
 </body>
