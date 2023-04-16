@@ -12,6 +12,7 @@
 </head>
 <body>
 <div id="root">
+    <input id="back" type="button" class="ui-button" value="返回">
     <div id="showDetail" style="border: 1px solid #000;height: auto;width: 100%">
     </div>
     <br>
@@ -57,6 +58,9 @@
         error: function(e){
             console.log(e);
         }
+    });
+    $("#back").on('click', function(){
+        location.href="../search.html";
     });
 </script>
 </html>
