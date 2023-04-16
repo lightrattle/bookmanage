@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图书推荐系统-图书搜索</title>
+    <script src="./jQuery/jquery-3.5.1.slim.min.js"></script>
+    <script src="./jQuery/jquery-3.5.1.min.js"></script>
+    <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.min.css">
+    <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.structure.min.css">
+    <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.theme.min.css">
+    <script src="./jQueryUI-1.13.2/jquery-ui.min.js"></script>
+</head>
+<body>
+<div id="root" style="position: relative;overflow-y: scroll;height: auto;width: 100%">
+    <label for="bookname">输入书名搜索图书:</label>
+    <input id="bookname" type="text" placeholder="书名">
+    <input id="sureSearch" type="button" class="ui-button" value="搜索"><br>
+    <div id="result" style="position: relative;overflow-y: scroll;height: auto;width: 100%;">
+
+    </div>
+</div>
+</body>
+<script>
+    $("#sureSearch").on('click', function(){
+        var bookname = $("#bookname").val();
+        $.ajax({
+            url: "/books/getBooksByBookname",
+            type: "post",
+            data: {
+                bookname: bookname
+            },
+            dataType: "json",
+            async: false,
+            success: function(data){
+                var pthis = $("#result").empty();
+                for(var i = 0; i < data.length; i++){
+                    pthis.append("<div class='detail'>" +
+                        "<input disabled type='text' id='oneBook_" + data[i].bookid + "' value='"
+                        + data[i].bookname + "'>" +
+                        "图书类别:<input disabled type='text' value='" + data[i].booktype + "'>" +
+                        "历史借阅:<input disabled type='number' value='" + data[i].lendnum + "'>" +
+                        "剩余数量:<input disabled type='number' value='" + data[i].remainnum + "'>" +
+                        "<img src='/images/" + data[i].image + "' alt='图书封面' style='width: 75px;height: 100px'>" +
+                        "<textarea disabled style='border: 1px solid #000'>" + data[i].intro + "</textarea>" +
+                        "</div>");
+                }
+            },
+            error: function(e){
+                console.log(e);
+            }
+        });
+    });
+    $(".detail").on('click', function(){
+        localStorage.setItem("bookid", $(this).children("input").eq(0).attr("id").split("_")[1]);
+
+    });
+</script>
+</html>

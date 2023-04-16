@@ -15,6 +15,8 @@ public interface BooksMapper {
 
     public List<Map<String, Object>> getBooksOfLendnum();
 
+    public List<Map<String, Object>> getBooksByBookname(String bookname);
+
     public boolean insertOneBook(String bookname, String booktype, String image, int allnum, String intro);
 
     public Integer getlatestBookid();

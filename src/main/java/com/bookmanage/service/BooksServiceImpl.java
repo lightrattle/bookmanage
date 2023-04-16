@@ -8,6 +8,7 @@ import java.util.Map;
 
 @Service
 public interface BooksServiceImpl {
+    int getLatestBookid();
     List<Map<String, Object>> getAllBooks();
 
     List<Map<String, Object>> getBooksByTypes(String booktype);
@@ -15,6 +16,8 @@ public interface BooksServiceImpl {
     List<Map<String, Object>> getBooksByHistory(int userid);
 
     List<Map<String, Object>> getBooksByBook(int bookid);
+
+    List<Map<String, Object>> getBooksByBookname(String bookname);
 
     List<Map<String, Object>> getBooksOfLendnum();
 

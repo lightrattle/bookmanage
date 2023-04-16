@@ -23,6 +23,11 @@ public class BooksService implements BooksServiceImpl {
     RecomMapper recomMapper;
 
     @Override
+    public int getLatestBookid() {
+        return booksMapper.getlatestBookid();
+    }
+
+    @Override
     public List<Map<String, Object>> getAllBooks() {
         return booksMapper.getAllBooks();
     }
@@ -115,6 +120,11 @@ public class BooksService implements BooksServiceImpl {
         }
         //TODO 返回books
         return books;
+    }
+
+    @Override
+    public List<Map<String, Object>> getBooksByBookname(String bookname) {
+        return booksMapper.getBooksByBookname(bookname);
     }
 
     @Override

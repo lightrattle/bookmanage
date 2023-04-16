@@ -1,6 +1,7 @@
 package com.bookmanage.controller;
 
 import com.bookmanage.service.impl.BooksService;
+import com.bookmanage.service.impl.InfoService;
 import com.bookmanage.utils.MultipartFileToFile;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.sql.DatabaseMetaData;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +24,9 @@ import java.util.Map;
 public class BooksController {
     @Autowired
     private BooksService booksService;
+
+    @Autowired
+    private InfoService infoService;
 
     @RequestMapping("/getAllBooks")//查找所有书（全部）
     public List<Map<String, Object>> getAllBooks(){
@@ -45,6 +51,11 @@ public class BooksController {
     @RequestMapping("/getBooksByBook")//根据所选图书推荐与之相关的图书
     public List<Map<String, Object>> getBooksByBook(int bookid){//根据所选图书获取与之有关的图书
         return booksService.getBooksByBook(bookid);
+    }
+
+    @RequestMapping("/getBooksByBookname")
+    public List<Map<String, Object>> getBooksByBookname(String bookname){
+        return booksService.getBooksByBookname(bookname);
     }
 
     @RequestMapping("/getBookByRecom")

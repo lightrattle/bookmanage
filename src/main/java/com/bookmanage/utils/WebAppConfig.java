@@ -16,11 +16,12 @@ public class WebAppConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //注册自己的拦截器并设置拦截的请求路径
         registry.addInterceptor(new AuthInterceptor())
-                .addPathPatterns("/**") //拦截的路径
-                .excludePathPatterns("/login.html")
-                .excludePathPatterns("/index.html")
-                .excludePathPatterns("../images/**")
-                .excludePathPatterns("/user/**");//排除的路径
+            .addPathPatterns("/**") //拦截的路径
+            .excludePathPatterns("/login.html")
+            .excludePathPatterns("/index.html")
+            .excludePathPatterns("/search.html")
+            .excludePathPatterns("../images/**")
+            .excludePathPatterns("/user/**");//排除的路径
     }
 
 }

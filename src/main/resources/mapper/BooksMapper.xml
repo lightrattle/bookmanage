@@ -17,6 +17,10 @@
         (select * from books order by lendnum desc) limit 0, 10
     </select>
 
+    <select id="getBooksByBookname" resultType="java.util.HashMap">
+        select * from books where bookname = #{bookname}
+    </select>
+
     <insert id="insertOneBook">
         insert into `books`(bookname, booktype, image, allnum, intro, remainnum)
         values(#{bookname}, #{booktype}, #{image}, #{allnum}, #{intro}, #{allnum})

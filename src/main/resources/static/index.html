@@ -11,9 +11,13 @@
     <script src="./jQueryUI-1.13.2/jquery-ui.min.js"></script>
 </head>
 <body>
-<div id="root" style="width: 100%;height: auto">
+<div id="root" style="width: 100%;height: auto;position: relative;overflow-y: scroll">
     <input disabled id="login" type="button" class="ui-button" value="登录">
-    <div id="show">
+    <input type="button" class="ui-button" id="search" value="搜索图书">
+    <div id="show" style="left: 0;width: 50%;height: auto;position: relative;overflow-y: scroll">
+
+    </div>
+    <div id="newInfo" style="right: 0;width: 50%;height: auto;position: relative;overflow-y: scroll">
 
     </div>
 </div>
@@ -43,6 +47,33 @@
     });
     $("#login").on('click', ()=>{
         location.href="login.html";
+    });
+    $.ajax({
+        url: "/info/getInfoListForNew",
+        type: "post",
+        data: {},
+        dataType: "json",
+        async: false,
+        success: function(data){
+            var pthis=$("#newContent");
+            for(var i = 0; i < data.length; i++){
+                var oneDiv = $("<div></div>");
+                oneDiv.append("时间:<input type='datetime' disabled value='" + data[i].infotime+ "'>" +
+                    "新书:<input disabled type='text' value='" + data[i].bookname + "'>" +
+                    "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
+                    "<textarea id='info_" + data[i].infoid + "' disabled " +
+                    "style='width:100%;height: 75px;resize: none;overflow-y: scroll'>"
+                    + data[i].infocontent +"</textarea>" +
+                    "简介:<input disabled type='text' value='" + data[i].intro + "'>");
+                pthis.append(oneDiv);
+            }
+        },
+        error: function(e){
+            console.log(e);
+        }
+    });
+    $("#search").on('click', function(){
+        location.href="search.html";
     });
 </script>
 </body>

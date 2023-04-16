@@ -11,11 +11,16 @@
     <script src="./jQueryUI-1.13.2/jquery-ui.min.js"></script>
 </head>
 <body>
-<div id="root" style="width: 100%;height: auto">
+<div id="root" style="width: 100%;height: auto;position: relative;overflow-y: scroll">
     <input type="button" class="ui-button" id="tologgout" value="退出登录">
     <input disabled type="button" class="ui-button" id="loginUser" value="">
+    <input type="button" class="ui-button" id="search" value="搜索图书">
     <input type="button" class="ui-button" id="extro" value="专家推荐">
-    <div id="showContent">
+    <input type="button" class="ui-button" id="newBook" value="新书推荐">
+    <div id="showContent" style="left: 0;width: 50%;height: auto;position: relative;overflow-y: scroll">
+
+    </div>
+    <div id="newContent" style="right: 0;width: 50%;height: auto;position: relative;overflow-y: scroll">
 
     </div>
 </div>
@@ -49,6 +54,34 @@
                 console.log(e);
             }
         });
+        var pinfo = $(document).find("#newContent");
+        pinfo.append("<input disabled type='button' class='ui-button' value='通知'>");
+        $.ajax({
+            url: "/info/getInfoListForUser",
+            type: "get",
+            data: {
+                userid: localStorage.getItem("userid")
+            },
+            dataType: "json",
+            async: false,
+            success: function(data){
+                var pthis = $(document).find("#showContent");
+                for(var i = 0; i < data.length; i++){
+                    var oneDiv = $("<div></div>");
+                    oneDiv.append("时间:<input type='datetime' disabled value='" + data[i].infotime+ "'>" +
+                        "新书:<input disabled type='text' value='" + data[i].bookname + "'>" +
+                        "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
+                        "<textarea id='info_" + data[i].infoid + "' disabled " +
+                        "style='width:100%;height: 75px;resize: none;overflow-y: scroll'>"
+                        + data[i].infocontent +"</textarea>" +
+                        "简介:<input disabled type='text' value='" + data[i].intro + "'>");
+                    pthis.append(oneDiv);
+                }
+            },
+            error: function(e){
+                console.log(e);
+            }
+        });
     });
     $(document).on('click', '#tologgout', function () {
         $.ajax({
@@ -71,7 +104,10 @@
         location.reload();
     });
     $("#extro").on('click', function(){
-        location.href=""
+        location.href="extro.html"
+    });
+    $("#search").on('click', function(){
+        location.href="search.html";
     });
 </script>
 </body>
