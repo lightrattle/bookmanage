@@ -47,6 +47,12 @@ public class BooksController {
         return booksService.getBooksByBook(bookid);
     }
 
+    @RequestMapping("/getBookByRecom")
+    public List<Map<String, Object>> getBookByRecom(){//根据所选图书获取与之有关的图书
+        return booksService.getBookByRecom();
+    }
+
+
     @RequestMapping("/getBooksByRecomAndUsername")//专家推荐的图书，根据专家名筛选
     public List<Map<String, Object>> getBooksByRecomAndUsername(String username){
         return booksService.getBooksByRecomAndUsername(username);

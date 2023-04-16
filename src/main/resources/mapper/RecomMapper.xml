@@ -1,22 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.bookmanage.mapper.RecomMapper">
-    <select id="getRecomListByBooktype" resultType="java.util.HashMap">
-        select recomid, userid, major, develop, books.bookid, reason,
+    <select id="getBookByRecom" resultType="java.util.HashMap">
+        select recomid, recom.userid, user.username, major, develop, books.bookid, reason,
                bookname, booktype, lendnum, image, allnum, intro, remainnum
-        from recom, books where books.bookid = recom.bookid and books.booktype = #{booktype}
+        from recom, books, user where books.bookid = recom.bookid and user.userid = recom.userid
+    </select>
+    
+    <select id="getRecomListByBooktype" resultType="java.util.HashMap">
+        select recomid, recom.userid, user.username, major, develop, books.bookid, reason,
+               bookname, booktype, lendnum, image, allnum, intro, remainnum
+        from recom, books, user 
+        where books.bookid = recom.bookid and user.userid = recom.userid and books.booktype = #{booktype}
     </select>
 
     <select id="getRecomListByUserid" resultType="java.util.HashMap">
-        select recomid, userid, major, develop, books.bookid, reason,
+        select recomid, recom.userid, user.username, major, develop, books.bookid, reason,
                bookname, booktype, lendnum, image, allnum, intro, remainnum
-        from recom, books where books.bookid = recom.bookid and userid = #{userid}
+        from recom, books, user 
+        where books.bookid = recom.bookid and user.userid = recom.userid and recom.userid = #{userid}
     </select>
 
     <select id="getRecomListByMajor" resultType="java.util.HashMap">
-        select recomid, userid, major, develop, books.bookid, reason,
+        select recomid, recom.userid, user.username, major, develop, books.bookid, reason,
                bookname, booktype, lendnum, image, allnum, intro, remainnum
-        from recom, books where books.bookid = recom.bookid and major = #{major}
+        from recom, books, user 
+        where books.bookid = recom.bookid and user.userid = recom.userid and major = #{major}
     </select>
 
     <select id="getRecomListByMajorAndDevelop" resultType="java.util.HashMap">
@@ -32,21 +41,24 @@
     </select>
 
     <select id="getBooksByRecomAndUserid" resultType="java.util.HashMap">
-        select recomid, userid, major, develop, books.bookid, reason,
+        select recomid, recom.userid, user.username, major, develop, books.bookid, reason,
                bookname, booktype, lendnum, image, allnum, intro, remainnum
-        from recom, books where books.bookid = recom.bookid and recom.userid = #{userid}
+        from recom, books, user 
+        where books.bookid = recom.bookid and user.userid = recom.userid and recom.userid = #{userid}
     </select>
 
     <select id="getBooksByRecomAndMajor" resultType="java.util.HashMap">
-        select recomid, userid, major, develop, books.bookid, reason,
+        select recomid, recom.userid, user.username, major, develop, books.bookid, reason,
                bookname, booktype, lendnum, image, allnum, intro, remainnum
-        from recom, books where books.bookid = recom.bookid and recom.major = #{major}
+        from recom, books, user 
+        where books.bookid = recom.bookid and user.userid = recom.userid and recom.major = #{major}
     </select>
 
     <select id="getBooksByRecomAndDevelop" resultType="java.util.HashMap">
-        select recomid, userid, major, develop, books.bookid, reason,
+        select recomid, recom.userid, user.username, major, develop, books.bookid, reason,
                bookname, booktype, lendnum, image, allnum, intro, remainnum
-        from recom, books where books.bookid = recom.bookid and recom.major = #{major} and recom.develop = #{develop}
+        from recom, books, user 
+        where books.bookid = recom.bookid and user.userid = recom.userid and recom.major = #{major} and recom.develop = #{develop}
     </select>
 
     <insert id="insertOneRecom">

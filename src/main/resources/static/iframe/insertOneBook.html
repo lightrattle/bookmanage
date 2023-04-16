@@ -37,7 +37,7 @@
         var allnum = $("#allnum").val();
         var intro = $("#intro").val();
         $.ajax({
-            url: "books/insertOneBookImage",
+            url: "../books/insertOneBookImage",
             type: "post",
             data: formData,
             async: false,
@@ -54,7 +54,7 @@
             }
         });
         $.ajax({
-            url: "books/insertOneBook",
+            url: "../books/insertOneBook",
             type: "post",
             data: {
                 bookname: bookname,

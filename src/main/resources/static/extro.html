@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>图书推荐系统-专家推荐</title>
+  <script src="./jQuery/jquery-3.5.1.slim.min.js"></script>
+  <script src="./jQuery/jquery-3.5.1.min.js"></script>
+  <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.min.css">
+  <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.structure.min.css">
+  <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.theme.min.css">
+  <script src="./jQueryUI-1.13.2/jquery-ui.min.js"></script>
+</head>
+<body>
+  <div id="root" style="width: 100%;height: auto">
+    <label for="extroName">专家姓名：</label>
+    <select id="extroName">
+      <option value="-1" selected>全部</option>
+    </select>
+    <label for="extroMajor">主要专业：</label>
+    <select id="extroMajor">
+      <option value="-1" selected>全部</option>
+    </select>
+    <label for="extroDevelop">发展方向：</label>
+    <select id="extroDevelop">
+      <option value="-1" selected>全部</option>
+    </select>
+    <div id="show">
+
+    </div>
+  </div>
+</body>
+<script>
+  $.ajax({
+    url: "/books/getBookByRecom",
+    type: "get",
+    data: {},
+    dataType: "json",
+    async: false,
+    sucess: function(data){
+      var pthis = $("#show").empty();
+      for(var i = 0; i < data.length; i++){
+        pthis.append("<div>" +
+                "<input disabled type='text' value='" + data[i].major + "'>" +
+                "<input disabled type='text' value='" + data[i].nickname + "'>" +
+                "" +
+                "</div>");
+      }
+    },
+    error: function(e){
+      console.log(e);
+    }
+  });
+</script>
+</html>

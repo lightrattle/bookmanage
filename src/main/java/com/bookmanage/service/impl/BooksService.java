@@ -53,7 +53,7 @@ public class BooksService implements BooksServiceImpl {
         int allLendNum = historyList.size();
         double count = 0.0;
         int num = 0;
-        double[] lunpan = new double[lengNumberList.size()];
+        double[] lunpan = new double[lengNumberList!=null?lengNumberList.size():0];
         for(Map.Entry<String, Double> entry: lengNumberList.entrySet()){
             double item = entry.getValue()/(allLendNum * 1.0) + count;
             count+= item;
@@ -120,6 +120,11 @@ public class BooksService implements BooksServiceImpl {
     @Override
     public List<Map<String, Object>> getBooksOfLendnum() {
         return booksMapper.getBooksOfLendnum();
+    }
+
+    @Override
+    public List<Map<String, Object>> getBookByRecom(){
+        return recomMapper.getBookByRecom();
     }
 
     @Override

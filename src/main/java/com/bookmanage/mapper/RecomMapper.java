@@ -7,6 +7,13 @@ import java.util.Map;
 
 @Mapper
 public interface RecomMapper {
+    public List<Map<String, Object>> getExtroName();
+
+    public List<Map<String, Object>> getExtroMajor();
+
+    public List<Map<String, Object>> getExtroDevelop();
+
+    public List<Map<String, Object>> getBookByRecom();
     public List<Map<String, Object>> getRecomListByBooktype(String booktype);
 
     public List<Map<String, Object>> getRecomListByUserid(int userid);

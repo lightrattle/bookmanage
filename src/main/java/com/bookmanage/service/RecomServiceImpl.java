@@ -9,6 +9,12 @@ import java.util.Map;
 
 @Service
 public interface RecomServiceImpl {
+    public List<Map<String, Object>> getExtroName();
+
+    public List<Map<String, Object>> getExtroMajor();
+
+    public List<Map<String, Object>> getExtroDevelop();
+
     public List<Map<String, Object>> getRecomListByBooktype(String booktype);
 
     public List<Map<String, Object>> getRecomListByUserid(int userid);

@@ -51,15 +51,9 @@ public class UserController {
     //注册功能，保存数据
     public String createUser(String nickname, String username, String password, String password_2){
         if(password.equals(password_2) && userService.createUser(nickname, username, password)) {
-            return "<script>" +
-                    "alert('注册完成！');" +
-                    "location.href='/login.html';" +
-                    "</script>";
+            return "login.html";
         }
-        return "<script>" +
-                "alert('注册出错！');" +
-                "location.href='/createUser.html';" +
-                "</script>";
+        return "createUser.html";
     }
 
     @RequestMapping("/logout")//退出登录

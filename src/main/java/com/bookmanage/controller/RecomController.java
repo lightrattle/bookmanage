@@ -17,6 +17,21 @@ public class RecomController {
     @Autowired
     private RecomService recomService;
 
+    @RequestMapping("/getExtroName")
+    public List<Map<String, Object>> getExtroName(){
+        return recomService.getExtroName();
+    }
+
+    @RequestMapping("/getExtroMajor")
+    public List<Map<String, Object>> getExtroMajor(){
+        return recomService.getExtroMajor();
+    }
+
+    @RequestMapping("/getExtroDevelop")
+    public List<Map<String, Object>> getExtroDevelop(){
+        return recomService.getExtroDevelop();
+    }
+
     @RequestMapping("/getRecomListByBooktype")
     public List<Map<String, Object>> getRecomListByBooktype(String booktype){
         return recomService.getRecomListByBooktype(booktype);

@@ -17,6 +17,21 @@ public class RecomService implements RecomServiceImpl {
     UserMapper userMapper;
 
     @Override
+    public List<Map<String, Object>> getExtroName() {
+        return recomMapper.getExtroName();
+    }
+
+    @Override
+    public List<Map<String, Object>> getExtroMajor() {
+        return recomMapper.getExtroMajor();
+    }
+
+    @Override
+    public List<Map<String, Object>> getExtroDevelop() {
+        return recomMapper.getExtroDevelop();
+    }
+
+    @Override
     public List<Map<String, Object>> getRecomListByBooktype(String booktype) {
         return recomMapper.getRecomListByBooktype(booktype);
     }
