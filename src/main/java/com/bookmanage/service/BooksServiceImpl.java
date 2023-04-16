@@ -20,6 +20,8 @@ public interface BooksServiceImpl {
 
     List<Map<String, Object>> getBookByRecom();
 
+    List<Map<String, Object>> getBooksByRecomAndBooktype(String booktype);
+
     List<Map<String, Object>> getBooksByRecomAndUsername(String username);
 
     List<Map<String, Object>> getBooksByRecomAndMajor(String major);

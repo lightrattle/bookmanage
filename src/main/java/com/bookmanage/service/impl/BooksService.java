@@ -128,6 +128,11 @@ public class BooksService implements BooksServiceImpl {
     }
 
     @Override
+    public List<Map<String, Object>> getBooksByRecomAndBooktype(String booktype) {
+        return recomMapper.getBooksByRecomAndBooktype(booktype);
+    }
+
+    @Override
     public List<Map<String, Object>> getBooksByRecomAndUsername(String username) {
         int userid = userMapper.getUseridByUsername(username);
         return recomMapper.getBooksByRecomAndUserid(userid);

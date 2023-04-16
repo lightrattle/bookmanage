@@ -1,6 +1,7 @@
 package com.bookmanage.controller;
 
 import com.bookmanage.service.impl.RecomService;
+import org.apache.ibatis.mapping.MappedStatement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +31,12 @@ public class RecomController {
     @RequestMapping("/getExtroDevelop")
     public List<Map<String, Object>> getExtroDevelop(){
         return recomService.getExtroDevelop();
+    }
+
+    @RequestMapping("/getRecomListByUsernameAndMajorAndDevelop")
+    public List<Map<String, Object>> getRecomListByUsernameAndMajorAndDevelop(
+            String username, String major, String develop){
+        return recomService.getRecomListByUsernameAndMajorAndDevelop(username, major, develop);
     }
 
     @RequestMapping("/getRecomListByBooktype")

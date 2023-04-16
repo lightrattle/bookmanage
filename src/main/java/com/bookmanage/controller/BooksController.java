@@ -52,6 +52,13 @@ public class BooksController {
         return booksService.getBookByRecom();
     }
 
+    @RequestMapping("/getBooksByRecomAndBooktype")
+    public List<Map<String, Object>> getBooksByRecomAndBooktype(String booktype){
+        if(booktype.equals("全部")) {
+            return booksService.getBookByRecom();
+        }
+        else return booksService.getBooksByRecomAndBooktype(booktype);
+    }
 
     @RequestMapping("/getBooksByRecomAndUsername")//专家推荐的图书，根据专家名筛选
     public List<Map<String, Object>> getBooksByRecomAndUsername(String username){

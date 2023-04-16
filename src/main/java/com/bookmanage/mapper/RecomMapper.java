@@ -13,7 +13,12 @@ public interface RecomMapper {
 
     public List<Map<String, Object>> getExtroDevelop();
 
+    public List<Map<String, Object>> getRecomListByUsernameAndMajorAndDevelop(
+            String username, String major, String develop);
+
     public List<Map<String, Object>> getBookByRecom();
+
+    public List<Map<String, Object>> getBooksByRecomAndBooktype(String booktype);
     public List<Map<String, Object>> getRecomListByBooktype(String booktype);
 
     public List<Map<String, Object>> getRecomListByUserid(int userid);
