@@ -12,6 +12,8 @@
 </head>
 <body>
   <div id="root" style="width: 100%;height: auto;position: relative;overflow-y: scroll">
+    <input id="back" type="button" class="ui-button" value="返回">
+    <br>
     <label for="booktype">按分类显示：</label>
     <select id="booktype">
       <option value="全部" selected>全部</option>
@@ -192,6 +194,9 @@
           console.log(e);
         }
       });
+    });
+    $("#back").on('click', function(){
+      location.href="home.html";
     });
   });
 </script>

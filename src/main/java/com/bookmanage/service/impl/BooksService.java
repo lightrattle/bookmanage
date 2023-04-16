@@ -40,9 +40,9 @@ public class BooksService implements BooksServiceImpl {
     @Override
     public List<Map<String, Object>> getBooksByHistory(int userid) {
         //根据历史借阅推荐，个性化推荐的核心部分
-        //TODO 根据userid获取该用户历史查阅书籍
+        // 根据userid获取该用户历史查阅书籍
         List<Map<String, Object>> historyList = borrowsMapper.getBorrowsListByUserid(userid);
-        //TODO 遍历获得该用户所借阅书籍的分类及每种分类所借数量
+        // 遍历获得该用户所借阅书籍的分类及每种分类所借数量
         Map<String, Double> lengNumberList = null;
         for (Map<String, Object> stringObjectMap : historyList) {
             String classify = (String) stringObjectMap.get("booktype");
@@ -54,71 +54,74 @@ public class BooksService implements BooksServiceImpl {
                 lengNumberList.replace(classify, newNum);
             }
         }
-        //TODO 将各种数量求和得到每类的百分比
+        // 将各种数量求和得到每类的百分比
         int allLendNum = historyList.size();
         double count = 0.0;
         int num = 0;
         double[] lunpan = new double[lengNumberList!=null?lengNumberList.size():0];
-        for(Map.Entry<String, Double> entry: lengNumberList.entrySet()){
-            double item = entry.getValue()/(allLendNum * 1.0) + count;
-            count+= item;
-            entry.setValue(item);
-            lunpan[num] = count;
-        }
-        //TODO 生成五次随机数，并根据百分比得到这五个随机数处于哪一类
-        int[] chooses = new int[5];
-        for(int i = 0; i < 5; i++){
-            int cho = 0;
-            double item = Math.random();
-            for(int j = 0; j < lunpan.length; j++){
-                if(item <= lunpan[i]){
-                    break;
-                }
-                cho++;
+        if(lunpan.length != 0){
+            for(Map.Entry<String, Double> entry: lengNumberList.entrySet()){
+                double item = entry.getValue()/(allLendNum * 1.0) + count;
+                count+= item;
+                entry.setValue(item);
+                lunpan[num] = count;
             }
-            chooses[i] = cho;
-        }
-        String[] choosesType = new String[5];
-        for(int i = 0; i < 5; i++){
-            int tmp = 0;
-            for(String str: lengNumberList.keySet()){
-                if(tmp == chooses[i]){
-                    choosesType[i] = str;
-                    break;
+            //生成五次随机数，并根据百分比得到这五个随机数处于哪一类
+            int[] chooses = new int[5];
+            for(int i = 0; i < 5; i++){
+                int cho = 0;
+                double item = Math.random();
+                for(int j = 0; j < lunpan.length; j++){
+                    if(item <= lunpan[i]){
+                        break;
+                    }
+                    cho++;
                 }
-                tmp++;
+                chooses[i] = cho;
             }
+            String[] choosesType = new String[5];
+            for(int i = 0; i < 5; i++){
+                int tmp = 0;
+                for(String str: lengNumberList.keySet()){
+                    if(tmp == chooses[i]){
+                        choosesType[i] = str;
+                        break;
+                    }
+                    tmp++;
+                }
+            }
+            // 在对应的类别中选取一本书
+            List<Map<String, Object>> books = null;
+            for(int i = 0; i< 5; i++){
+                // 获得对于类别的所有书籍
+                List<Map<String, Object>> booksList = booksMapper.getBooksByTypes(choosesType[i]);
+                // 生成在最大数量范围内的随机数
+                int chooseOne = (int)(Math.random() * booksList.size() + 0);
+                // 选取该随机数对应的书，并加入List
+                Map<String, Object> oneBook = booksList.get(chooseOne);
+                books.add(oneBook);
+            }
+            // 将上面生成的5本推荐书作为返回值
+            return books;
         }
-        //TODO 在对应的类别中选取一本书
-        List<Map<String, Object>> books = null;
-        for(int i = 0; i< 5; i++){
-            //TODO 获得对于类别的所有书籍
-            List<Map<String, Object>> booksList = booksMapper.getBooksByTypes(choosesType[i]);
-            //TODO 生成在最大数量范围内的随机数
-            int chooseOne = (int)(Math.random() * booksList.size() + 0);
-            //TODO 选取该随机数对应的书，并加入List
-            Map<String, Object> oneBook = booksList.get(chooseOne);
-            books.add(oneBook);
-        }
-        //TODO 将上面生成的5本推荐书作为返回值
-        return books;
+        else return null;
     }
 
     @Override
     public List<Map<String, Object>> getBooksByBook(int bookid) {
-        //TODO 根据所选图书推荐与之相关的图书
-        //TODO 根据本书id获得本书类别
+        // 根据所选图书推荐与之相关的图书
+        // 根据本书id获得本书类别
         String classify = (String)booksMapper.getOneBookByBookid(bookid).get("booktype");
-        //TODO 根据该类别获取所有书籍
+        // 根据该类别获取所有书籍
         List<Map<String, Object>> theClassifyBooks = booksMapper.getBooksByTypes(classify);
-        //TODO 生成五个随机数，并将对应的书加入books
+        // 生成五个随机数，并将对应的书加入books
         List<Map<String, Object>> books = null;
         int[] chooses = new int[5];
         for(int i = 0; i < 5; i++){
             int choose = (int)(Math.random() * theClassifyBooks.size() + 0);
             books.add(theClassifyBooks.get(choose));
         }
-        //TODO 返回books
+        // 返回books
         return books;
     }
 

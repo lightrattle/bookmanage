@@ -12,6 +12,7 @@
 </head>
 <body>
 <div id="root" style="position: relative;overflow-y: scroll;height: auto;width: 100%">
+    <input id="back" type="button" class="ui-button" value="返回">
     <label for="bookname">输入书名搜索图书:</label>
     <input id="bookname" type="text" placeholder="书名">
     <input id="sureSearch" type="button" class="ui-button" value="搜索"><br>
@@ -26,7 +27,7 @@
             var bookname = $("#bookname").val();
             $.ajax({
                 url: "/books/getBooksByBookname",
-                type: "post",
+                type: "get",
                 data: {
                     bookname: bookname
                 },
@@ -60,6 +61,9 @@
             localStorage.setItem("image", ".."+$(this).find("img").attr("src"));
             localStorage.setItem("intro", $(this).find("textarea").val());
             location.href="./iframe/detail.html";
+        });
+        $("#back").on('click', function(){
+            location.href="home.html";
         });
     });
 </script>
