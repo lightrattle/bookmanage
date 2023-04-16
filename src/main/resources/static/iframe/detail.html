@@ -11,6 +11,52 @@
     <script src="../jQueryUI-1.13.2/jquery-ui.min.js"></script>
 </head>
 <body>
+<div id="root">
+    <div id="showDetail" style="border: 1px solid #000;height: auto;width: 100%">
+    </div>
+    <br>
+    <input disabled type="button" class="ui-button" value="↓↓↓相关图书推↓↓↓"
+           style="width: 100%;height: 30px;position: relative;border: 1px solid #000" >
+    <div id="suggest">
 
+    </div>
+</div>
 </body>
+<script>
+    $(document).find("#showDetail").append(
+        "<input disabled type='text' id='oneBook_" + data[i].bookid + "' value='"
+        + data[i].bookname + "'>" +
+        "图书类别:<input disabled type='text' value='" + data[i].booktype + "'>" +
+        "历史借阅:<input disabled type='number' value='" + data[i].lendnum + "'>" +
+        "剩余数量:<input disabled type='number' value='" + data[i].remainnum + "'>" +
+        "<img src='/images/" + data[i].image + "' alt='图书封面' style='width: 75px;height: 100px'>" +
+        "<textarea disabled style='border: 1px solid #000'>" + data[i].intro + "</textarea>"
+    );
+    $.ajax({
+        url: "../books/getBooksByBook",
+        type: "post",
+        data: {
+            bookid: localStorage.getItem("bookid");
+        },
+        dataType: "json",
+        async: false,
+        success: function(data){
+            var pthis=$("#suggest");
+            for(var i = 0; i < data.length; i++){
+                pthis.append("<div class='detail'>" +
+                    "<input disabled type='text' id='oneBook_" + data[i].bookid + "' value='"
+                    + data[i].bookname + "'>" +
+                    "图书类别:<input disabled type='text' value='" + data[i].booktype + "'>" +
+                    "历史借阅:<input disabled type='number' value='" + data[i].lendnum + "'>" +
+                    "剩余数量:<input disabled type='number' value='" + data[i].remainnum + "'>" +
+                    "<img src='/images/" + data[i].image + "' alt='图书封面' style='width: 75px;height: 100px'>" +
+                    "<textarea disabled style='border: 1px solid #000'>" + data[i].intro + "</textarea>" +
+                    "</div>");
+            }
+        },
+        error: function(e){
+            console.log(e);
+        }
+    });
+</script>
 </html>
