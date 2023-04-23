@@ -89,9 +89,9 @@
                 dataType: "json",
                 async: false,
                 success: function(data){
-                    localStorage.setItem("loginUser", "");
-                    localStorage.setItem("userid", "");
-                    localStorage.setItem("status", "");
+                    localStorage.removeItem("loginUser");
+                    localStorage.removeItem("userid");
+                    localStorage.removeItem("status");
                     alert("退出登录成功！");
                 },
                 error: function (error) {}
