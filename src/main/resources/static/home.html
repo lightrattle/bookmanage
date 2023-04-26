@@ -9,6 +9,7 @@
     <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.structure.min.css">
     <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.theme.min.css">
     <script src="./jQueryUI-1.13.2/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="./css/common.css">
 </head>
 <body>
 <div id="root" style="width: 100%;height: auto;position: relative;overflow-y: scroll">
@@ -16,6 +17,7 @@
     <input disabled type="button" class="ui-button" id="loginUser" value="">
     <input type="button" class="ui-button" id="search" value="搜索图书">
     <input type="button" class="ui-button" id="extro" value="专家推荐">
+    <input type="button" class="ui-button" id="insert" style="display: none" value="上传图书">
     <div id="showContent" style="left: 0;width: 100%;height: auto;position: relative;overflow-y: scroll">
 
     </div>
@@ -25,6 +27,9 @@
 </div>
 <script>
     $(document).ready(function(){
+        if(localStorage.getItem("status") === '0'){
+            $("#insert").show();
+        }
         var pthis = $(document).find("#showContent");
         pthis.append("<input id='fresh' type='button' class='ui-button' value='刷新推荐'>");
         $("#loginUser").val(localStorage.getItem("loginUser"));

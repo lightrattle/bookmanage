@@ -1,4 +1,4 @@
-package com.bookmanage.vo;
+package com.petcatqi.vo;
 
 public class CodeMsg {
 

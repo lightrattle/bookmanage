@@ -1,0 +1,10 @@
+#root{
+    font-family: '隶书';
+    font-size: 26px !important;
+}
+input[type='button']{
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+
+}

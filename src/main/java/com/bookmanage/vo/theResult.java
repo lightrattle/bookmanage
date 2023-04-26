@@ -1,4 +1,4 @@
-package com.bookmanage.vo;
+package com.petcatqi.vo;
 
 /*http请求返回的最外层对象*/
 public class theResult<T> {
