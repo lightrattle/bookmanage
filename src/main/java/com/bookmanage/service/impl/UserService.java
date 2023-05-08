@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class UserService implements UserServiceImpl {
@@ -57,6 +58,17 @@ public class UserService implements UserServiceImpl {
     @Override
     public boolean resetPassword(int userid) {
         return userMapper.resetPassword(userid);
+    }
+
+    @Override
+    public String updatePassword(int userid, String oldPassword, String newPassword) {
+        if((String)(userMapper.getPasswordByUserid(userid) == oldPassword)){
+            userMapper.updatePassword(userid, newPassword);
+            return "修改密码成功,下次请使用新密码登录！";
+        }
+        else {
+            return "旧密码不匹配！";
+        }
     }
 
     @Override

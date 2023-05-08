@@ -61,7 +61,16 @@
         select lended from user where userid = #{userid}
     </select>
 
+    <select id="getPasswordByUserid" resultType="String">
+        select password from user where userid = #{userid}
+    </select>
+
     <update id="updateLended">
         update `user` set lended = lended - 1 where userid = #{userid}
+    </update>
+
+    <update id="updatePassword">
+        update `user` set
+            password = #{password} where userid = #{userid}
     </update>
 </mapper>

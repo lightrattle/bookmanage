@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>图书管理-个人中心</title>
+  <script src="../jQuery/jquery-3.5.1.slim.min.js"></script>
+  <script src="../jQuery/jquery-3.5.1.min.js"></script>
+  <link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.min.css">
+  <link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.structure.min.css">
+  <link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.theme.min.css">
+  <script src="../jQueryUI-1.13.2/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<div id="userInfo">
+  <label for="username">用户名：</label>
+  <input id="username" type="text" value="">
+  <br>
+  <label for="nickname">昵称：</label>
+  <input id="nickname" type="text" value=""><br>
+  <input id="resetNickname" type="button" class="ui-button" value="确认修改">
+  <br>
+  <label for="oldpassword">旧密码：</label>
+  <input id="oldpassword" type="password" value="">
+  <br>
+  <label for="newpassword">新密码：</label>
+  <input id="newpassword" type="password" value="">
+  <br>
+  <label for="passwordAgain">再次输入：</label>
+  <input id="passwordAgain" type="password" value=""><br>
+  <input id="resetPassword" type="button" class="ui-button" value="确认修改">
+  <br>
+  <label for="maxlend">最大借阅数量：</label>
+  <input id="maxlend" type="text" value=""><br>
+  <br>
+  <label for="lended">已经借阅数量：</label>
+  <input id="lended" type="text" value=""><br>
+  <br>
+</div>
+<br>
+<div>------------------------------------------------------------------------------</div>
+<br>
+<div id="showLended">
+</div>
+</body>
+<script>
+  $(document).ready(function(){
+    $("#resetNickname").on('click', function(){
+      var newNickname = $("#nickname").val();
+      $.ajax({
+        url: "../user/resetNickname",
+        type: "post",
+        data: {
+          nickname: newNickname
+        },
+        dataType: "json",
+        async: false,
+        success: function(data){
+          alert("修改成功！");
+          console.log(data);
+        },
+        error: function (e){
+          console.log(e);
+        }
+      });
+    });
+    $("#resetPassword").on('click', function(){
+      var userid = localStorage.getItem("userid");
+      var oldPassword = $("#oldpassword").val();
+      var newPassword = $("#newpassword").val();
+      if($("#passwordAgain").val() === newPassword){
+        $.ajax({
+          url: "../user/updatePassword",
+          type: "post",
+          data: {
+            userid: Number(userid),
+            oldPassword: oldPassword,
+            newPassword: newPassword
+          },
+          dataType: "json",
+          async: false,
+          success: function(data){
+            alert(data);
+            location.reload();
+          },
+          error: function(e){
+            console.log(e);
+          }
+        });
+      }
+      else{
+        alert("两次输入密码不一致！");
+      }
+    });
+  });
+</script>
+</html>

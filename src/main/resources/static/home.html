@@ -21,6 +21,7 @@
         <input type="button" class="ui-button" id="insert" style="display: none" value="上传图书">
         <input type="button" class="ui-button" id="manageUser" style="display: none" value="用户管理">
         <input type="button" class="ui-button" id="insertExtro" style="display: none" value="填写推荐">
+        <input type="button" class="ui-button" id="userCenter" style="display: none" value="个人中心">
 
     </div>
     <div id="showContent" style="left: 0;width: 100%;height: auto;position: relative;overflow-y: scroll">
@@ -38,6 +39,9 @@
         }
         if(localStorage.getItem("status") === '1') {
             $("#insertExtro").show();
+        }
+        if(localStorage.getItem("status") === '2') {
+            $("#userCenter").show();
         }
         var pthis = $(document).find("#showContent");
         pthis.append("<input id='fresh' type='button' class='ui-button' value='刷新推荐'>");
@@ -129,6 +133,9 @@
         });
         $("#manageUser").on('click', function(){
             location.href="./iframe/manageUser.html";
+        });
+        $("#userCenter").on('click', function(){
+            location.href="./iframe/userCenter.html";
         });
     });
 </script>

@@ -35,5 +35,9 @@ public interface UserMapper {
 
     int getLendedByUserid(int userid);
 
+    String getPasswordByUserid(int userid);
+
+    String updatePassword(int userid, String password);
+
     boolean updateLended(int userid);
 }

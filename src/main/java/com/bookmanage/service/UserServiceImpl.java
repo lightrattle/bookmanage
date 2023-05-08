@@ -26,5 +26,7 @@ public interface UserServiceImpl {
 
     boolean resetPassword(int userid);
 
+    String updatePassword(int userid, String oldPassword, String newPassword);
+
     boolean deleteUser(int userid);
 }

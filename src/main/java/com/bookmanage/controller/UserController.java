@@ -104,6 +104,11 @@ public class UserController {
         return userService.resetPassword(userid);
     }
 
+    @RequestMapping("/updatePassword")
+    public String updatePassword(int userid, String oldPassword, String newPassword){
+        return userService.updatePassword(userid, oldPassword, newPassword);
+    }
+
     @RequestMapping("/deleteUser")
     public boolean deleteUser(int userid){
         return userService.deleteUser(userid);
