@@ -19,7 +19,9 @@
         <input type="button" class="ui-button" id="search" value="搜索图书">
         <input type="button" class="ui-button" id="extro" value="专家推荐">
         <input type="button" class="ui-button" id="insert" style="display: none" value="上传图书">
+        <input type="button" class="ui-button" id="manageUser" style="display: none" value="用户管理">
         <input type="button" class="ui-button" id="insertExtro" style="display: none" value="填写推荐">
+
     </div>
     <div id="showContent" style="left: 0;width: 100%;height: auto;position: relative;overflow-y: scroll">
 
@@ -32,8 +34,9 @@
     $(document).ready(function(){
         if(localStorage.getItem("status") === '0'){
             $("#insert").show();
+            $("#manageUser").show();
         }
-        if(localStorage.getItem("status") === '1'){
+        if(localStorage.getItem("status") === '1') {
             $("#insertExtro").show();
         }
         var pthis = $(document).find("#showContent");
@@ -123,6 +126,9 @@
         });
         $("#insertExtro").on('click', function(){
             location.href="./iframe/insertExtro.html";
+        });
+        $("#manageUser").on('click', function(){
+            location.href="./iframe/manageUser.html";
         });
     });
 </script>

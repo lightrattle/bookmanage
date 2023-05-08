@@ -24,4 +24,44 @@
     <select id="getUsernameForRecom" resultType="java.util.HashMap">
         select userid, username, nickname, status, maxlend, lended from user where status = 1
     </select>
+
+    <select id="listAllUser" resultType="java.util.HashMap">
+        select userid, username, nickname, status, maxlend from user
+    </select>
+
+    <update id="resetNickname">
+        update `user` set
+            nickname = #{nickname} where userid = #{userid}
+    </update>
+
+    <update id="resetStatus">
+        update `user` set
+            status = #{status} where userid = #{userid}
+    </update>
+
+    <update id="resetMaxlend">
+        update `user` set
+            maxlend = #{maxlend} where userid = #{userid}
+    </update>
+
+    <update id="resetPassword">
+        update `user` set
+            password = '123456' where userid = #{userid}
+    </update>
+
+    <delete id="deleteUser">
+        delete from user where userid = #{userid}
+    </delete>
+
+    <select id="getMaxlendByUserid" resultType="Integer">
+        select maxlend from user where userid = #{userid}
+    </select>
+
+    <select id="getLendedByUserid" resultType="Integer">
+        select lended from user where userid = #{userid}
+    </select>
+
+    <update id="updateLended">
+        update `user` set lended = lended - 1 where userid = #{userid}
+    </update>
 </mapper>

@@ -33,4 +33,34 @@ public class UserService implements UserServiceImpl {
     public List<Map<String, Object>> getUsernameForRecom() {
         return userMapper.getUsernameForRecom();
     }
+
+    @Override
+    public List<Map<String, Object>> listAllUser() {
+        return userMapper.listAllUser();
+    }
+
+    @Override
+    public boolean resetNickname(int userid, String nickname) {
+        return userMapper.resetNickname(userid, nickname);
+    }
+
+    @Override
+    public boolean resetStatus(int userid, int status) {
+        return userMapper.resetStatus(userid, status);
+    }
+
+    @Override
+    public boolean resetMaxlend(int userid, int maxlend) {
+        return userMapper.resetMaxlend(userid, maxlend);
+    }
+
+    @Override
+    public boolean resetPassword(int userid) {
+        return userMapper.resetPassword(userid);
+    }
+
+    @Override
+    public boolean deleteUser(int userid) {
+        return userMapper.deleteUser(userid);
+    }
 }

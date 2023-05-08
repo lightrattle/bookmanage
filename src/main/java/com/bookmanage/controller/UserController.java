@@ -78,4 +78,34 @@ public class UserController {
     public List<Map<String, Object>> getUsernameForRecom(){
         return userService.getUsernameForRecom();
     }
+
+    @RequestMapping("/listAllUser")
+    public List<Map<String, Object>> listAllUser(){
+        return userService.listAllUser();
+    }
+
+    @RequestMapping("/resetNickname")
+    public boolean resetNickname(int userid, String nickname) {
+        return userService.resetNickname(userid, nickname);
+    }
+
+    @RequestMapping("/resetStatus")
+    public boolean resetStatus(int userid, int status) {
+        return userService.resetStatus(userid, status);
+    }
+
+    @RequestMapping("/resetMaxlend")
+    public boolean resetMaxlend(int userid, int maxlend){
+        return userService.resetMaxlend(userid, maxlend);
+    }
+
+    @RequestMapping("/resetPassword")
+    public boolean resetPassword(int userid){
+        return userService.resetPassword(userid);
+    }
+
+    @RequestMapping("/deleteUser")
+    public boolean deleteUser(int userid){
+        return userService.deleteUser(userid);
+    }
 }

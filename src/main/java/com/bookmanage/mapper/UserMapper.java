@@ -18,4 +18,22 @@ public interface UserMapper {
     boolean removeUser(int userid);
 
     List<Map<String, Object>> getUsernameForRecom();
+
+    List<Map<String, Object>> listAllUser();
+
+    boolean resetNickname(int userid, String nickname);
+
+    boolean resetStatus(int userid, int status);
+
+    boolean resetMaxlend(int userid, int maxlend);
+
+    boolean resetPassword(int userid);
+
+    boolean deleteUser(int userid);
+
+    int getMaxlendByUserid(int userid);
+
+    int getLendedByUserid(int userid);
+
+    boolean updateLended(int userid);
 }
