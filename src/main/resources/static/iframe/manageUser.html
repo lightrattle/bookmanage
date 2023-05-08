@@ -13,7 +13,7 @@
 </head>
 <body>
 <div id="choList">
-  <input type="button" class="ui-button" id="back" style="display: none" value="返回">
+  <input type="button" class="ui-button" id="back" style="display: block" value="返回">
 </div>
 <div>
   <table>
@@ -64,12 +64,12 @@
                   "<td id='userid'>" + data[i].userid + "</td>" +
                   "<td>" + data[i].username + "</td>" +
                   "<td class='resetNickname'>" + data[i].nickname + "</td>" +
-                  "<td class='resetStatus'>" + data[i].statusStr + "</td>" +
+                  "<td class='resetStatus'>" + statusStr + "</td>" +
                   "<td class='resetMaxlend'>" + data[i].maxlend + "</td>" +
                   "<td class='resetPassword'>重置密码</td>" +
                   "<td class='deleteUser'>删除用户</td>" +
                   "</tr>");
-          $sele.append(temp);
+          $show.append(temp);
         }
       },
       error: function(error){
@@ -149,7 +149,7 @@
         });
       }
     });
-    $("#resetPassword").on('click', (e)=>{
+    $(".resetPassword").on('click', (e)=>{
       var userid = $(this).parent().find("#userid").html();
       $.ajax({
         url: "../user/resetPassword",
@@ -168,7 +168,7 @@
         }
       });
     });
-    $("#deleteUser").on('click', (e)=>{
+    $(".deleteUser").on('click', (e)=>{
       var userid = $(this).parent().find("#userid").html();
       $.ajax({
         url: "../user/deleteUser",

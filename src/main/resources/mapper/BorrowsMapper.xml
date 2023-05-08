@@ -16,6 +16,11 @@
         from borrows, books where borrows.status = #{status} and books.bookid = borrows.bookid
     </select>
 
+    <select id="getUsersByBooktype" resultType="java.util.HashMap">
+       select * from user, (select userid from (select userid, booktype from books, borrows where books.bookid = borrows.bookid) as ub
+            where ub.booktype = #{booktype}) as uid where user.userid = uid.userid
+    </select>
+
     <insert id="insertOneBorrow">
         insert into `borrows`(userid, lendtime, bookid) values (#{userid}, #{lendtime}, #{bookid})
     </insert>

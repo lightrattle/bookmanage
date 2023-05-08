@@ -62,7 +62,7 @@ public class UserService implements UserServiceImpl {
 
     @Override
     public String updatePassword(int userid, String oldPassword, String newPassword) {
-        if((String)(userMapper.getPasswordByUserid(userid) == oldPassword)){
+        if(new String(userMapper.getPasswordByUserid(userid)).equals(oldPassword)){
             userMapper.updatePassword(userid, newPassword);
             return "修改密码成功,下次请使用新密码登录！";
         }
