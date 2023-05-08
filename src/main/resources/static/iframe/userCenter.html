@@ -92,6 +92,20 @@
         alert("两次输入密码不一致！");
       }
     });
+    $.ajax({
+      url: "",
+      type: "post",
+      data: {},
+      dataType: "post",
+      async: false,
+      success: function(data){
+        var showLendedBooks = $("#showLended");
+
+      },
+      error: function(e){
+        console.log(e);
+      }
+    });
   });
 </script>
 </html>

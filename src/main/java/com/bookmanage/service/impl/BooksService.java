@@ -198,8 +198,10 @@ public class BooksService implements BooksServiceImpl {
         int lended = userMapper.getLendedByUserid(userid);
         int canLend = maxLend - lended;
         if(canLend > 0 && remainNum > 0){
+            Date nowTime = new Date();
             booksMapper.updateLendnum(bookid);
             userMapper.updateLended(userid);
+            borrowsMapper.insertOneBorrow(userid, nowTime, bookid);
             return "借阅成功！";
         }
         else{
