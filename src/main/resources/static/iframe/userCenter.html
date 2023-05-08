@@ -40,7 +40,21 @@
 <br>
 <div>------------------------------------------------------------------------------</div>
 <br>
-<div id="showLended">
+<div>
+  <table>
+    <thead>
+    <tr>
+      <td>序号</td>
+      <td>书名</td>
+      <td>所属分类</td>
+      <td>借出时间</td>
+      <td>状态</td>
+      <td>操作</td>
+    </tr>
+    </thead>
+    <tbody id="showLended">
+    </tbody>
+  </table>
 </div>
 </body>
 <script>
@@ -93,17 +107,63 @@
       }
     });
     $.ajax({
-      url: "",
+      url: "../borrows/getBorrowsListByUserid",
       type: "post",
-      data: {},
+      data: {
+        userid: localStorage.getItem("userid")
+      },
       dataType: "post",
       async: false,
       success: function(data){
         var showLendedBooks = $("#showLended");
-
+        for(var i = 0; i < data.length; i++){
+          var statusStr = "未知";
+          switch (data[i].status){
+            case '0':
+              statusStr = "借阅中";
+              break;
+            case '1':
+              statusStr = "已归还";
+              break;
+            default:
+              break;
+          }
+          var temp = $("<tr>" +
+                  "<td class='bookid' >" + data[i].bookid + "</td>" +
+                  "<td class='bookname'>" + data[i].bookname + "</td>" +
+                  "<td class='booktype'>" + data[i].booktype + "</td>" +
+                  "<td class='lendtime'>" + data[i].lendtime + "</td>" +
+                  "<td class='status'>" + statusStr + "</td>" +
+                  "<td class='button'>" + (statusStr==="借阅中"?"点击归还":"无需操作") + "</td>" +
+                  "</tr>")
+          showLendedBooks.append(temp);
+        }
       },
       error: function(e){
         console.log(e);
+      }
+    });
+    $(".button").on('click', (e)=>{
+      var bookid = $(this).parent().find(".bookid").html();
+      var userid = localStorage.getItem("userid");
+      if($(this).text()==="点击归还"){
+        $.ajax({
+          url: "../borrows/updateOneStatus",
+          type: "post",
+          data: {
+            userid: userid,
+            bookid: bookid
+          },
+          dataType: "json",
+          async: false,
+          success: function(data){
+            alert("还书成功！");
+            console.log(data);
+          },
+          error: function(e) {
+            console.log(e);
+          }
+        });
       }
     });
   });
