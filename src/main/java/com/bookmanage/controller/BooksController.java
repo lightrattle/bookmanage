@@ -107,4 +107,8 @@ public class BooksController {
     @RequestMapping("/deleteOneBook")//删除一本书
     public boolean deleteOneBook(int bookid) {return booksService.deleteOneBook(bookid);}
 
+    @RequestMapping("/lendOne")
+    public String lendOne(int userid, int bookid){
+        return booksService.lendOne(userid, bookid);
+    }
 }

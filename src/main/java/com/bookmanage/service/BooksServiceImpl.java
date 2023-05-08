@@ -35,4 +35,6 @@ public interface BooksServiceImpl {
     boolean updateLendnum(int bookid);
 
     boolean deleteOneBook(int bookid);
+
+    String lendOne(int userid, int bookid);
 }

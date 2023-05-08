@@ -190,4 +190,20 @@ public class BooksService implements BooksServiceImpl {
     public boolean deleteOneBook(int bookid) {
         return booksMapper.deleteOneBook(bookid);
     }
+
+    @Override
+    public String lendOne(int userid, int bookid) {
+        int remainNum = booksMapper.getRemainNumByBookid(bookid);
+        int maxLend = userMapper.getMaxlendByUserid(userid);
+        int lended = userMapper.getLendedByUserid(userid);
+        int canLend = maxLend - lended;
+        if(canLend > 0 && remainNum > 0){
+            booksMapper.updateLendnum(bookid);
+            userMapper.updateLended(userid);
+            return "借阅成功！";
+        }
+        else{
+            return "借阅失败！";
+        }
+    }
 }

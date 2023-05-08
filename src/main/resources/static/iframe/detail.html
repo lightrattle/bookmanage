@@ -18,6 +18,10 @@
     <div id="showDetail" style="border: 1px solid #000;height: auto;width: 100%">
     </div>
     <br>
+    <input id="lendOne" type="button" class="ui-button" value="借阅">
+    <br>
+    <div id="showComment" style="border: 1px solid #000;height: auto;width: 100%">
+    </div>
     <input disabled type="button" class="ui-button" value="↓↓↓相关图书推↓↓↓"
            style="width: 100%;height: 30px;position: relative;border: 1px solid #000" >
     <div id="suggest">
@@ -36,6 +40,28 @@
             "<img src='/images/" + data[i].image + "' alt='图书封面' style='width: 75px;height: 100px'>" +
             "<textarea disabled style='border: 1px solid #000'>" + data[i].intro + "</textarea>"
         );
+        $("#lendOne").on('click', (e)=>{
+           var bookid = ($("#showDetail").children("input").eq(0).attr("id")).split("_")[1];
+           var userid = localStorage.getItem("userid");
+           $.ajax({
+               url: "../book/lendOne",
+               type: "post",
+               data: {
+                   userid: Number(userid),
+                   bookid: Number(bookid)
+               },
+               dataType: "json",
+               async: false,
+               success: function(data){
+                   alert(data);
+                   location.reload();
+               },
+               error: function(e){
+                   console.log(e);
+               }
+           });
+        });
+        $.ajax({});
         $.ajax({
             url: "../books/getBooksByBook",
             type: "post",

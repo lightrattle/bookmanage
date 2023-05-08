@@ -24,4 +24,8 @@ public interface BooksMapper {
     public boolean updateLendnum(int bookid);
 
     public boolean deleteOneBook(int bookid);
+
+    public int getRemainNumByBookid(int bookid);
+
+
 }

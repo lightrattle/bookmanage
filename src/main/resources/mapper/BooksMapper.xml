@@ -36,4 +36,10 @@
             remainnum = remainnum - 1
                 where bookid = #{bookid} and remainnum > 0
     </update>
+
+    <select id="getRemainNumByBookid" resultType="Integer">
+        select remainnum from books where bookid = #{bookid};
+    </select>
+
+
 </mapper>
