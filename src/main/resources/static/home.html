@@ -13,11 +13,14 @@
 </head>
 <body>
 <div id="root" style="width: 100%;height: auto;position: relative;overflow-y: scroll">
-    <input type="button" class="ui-button" id="tologgout" value="退出登录">
-    <input disabled type="button" class="ui-button" id="loginUser" value="">
-    <input type="button" class="ui-button" id="search" value="搜索图书">
-    <input type="button" class="ui-button" id="extro" value="专家推荐">
-    <input type="button" class="ui-button" id="insert" style="display: none" value="上传图书">
+    <div id="choList">
+        <input type="button" class="ui-button" id="tologgout" value="退出登录">
+        <input disabled type="button" class="ui-button" id="loginUser" value="">
+        <input type="button" class="ui-button" id="search" value="搜索图书">
+        <input type="button" class="ui-button" id="extro" value="专家推荐">
+        <input type="button" class="ui-button" id="insert" style="display: none" value="上传图书">
+        <input type="button" class="ui-button" id="insertExtro" style="display: none" value="填写推荐">
+    </div>
     <div id="showContent" style="left: 0;width: 100%;height: auto;position: relative;overflow-y: scroll">
 
     </div>
@@ -29,6 +32,9 @@
     $(document).ready(function(){
         if(localStorage.getItem("status") === '0'){
             $("#insert").show();
+        }
+        if(localStorage.getItem("status") === '1'){
+            $("#insertExtro").show();
         }
         var pthis = $(document).find("#showContent");
         pthis.append("<input id='fresh' type='button' class='ui-button' value='刷新推荐'>");
@@ -111,6 +117,12 @@
         });
         $("#search").on('click', function(){
             location.href="search.html";
+        });
+        $("#insert").on('click', function(){
+            location.href="./iframe/insertOneBook.html";
+        });
+        $("#insertExtro").on('click', function(){
+            location.href="./iframe/insertExtro.html";
         });
     });
 </script>

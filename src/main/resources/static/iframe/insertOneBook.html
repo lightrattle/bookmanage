@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>图书馆里-新增图书</title>
+    <title>图书管理-新增图书</title>
     <script src="../jQuery/jquery-3.5.1.slim.min.js"></script>
     <script src="../jQuery/jquery-3.5.1.min.js"></script>
     <link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.min.css">
@@ -10,15 +10,17 @@
     <link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.theme.min.css">
     <script src="../jQueryUI-1.13.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="../css/common.css">
-
 </head>
 <body>
+<div id="choList">
+    <input type="button" class="ui-button" id="back" style="display: none" value="返回">
+</div>
 <div id="insertOneBook">
     <label for="bookname">图书名:</label>
     <input type="text" id="bookname" placeholder="图书名"><br>
     <label for="insertclassify">分类:</label>
     <input type="text" id="insertclassify" placeholder="图书所属类别"><br>
-    <label for="insertclassify">封面:</label>
+    <label for="insertimage">封面:</label>
     <input type="file" id="insertimage" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"><br>
     <label for="allnum">上架数量:</label>
     <input type="number" id="allnum" placeholder="数量"><br>
@@ -83,6 +85,9 @@
                 image.src = reader.result;
             };
         }
+        $("#back").on('click', function(){
+            location.href="../home.html";
+        });
     });
 </script>
 </html>
