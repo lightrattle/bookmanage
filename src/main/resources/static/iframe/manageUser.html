@@ -48,20 +48,20 @@
         for(let i = 0; i < data.length; i++) {
           var statusStr = "无权限";
           switch (data[i].status){
-            case '0':
+            case 0:
               statusStr = "系统管理员";
               break;
-            case '1':
+            case 1:
               statusStr = "专家";
               break;
-            case '2':
+            case 2:
               statusStr = "借阅者";
               break;
             default:
               break;
           }
           var temp = $("<tr>" +
-                  "<td id='userid'>" + data[i].userid + "</td>" +
+                  "<td class='userid'>" + data[i].userid + "</td>" +
                   "<td>" + data[i].username + "</td>" +
                   "<td class='resetNickname'>" + data[i].nickname + "</td>" +
                   "<td class='resetStatus'>" + statusStr + "</td>" +
@@ -81,7 +81,7 @@
       location.href="../home.html";
     });
     $(".resetNickname").on('click', (e)=>{
-      var userid = $(this).parent().find("userid").html();
+      var userid = $(e.target).parent().find(".userid").html();
       var newInfo = prompt("要更新为：", "new Info");
       if(newInfo != null && newInfo !== ""){
         $.ajax({
@@ -104,7 +104,7 @@
       }
     });
     $(".resetStatus").on('click', (e)=>{
-      var userid = $(this).parent().find("userid").html();
+      var userid = $(e.target).parent().find(".userid").html();
       var newInfo = prompt("要更新为：", "new Info");
       if(newInfo != null && newInfo !== "" && Number(newInfo) >=0 && Number(newInfo) <= 2){
         $.ajax({
@@ -127,7 +127,7 @@
       }
     });
     $(".resetMaxlend").on('click', (e)=>{
-      var userid = $(this).parent().find("userid").html();
+      var userid = $(e.target).parent().find(".userid").html();
       var newInfo = prompt("要更新为：", "new Info");
       if(newInfo != null && newInfo !== "" && (Number(newInfo)) !== "NaN"){
         $.ajax({
@@ -140,7 +140,7 @@
           dataType: "json",
           async: false,
           success: function(data){
-            alset("更新成功！");
+            alert("更新成功！");
             location.reload();
           },
           error: function(error){
@@ -150,7 +150,7 @@
       }
     });
     $(".resetPassword").on('click', (e)=>{
-      var userid = $(this).parent().find("#userid").html();
+      var userid = $(e.target).parent().find(".userid").html();
       $.ajax({
         url: "../user/resetPassword",
         type: "post",
@@ -169,7 +169,7 @@
       });
     });
     $(".deleteUser").on('click', (e)=>{
-      var userid = $(this).parent().find("#userid").html();
+      var userid = $(e.target).parent().find(".userid").html();
       $.ajax({
         url: "../user/deleteUser",
         type: "post",
@@ -186,6 +186,7 @@
           console.log(e);
         }
       });
+      location.reload();
     });
   });
 </script>

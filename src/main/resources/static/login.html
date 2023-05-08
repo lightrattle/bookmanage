@@ -16,9 +16,56 @@
 <label for="password">密&nbsp;&nbsp;&nbsp;码:</label><input type="password" id="password" required placeholder="密码"><br>
 <button type="button" class="ui-button" id="tologin">登录</button>
 <button type="button" class="ui-button" id="back">返回</button>
+<button type="button" class="ui-button" id="createUser">注册</button>
+<div id="showCreate" style="position: fixed;display: none;border:1px solid #000;height: 60%;width: 60%;top: 20%;left: 20%;background-color: #cccccc">
+    <label for="newNickname">昵称</label><input id="newNickname" type="text" placeholder="昵称"><br>
+    <label for="newUsername">用户名</label><input id="newUsername" type="text" placeholder="用户名"><br>
+    <label for="newPassword">密码</label><input id="newPassword" type="password" placeholder="密码"><br>
+    <label for="againPassword">再次输入</label><input id="againPassword" type="password" placeholder="再次输入"><br>
+    <input id="sureToCreate" type="button" value="注册">
+    <input id="cancel" type="button" value="取消">
+</div>
 </body>
 <script>
     $(document).ready(function(){
+        $("#createUser").on('click', function(){
+            $("#showCreate").show();
+        });
+        $("#cancel").on('click', function(){
+            $("#showCreate").hide();
+        });
+        $("#sureToCreate").on('click', function(){
+            var nickname = $("#newNickname").val();
+            var username = $("#newUsername").val();
+            var password = $("#newPassword").val();
+            var again = $("#againPassword").val();
+            if(again === password){
+                $.ajax({
+                    url: "/user/createUser",
+                    type: "post",
+                    data: {
+                        nickname: nickname,
+                        username: username,
+                        password: password
+                    },
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        //TODO 不生效。不知道为什么
+                        let logInfo = data;
+                        $("#showCreate").hide();
+                        alert(logInfo);
+                    },
+                    error: function (errorMsg) {
+                        console.log(errorMsg);
+                    }
+                });
+            }
+            else{
+                alert("两次密码不一致！");
+            }
+            location.reload();
+        })
         $(document).on('click', '#tologin' , function () {
             var result;
             $.ajax({
@@ -41,6 +88,9 @@
             localStorage.setItem("loginUser", result['loginUser']);
             localStorage.setItem("userid", result['userid']);
             localStorage.setItem("status", result['status']);
+            localStorage.setItem("nickname", result['nickname']);
+            localStorage.setItem("maxlend", result['maxlend']);
+            localStorage.setItem("lended", result['lended']);
             alert(result['msg']);
             location.href ='/home.html';
         });

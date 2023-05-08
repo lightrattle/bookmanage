@@ -32,19 +32,19 @@
 <script>
     $(document).ready(function(){
         $(document).find("#showDetail").append(
-            "<input disabled type='text' id='oneBook_" + data[i].bookid + "' value='"
-            + data[i].bookname + "'>" +
-            "图书类别:<input disabled type='text' value='" + data[i].booktype + "'>" +
-            "历史借阅:<input disabled type='number' value='" + data[i].lendnum + "'>" +
-            "剩余数量:<input disabled type='number' value='" + data[i].remainnum + "'>" +
-            "<img src='/images/" + data[i].image + "' alt='图书封面' style='width: 75px;height: 100px'>" +
-            "<textarea disabled style='border: 1px solid #000'>" + data[i].intro + "</textarea>"
+            "<input disabled type='text' id='oneBook_" + localStorage.getItem("bookid") + "' value='"
+            + localStorage.getItem("bookname") + "'>" +
+            "图书类别:<input disabled type='text' value='" + localStorage.getItem("booktype") + "'>" +
+            "历史借阅:<input disabled type='number' value='" + localStorage.getItem("lendnum") + "'>" +
+            "剩余数量:<input disabled type='number' value='" + localStorage.getItem("remainnum") + "'>" +
+            "<img src='/images/" + localStorage.getItem("image") + "' alt='图书封面' style='width: 75px;height: 100px'>" +
+            "<textarea disabled style='border: 1px solid #000'>" + localStorage.getItem("intro") + "</textarea>"
         );
         $("#lendOne").on('click', (e)=>{
            var bookid = ($("#showDetail").children("input").eq(0).attr("id")).split("_")[1];
            var userid = localStorage.getItem("userid");
            $.ajax({
-               url: "../book/lendOne",
+               url: "../books/lendOne",
                type: "post",
                data: {
                    userid: Number(userid),

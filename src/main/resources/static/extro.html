@@ -29,6 +29,7 @@
     <label for="extroDevelop">发展方向：</label>
     <select id="extroDevelop">
     </select>
+    <br>
     <div id="show" style="position: relative">
 
     </div>
@@ -101,12 +102,24 @@
     }
     $.ajax({
       url: "/books/getBookByRecom",
-      type: "get",
+      type: "post",
       data: {},
       dataType: "json",
       async: false,
       sucess: function(data){
-        showBooks(data);
+        $("#show").empty();
+        for(var i = 0; i < data.length; i++){
+          $("#show").append("<div>" +
+                  "专业:<input disabled type='text' value='" + data[i].major + "'>" +
+                  "<input disabled type='text' value='" + data[i].username + "'>" +
+                  "推荐书目:<input disabled type='text' value='" + data[i].bookname + "'>" +
+                  "发展方向:<input disabled type='text' value='" + data[i].develop + "'>" +
+                  "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
+                  "余量:<input disabled type='text' value='" + data[i].remainnum + "'><br>" +
+                  "<img style='height: 100px;width: 75px' alt='图书封面' src='./images/" + data[i].image + "'><br>" +
+                  "<textarea disabled>" + data[i].reason + "</textarea><br>" +
+                  "</div>");
+        }
       },
       error: function(e){
         console.log(e);

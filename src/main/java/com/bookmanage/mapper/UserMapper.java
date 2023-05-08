@@ -37,7 +37,7 @@ public interface UserMapper {
 
     String getPasswordByUserid(int userid);
 
-    String updatePassword(int userid, String password);
+    boolean updatePassword(int userid, String password);
 
     boolean updateLended(int userid);
 }

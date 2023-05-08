@@ -37,7 +37,8 @@
                 success: function(data){
                     var pthis = $("#result").empty();
                     for(var i = 0; i < data.length; i++){
-                        pthis.append("<div class='detail'>" +
+                        pthis.append("<div>" +
+                            "<button class='detail' type='button'>详情</button>" +
                             "<input disabled type='text' id='oneBook_" + data[i].bookid + "' value='"
                             + data[i].bookname + "'>" +
                             "图书类别:<input disabled type='text' value='" + data[i].booktype + "'>" +
@@ -46,22 +47,22 @@
                             "<img src='/images/" + data[i].image + "' alt='图书封面' style='width: 75px;height: 100px'>" +
                             "<textarea disabled style='border: 1px solid #000'>" + data[i].intro + "</textarea>" +
                             "</div>");
+                        $(".detail").on('click', (e)=>{
+                            localStorage.setItem("bookid", $(e.target).parent().children("input").eq(0).attr("id").split("_")[1]);
+                            localStorage.setItem("bookname", $(e.target).parent().children("input").eq(0).val());
+                            localStorage.setItem("booktype", $(e.target).parent().children("input").eq(1).val());
+                            localStorage.setItem("lendnum", $(e.target).parent().children("input").eq(2).val());
+                            localStorage.setItem("remainnum", $(e.target).parent().children("input").eq(3).val());
+                            localStorage.setItem("image", ".."+$(e.target).parent().find("img").attr("src"));
+                            localStorage.setItem("intro", $(e.target).parent().find("textarea").val());
+                            location.href="iframe/detail.html";
+                        });
                     }
                 },
                 error: function(e){
                     console.log(e);
                 }
             });
-        });
-        $(".detail").on('click', function(){
-            localStorage.setItem("bookid", $(this).children("input").eq(0).attr("id").split("_")[1]);
-            localStorage.setItem("bookname", $(this).children("input").eq(0).val());
-            localStorage.setItem("booktype", $(this).children("input").eq(1).val());
-            localStorage.setItem("lendnum", $(this).children("input").eq(2).val());
-            localStorage.setItem("remainnum", $(this).children("input").eq(3).val());
-            localStorage.setItem("image", ".."+$(this).find("img").attr("src"));
-            localStorage.setItem("intro", $(this).find("textarea").val());
-            location.href="./iframe/detail.html";
         });
         $("#back").on('click', function(){
             location.href="home.html";

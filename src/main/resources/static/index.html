@@ -13,7 +13,7 @@
 </head>
 <body>
 <div id="root" style="width: 100%;height: auto;position: relative;overflow-y: scroll">
-    <input disabled id="login" type="button" class="ui-button" value="登录">
+    <input id="login" type="button" class="ui-button" value="登录">
     <input type="button" class="ui-button" id="search" value="搜索图书">
     <div id="show" style="left: 0;width: 100%;height: auto;position: relative;overflow-y: scroll">
 
@@ -38,8 +38,8 @@
                         "<input disabled type='text' value='" + data[i].booktype + "'>" +
                         "<input disabled type='text' value='热度:" + data[i].lendnum + "'>" +
                         "<input disabled type='text' value='剩余数量:" + data[i].remainnum + "'><br>" +
-                        "<img alt='图书封面' src='" + data[i].image + "'><br>" +
-                        "<input disabled type='text' value='" + data[i].intro + "'><br>");
+                        "<img alt='图书封面' src='./images/" + data[i].image + "'><br>" +
+                        "<textarea disabled type='text'>" + data[i].intro + "</textarea><br>");
                     pthis.append(oneDiv);
                 }
             },

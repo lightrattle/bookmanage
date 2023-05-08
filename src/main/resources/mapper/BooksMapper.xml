@@ -52,4 +52,8 @@
     <update id="updateIntro">
         update `books` set intro = #{intro} where bookid = #{bookid}
     </update>
+
+    <delete id="deleteOneBook">
+        delete from books where bookid = #{bookid}
+    </delete>
 </mapper>

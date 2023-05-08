@@ -12,12 +12,15 @@
   <link rel="stylesheet" href="../css/common.css">
 </head>
 <body>
+<div id="choList">
+  <input type="button" class="ui-button" id="back" style="display: block" value="返回">
+</div>
 <div id="userInfo">
   <label for="username">用户名：</label>
   <input id="username" type="text" value="">
   <br>
   <label for="nickname">昵称：</label>
-  <input id="nickname" type="text" value=""><br>
+  <input id="nickname" type="text" value="">
   <input id="resetNickname" type="button" class="ui-button" value="确认修改">
   <br>
   <label for="oldpassword">旧密码：</label>
@@ -27,14 +30,14 @@
   <input id="newpassword" type="password" value="">
   <br>
   <label for="passwordAgain">再次输入：</label>
-  <input id="passwordAgain" type="password" value=""><br>
+  <input id="passwordAgain" type="password" value="">
   <input id="resetPassword" type="button" class="ui-button" value="确认修改">
   <br>
   <label for="maxlend">最大借阅数量：</label>
-  <input id="maxlend" type="text" value=""><br>
+  <input id="maxlend" disabled type="text" value=""><br>
   <br>
   <label for="lended">已经借阅数量：</label>
-  <input id="lended" type="text" value=""><br>
+  <input id="lended" disabled type="text" value=""><br>
   <br>
 </div>
 <br>
@@ -59,12 +62,20 @@
 </body>
 <script>
   $(document).ready(function(){
+    $("#back").on('click', function(){
+      location.href="../home.html";
+    });
+    $("#nickname").val(localStorage.getItem("nickname"));
+    $("#maxlend").val(localStorage.getItem("maxlend"));
+    $("#lended").val(localStorage.getItem("lended"));
+
     $("#resetNickname").on('click', function(){
       var newNickname = $("#nickname").val();
       $.ajax({
         url: "../user/resetNickname",
         type: "post",
         data: {
+          userid: localStorage.getItem("userid"),
           nickname: newNickname
         },
         dataType: "json",

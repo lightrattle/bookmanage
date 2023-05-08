@@ -23,6 +23,8 @@ public class WebAppConfig implements WebMvcConfigurer {
                 .excludePathPatterns("../images/**")
                 .excludePathPatterns("../books/**")
                 .excludePathPatterns("../info/**")
+                .excludePathPatterns("/books/**")
+                .excludePathPatterns("/info/**")
                 .excludePathPatterns("/user/**");//排除的路径
     }
 

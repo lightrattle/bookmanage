@@ -6,7 +6,7 @@ public class User {
     private String password;
     private String nickname;
     private int status;
-    private int namlend;
+    private int maxlend;
     private int lended;
 
     public int getUserid() {
@@ -49,12 +49,12 @@ public class User {
         this.status = status;
     }
 
-    public int getNamlend() {
-        return namlend;
+    public int getMaxlend() {
+        return maxlend;
     }
 
-    public void setNamlend(int namlend) {
-        this.namlend = namlend;
+    public void setMaxlend(int maxlend) {
+        this.maxlend = maxlend;
     }
 
     public int getLended() {

@@ -5,6 +5,7 @@ import com.bookmanage.service.BooksServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -115,8 +116,7 @@ public class BooksService implements BooksServiceImpl {
         // 根据该类别获取所有书籍
         List<Map<String, Object>> theClassifyBooks = booksMapper.getBooksByTypes(classify);
         // 生成五个随机数，并将对应的书加入books
-        List<Map<String, Object>> books = null;
-        int[] chooses = new int[5];
+        List<Map<String, Object>> books = new ArrayList<>();
         for(int i = 0; i < 5; i++){
             int choose = (int)(Math.random() * theClassifyBooks.size() + 0);
             books.add(theClassifyBooks.get(choose));

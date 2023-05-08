@@ -73,7 +73,7 @@
     $("#sureSearch").on('click', (e)=>{
       var str = $("#search").val();
       $.ajax({
-        url: "../book/getBooksBySearchString",
+        url: "../books/getBooksBySearchString",
         type: "post",
         data: {
           searchString: str
@@ -90,7 +90,7 @@
                     "<td class='lendnum'>" + data[i].lendnum + "</td>" +
                     "<td class='allnum'>" + data[i].allnum + "</td>" +
                     "<td class='remainnum'>" + data[i].remainnum + "</td>" +
-                    "<td class='intro'>" + (data[i].intro).slice(0,10) + "</td>" +
+                    "<td class='intro' style='width: 10em !important;overflow: hidden'>" + data[i].intro + "</td>" +
                     "<td class='delete' style='border: 1px solid #000;border-radius: 5px'>删除图书</td>" +
                     "</tr>");
             showBooks.append(temp);
@@ -103,7 +103,7 @@
     });
     $(".allnum").on('click', (e)=>{
       var allnum = prompt("请输入要更新的总馆藏为多少：", "new All Number");
-      var bookid = $(this).parent().find(".bookid").html();
+      var bookid = $(e.target).parent().find(".bookid").html();
       if(Number(allnum)!== 'NaN'){
         $.ajax({
           url: "../books/updateAllnum",
@@ -125,8 +125,8 @@
       }
     });
     $(".intro").on('click', (e)=>{
-      var intro = prompt("请输入要更新的总馆藏为多少：", "new intro");
-      var bookid = $(this).parent().find(".bookid").html();
+      var intro = prompt("请输入要更新的图书简介为：", "new intro");
+      var bookid = $(e.target).parent().find(".bookid").html();
       if(intro !== '' && intro != null){
         $.ajax({
           url: "../books/updateIntro",
@@ -148,7 +148,7 @@
       }
     });
     $(".delete").on('click', (e)=>{
-      var bookid = $(this).parent().find(".bookid").html();
+      var bookid = $(e.target).parent().find(".bookid").html();
       $.ajax({
         url: "../books/deleteOneBook",
         type: "post",
