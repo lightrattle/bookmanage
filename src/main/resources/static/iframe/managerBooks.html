@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>图书管理-图书管理</title>
+  <script src="../jQuery/jquery-3.5.1.slim.min.js"></script>
+  <script src="../jQuery/jquery-3.5.1.min.js"></script>
+  <link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.min.css">
+  <link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.structure.min.css">
+  <link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.theme.min.css">
+  <script src="../jQueryUI-1.13.2/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+<div id="choList">
+  <input type="button" class="ui-button" id="back" style="display: block" value="返回">
+</div><br>
+<div>------------------------------------------------------------------------------------</div>
+<label for="search">模糊搜索：</label>
+<input id="search" type="text" placeholder="输入以查询图书">
+<input id="sureSearch" type="button" value="搜索">
+<br>
+<div>
+  <table>
+    <thead>
+    <tr>
+      <td>序号</td>
+      <td>书名</td>
+      <td>图书分类</td>
+      <td>借出次数</td>
+      <td>馆藏总数</td>
+      <td>当前剩余</td>
+      <td>图书简介(部分)</td>
+      <td>操作</td>
+    </tr>
+    </thead>
+    <tbody id="showBooks">
+    </tbody>
+  </table>
+</div>
+</body>
+<script>
+  $(document).ready(function(){
+    $.ajax({
+      url: "../books/getAllBooks",
+      type: "post",
+      data: {},
+      dataType: "json",
+      async: false,
+      success: function(data){
+        var showBooks = $("#showBooks");
+        for(let i = 0; i < data.length; i++) {
+          var temp = $("<tr>" +
+                  "<td class='bookid'>" + data[i].bookid + "</td>" +
+                  "<td class='bookname'>" + data[i].bookname + "</td>" +
+                  "<td class='booktype'>" + data[i].booktype + "</td>" +
+                  "<td class='lendnum'>" + data[i].lendnum + "</td>" +
+                  "<td class='allnum'>" + data[i].allnum + "</td>" +
+                  "<td class='remainnum'>" + data[i].remainnum + "</td>" +
+                  "<td class='intro'>" + data[i].intro + "</td>" +
+                  "<td class='delete' style='border: 1px solid #000;border-radius: 5px'>删除图书</td>" +
+                  "</tr>");
+          showBooks.append(temp);
+        }
+      },
+      error: function(e){
+        console.log(e);
+      }
+    });
+    $("#back").on('click', function(){
+      location.href="../home.html";
+    });
+    $("#sureSearch").on('click', (e)=>{
+      var str = $("#search").val();
+      $.ajax({
+        url: "../book/getBooksBySearchString",
+        type: "post",
+        data: {
+          searchString: str
+        },
+        dataType: "json",
+        async: false,
+        success: function(data){
+          var showBooks = $("#showBooks").empty();
+          for(let i = 0; i < data.length; i++) {
+            var temp = $("<tr>" +
+                    "<td class='bookid'>" + data[i].bookid + "</td>" +
+                    "<td class='bookname'>" + data[i].bookname + "</td>" +
+                    "<td class='booktype'>" + data[i].booktype + "</td>" +
+                    "<td class='lendnum'>" + data[i].lendnum + "</td>" +
+                    "<td class='allnum'>" + data[i].allnum + "</td>" +
+                    "<td class='remainnum'>" + data[i].remainnum + "</td>" +
+                    "<td class='intro'>" + (data[i].intro).slice(0,10) + "</td>" +
+                    "<td class='delete' style='border: 1px solid #000;border-radius: 5px'>删除图书</td>" +
+                    "</tr>");
+            showBooks.append(temp);
+          }
+        },
+        error: function(e){
+          console.log(e);
+        }
+      });
+    });
+    $(".allnum").on('click', (e)=>{
+      var allnum = prompt("请输入要更新的总馆藏为多少：", "new All Number");
+      var bookid = $(this).parent().find(".bookid").html();
+      if(Number(allnum)!== 'NaN'){
+        $.ajax({
+          url: "../books/updateAllnum",
+          type: "post",
+          data: {
+            bookid: bookid,
+            allnum: allnum
+          },
+          dataType: "json",
+          async: false,
+          success: function(data){
+            alert("更新成功！");
+            location.reload();
+          },
+          error: function(e){
+            console.log(e);
+          }
+        });
+      }
+    });
+    $(".intro").on('click', (e)=>{
+      var intro = prompt("请输入要更新的总馆藏为多少：", "new intro");
+      var bookid = $(this).parent().find(".bookid").html();
+      if(intro !== '' && intro != null){
+        $.ajax({
+          url: "../books/updateIntro",
+          type: "post",
+          data: {
+            bookid: bookid,
+            intro: intro
+          },
+          dataType: "json",
+          async: false,
+          success: function(data){
+            alert("更新成功！");
+            location.reload();
+          },
+          error: function(e){
+            console.log(e);
+          }
+        });
+      }
+    });
+    $(".delete").on('click', (e)=>{
+      var bookid = $(this).parent().find(".bookid").html();
+      $.ajax({
+        url: "../books/deleteOneBook",
+        type: "post",
+        data: {
+          bookid: bookid
+        },
+        dataType: "json",
+        async: false,
+        success: function(data){
+          alert("删除成功！");
+          location.reload();
+        },
+        error: function(e){
+          console.log(e);
+        }
+      });
+    });
+  });
+</script>
+</html>

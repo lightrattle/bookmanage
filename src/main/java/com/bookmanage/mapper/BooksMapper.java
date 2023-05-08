@@ -27,5 +27,9 @@ public interface BooksMapper {
 
     public int getRemainNumByBookid(int bookid);
 
+    public List<Map<String, Object>> getBooksBySearchString(String str);
 
+    public boolean updateAllnum(int bookid, int allnum);
+
+    public boolean updateIntro(int bookid, String intro);
 }

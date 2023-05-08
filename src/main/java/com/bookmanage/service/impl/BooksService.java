@@ -208,4 +208,28 @@ public class BooksService implements BooksServiceImpl {
             return "借阅失败！";
         }
     }
+
+    @Override
+    public List<Map<String, Object>> getBooksBySearchString(String searchString) {
+        if(searchString.length() == 0){
+            return booksMapper.getAllBooks();
+        }
+        else {
+            StringBuilder str = new StringBuilder();
+            for(int i = 0; i < searchString.length(); i++){
+                str.append(searchString.charAt(i)).append("%");
+            }
+            return booksMapper.getBooksBySearchString(new String(str));
+        }
+    }
+
+    @Override
+    public boolean updateAllnum(int bookid, int allnum) {
+        return booksMapper.updateAllnum(bookid, allnum);
+    }
+
+    @Override
+    public boolean updateIntro(int bookid, String intro) {
+        return booksMapper.updateIntro(bookid, intro);
+    }
 }

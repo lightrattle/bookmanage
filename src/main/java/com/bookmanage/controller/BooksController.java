@@ -111,4 +111,19 @@ public class BooksController {
     public String lendOne(int userid, int bookid){
         return booksService.lendOne(userid, bookid);
     }
+
+    @RequestMapping("/getBooksBySearchString")
+    public List<Map<String, Object>> getBooksBySearchString(String searchString){
+        return booksService.getBooksBySearchString(searchString);
+    }
+
+    @RequestMapping("/updateAllnum")
+    public boolean updateAllnum(int bookid, int allnum){
+        return booksService.updateAllnum(bookid, allnum);
+    }
+
+    @RequestMapping("/updateIntro")
+    public boolean updateIntro(int bookid, String intro){
+        return booksService.updateIntro(bookid, intro);
+    }
 }

@@ -22,7 +22,7 @@
         <input type="button" class="ui-button" id="manageUser" style="display: none" value="用户管理">
         <input type="button" class="ui-button" id="insertExtro" style="display: none" value="填写推荐">
         <input type="button" class="ui-button" id="userCenter" style="display: none" value="个人中心">
-
+        <input type="button" class="ui-button" id="managerBooks" style="display: none" value="图书管理">
     </div>
     <div id="showContent" style="left: 0;width: 100%;height: auto;position: relative;overflow-y: scroll">
 
@@ -36,6 +36,7 @@
         if(localStorage.getItem("status") === '0'){
             $("#insert").show();
             $("#manageUser").show();
+            $("#managerBooks").show();
         }
         if(localStorage.getItem("status") === '1') {
             $("#insertExtro").show();
@@ -136,6 +137,9 @@
         });
         $("#userCenter").on('click', function(){
             location.href="./iframe/userCenter.html";
+        });
+        $("#managerBooks").on('click', function(){
+            location.href="./iframe/managerBooks.html";
         });
     });
 </script>

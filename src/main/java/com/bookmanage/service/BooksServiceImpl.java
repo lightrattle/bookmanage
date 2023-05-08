@@ -37,4 +37,10 @@ public interface BooksServiceImpl {
     boolean deleteOneBook(int bookid);
 
     String lendOne(int userid, int bookid);
+
+    List<Map<String, Object>> getBooksBySearchString(String searchString);
+
+    boolean updateAllnum(int bookid, int allnum);
+
+    boolean updateIntro(int bookid, String intro);
 }

@@ -41,5 +41,15 @@
         select remainnum from books where bookid = #{bookid};
     </select>
 
+    <select id="getBooksBySearchString" resultType="java.util.HashMap">
+        select * from books where booktype like #{str} or bookname like #{str} or intro like #{str}
+    </select>
 
+    <update id="updateAllnum">
+        update `books` set allnum = #{allnum} where bookid = #{bookid}
+    </update>
+
+    <update id="updateIntro">
+        update `books` set intro = #{intro} where bookid = #{bookid}
+    </update>
 </mapper>
