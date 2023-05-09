@@ -108,7 +108,7 @@ public class BooksController {
     public boolean deleteOneBook(int bookid) {return booksService.deleteOneBook(bookid);}
 
     @RequestMapping("/lendOne")
-    public String lendOne(int userid, int bookid){
+    public boolean lendOne(int userid, int bookid){
         return booksService.lendOne(userid, bookid);
     }
 
