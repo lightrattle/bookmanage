@@ -59,13 +59,24 @@
                 var pthis = $(document).find("#showContent");
                 for(var i = 0; i < data.length; i++){
                     var oneDiv = $("<div></div>");
-                    oneDiv.append("<input disabled type='text' id='book_" + data[i].bookid +"' value='" + data[i].bookname + "'>" +
+                    oneDiv.append("<button class='detail' type='button'>详情</button>" +
+                        "<input disabled type='text' id='book_" + data[i].bookid +"' value='" + data[i].bookname + "'>" +
                         "<input disabled type='text' value='" + data[i].booktype + "'>" +
                         "<input disabled type='text' value='热度:" + data[i].lendnum + "'>" +
                         "<input disabled type='text' value='剩余数量:" + data[i].remainnum + "'><br>" +
-                        "<img alt='图书封面' src='" + data[i].image + "'><br>" +
+                        "<img alt='图书封面' src='/images/" + data[i].image + "'><br>" +
                         "<input disabled type='text' value='" + data[i].intro + "'><br>");
                     pthis.append(oneDiv);
+                    $(".detail").on('click', (e)=>{
+                        localStorage.setItem("bookid", $(e.target).parent().children("input").eq(0).attr("id").split("_")[1]);
+                        localStorage.setItem("bookname", $(e.target).parent().children("input").eq(0).val());
+                        localStorage.setItem("booktype", $(e.target).parent().children("input").eq(1).val());
+                        localStorage.setItem("lendnum", $(e.target).parent().children("input").eq(2).val());
+                        localStorage.setItem("remainnum", $(e.target).parent().children("input").eq(3).val());
+                        localStorage.setItem("image", ".."+$(e.target).parent().find("img").attr("src"));
+                        localStorage.setItem("intro", $(e.target).parent().find("textarea").val());
+                        location.href="iframe/detail.html";
+                    });
                 }
             },
             error: function(e){

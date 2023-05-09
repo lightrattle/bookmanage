@@ -37,7 +37,7 @@
             "图书类别:<input disabled type='text' value='" + localStorage.getItem("booktype") + "'>" +
             "历史借阅:<input disabled type='number' value='" + localStorage.getItem("lendnum") + "'>" +
             "剩余数量:<input disabled type='number' value='" + localStorage.getItem("remainnum") + "'>" +
-            "<img src='/images/" + localStorage.getItem("image") + "' alt='图书封面' style='width: 75px;height: 100px'>" +
+            "<img src='../" + localStorage.getItem("image") + "' alt='图书封面' style='width: 75px;height: 100px'>" +
             "<textarea disabled style='border: 1px solid #000'>" + localStorage.getItem("intro") + "</textarea>"
         );
         $("#lendOne").on('click', (e)=>{
@@ -93,7 +93,7 @@
             }
         });
         $("#back").on('click', function(){
-            location.href="../search.html";
+            location.href="../home.html";
         });
     });
 </script>

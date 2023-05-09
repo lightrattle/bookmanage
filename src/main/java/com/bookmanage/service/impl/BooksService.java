@@ -5,10 +5,7 @@ import com.bookmanage.service.BooksServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class BooksService implements BooksServiceImpl {
@@ -44,23 +41,25 @@ public class BooksService implements BooksServiceImpl {
         // 根据userid获取该用户历史查阅书籍
         List<Map<String, Object>> historyList = borrowsMapper.getBorrowsListByUserid(userid);
         // 遍历获得该用户所借阅书籍的分类及每种分类所借数量
-        Map<String, Double> lengNumberList = null;
+        Map<String, Double> lengNumberList = new HashMap<>();
+        int len = 0;
         for (Map<String, Object> stringObjectMap : historyList) {
             String classify = (String) stringObjectMap.get("booktype");
             if (lengNumberList.get(classify) == null) {
-                lengNumberList.put(classify, 0.0);
+                lengNumberList.put(classify, 1.0);
             } else {
                 double oldNum = lengNumberList.get(classify);
                 double newNum = oldNum + 1.0;
                 lengNumberList.replace(classify, newNum);
             }
+            len++;
         }
         // 将各种数量求和得到每类的百分比
-        int allLendNum = historyList.size();
+        int allLendNum = len;
         double count = 0.0;
         int num = 0;
-        double[] lunpan = new double[lengNumberList!=null?lengNumberList.size():0];
-        if(lunpan.length != 0){
+        double[] lunpan = new double[lengNumberList.size()];
+        if(lunpan.length != 0 && len != 0){
             for(Map.Entry<String, Double> entry: lengNumberList.entrySet()){
                 double item = entry.getValue()/(allLendNum * 1.0) + count;
                 count+= item;
@@ -73,7 +72,7 @@ public class BooksService implements BooksServiceImpl {
                 int cho = 0;
                 double item = Math.random();
                 for(int j = 0; j < lunpan.length; j++){
-                    if(item <= lunpan[i]){
+                    if(item <= lunpan[j]){
                         break;
                     }
                     cho++;
@@ -92,7 +91,7 @@ public class BooksService implements BooksServiceImpl {
                 }
             }
             // 在对应的类别中选取一本书
-            List<Map<String, Object>> books = null;
+            List<Map<String, Object>> books = new ArrayList<>();
             for(int i = 0; i< 5; i++){
                 // 获得对于类别的所有书籍
                 List<Map<String, Object>> booksList = booksMapper.getBooksByTypes(choosesType[i]);

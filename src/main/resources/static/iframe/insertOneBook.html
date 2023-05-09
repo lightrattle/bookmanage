@@ -34,6 +34,10 @@
 <script>
     $(document).ready(function(){
         $(document).on('click', '#sureInsert', function(){
+            if(document.getElementById('insertimage').files[0].size/1024 > 1000){
+                alert("封面图片不能大于1M，请重新选择！");
+                return;
+            }
             var bookname = $("#bookname").val();
             var classify = $("#insertclassify").val();
             var imagestring;
