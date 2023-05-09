@@ -41,7 +41,7 @@
             "<textarea disabled style='border: 1px solid #000'>" + localStorage.getItem("intro") + "</textarea>"
         );
         $("#lendOne").on('click', (e)=>{
-           var bookid = ($("#showDetail").children("input").eq(0).attr("id")).split("_")[1];
+           var bookid = ($("#showDetail").children("input").eq(0).attr("id")).toString().split("_")[1];
            var userid = localStorage.getItem("userid");
            $.ajax({
                url: "../books/lendOne",
@@ -53,7 +53,7 @@
                dataType: "json",
                async: false,
                success: function(data){
-                   alert(data);
+                   alert("借阅成功！");
                    location.reload();
                },
                error: function(e){
@@ -61,7 +61,6 @@
                }
            });
         });
-        $.ajax({});
         $.ajax({
             url: "../books/getBooksByBook",
             type: "post",
