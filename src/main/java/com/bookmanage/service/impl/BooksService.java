@@ -192,7 +192,7 @@ public class BooksService implements BooksServiceImpl {
     }
 
     @Override
-    public String lendOne(int userid, int bookid) {
+    public boolean lendOne(int userid, int bookid) {
         int remainNum = booksMapper.getRemainNumByBookid(bookid);
         int maxLend = userMapper.getMaxlendByUserid(userid);
         int lended = userMapper.getLendedByUserid(userid);
@@ -202,10 +202,10 @@ public class BooksService implements BooksServiceImpl {
             booksMapper.updateLendnum(bookid);
             userMapper.updateLended(userid);
             borrowsMapper.insertOneBorrow(userid, nowTime, bookid);
-            return "借阅成功！";
+            return true;
         }
         else{
-            return "借阅失败！";
+            return false;
         }
     }
 
