@@ -17,7 +17,7 @@
 </div>
 <div id="userInfo">
   <label for="username">用户名：</label>
-  <input id="username" type="text" value="">
+  <input id="username" disabled type="text" value="">
   <br>
   <label for="nickname">昵称：</label>
   <input id="nickname" type="text" value="">
@@ -65,6 +65,7 @@
     $("#back").on('click', function(){
       location.href="../home.html";
     });
+    $("#username").val(localStorage.getItem(""));
     $("#nickname").val(localStorage.getItem("nickname"));
     $("#maxlend").val(localStorage.getItem("maxlend"));
     $("#lended").val(localStorage.getItem("lended"));
