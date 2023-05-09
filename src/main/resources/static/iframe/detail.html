@@ -53,8 +53,13 @@
                dataType: "json",
                async: false,
                success: function(data){
-                   alert("借阅成功！");
-                   location.reload();
+                   if(data){
+                       alert("借阅成功！");
+                       location.reload();
+                   }
+                   else{
+                       alert("借阅失败！");
+                   }
                },
                error: function(e){
                    console.log(e);
