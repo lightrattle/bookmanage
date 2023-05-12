@@ -92,7 +92,9 @@
             localStorage.setItem("maxlend", result['maxlend']);
             localStorage.setItem("lended", result['lended']);
             alert(result['msg']);
-            location.href ='/home.html';
+            if(result['status'] === '0' || result['status'] === '1' ||result['status'] === '2') {
+                location.href = '/home.html';
+            }
         });
         $(document).keydown(function(event){
             if(event.keyCode === 13){
