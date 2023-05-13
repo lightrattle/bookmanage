@@ -17,6 +17,7 @@ public class WebAppConfig implements WebMvcConfigurer {
         //注册自己的拦截器并设置拦截的请求路径
         registry.addInterceptor(new AuthInterceptor())
                 .addPathPatterns("/**") //拦截的路径
+                .excludePathPatterns("/")
                 .excludePathPatterns("/login.html")
                 .excludePathPatterns("/index.html")
                 .excludePathPatterns("/search.html")
