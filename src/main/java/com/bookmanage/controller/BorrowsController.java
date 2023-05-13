@@ -39,7 +39,7 @@ public class BorrowsController {
     }
 
     @RequestMapping("/updateOneStatus")//还书
-    public boolean updateOneStatus(int userid, int bookid){
-        return borrowsService.updateOneStatus(userid, bookid);
+    public boolean updateOneStatus(int userid, int borrowid){
+        return borrowsService.updateOneStatus(userid, borrowid);
     }
 }

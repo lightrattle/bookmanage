@@ -35,7 +35,7 @@ public class BorrowsService implements BorrowsServiceImpl {
     }
 
     @Override
-    public boolean updateOneStatus(int userid, int bookid) {
-        return borrowsMapper.updateOneStatus(userid, bookid);
+    public boolean updateOneStatus(int userid, int borrowid) {
+        return borrowsMapper.updateOneStatus(userid, borrowid);
     }
 }

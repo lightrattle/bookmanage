@@ -56,6 +56,7 @@
                    if(data){
                        alert("借阅成功！");
                        location.reload();
+                       localStorage.setItem("lended", Number(localStorage.getItem("lended"))+1);
                    }
                    else{
                        alert("借阅失败！");

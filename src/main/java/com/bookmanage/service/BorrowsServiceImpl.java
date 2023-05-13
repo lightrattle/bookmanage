@@ -16,5 +16,5 @@ public interface BorrowsServiceImpl {
 
     boolean insertOneBorrow(int userid, Date lendtime, int bookid);
 
-    boolean updateOneStatus(int userid, int bookid);
+    boolean updateOneStatus(int userid, int borrowid);
 }

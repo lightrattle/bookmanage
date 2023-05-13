@@ -28,6 +28,6 @@
     <update id="updateOneStatus">
         update `borrows` set
             status = 1
-                where userid = #{userid} and bookid = #{bookid}
+                where userid = #{userid} and borrowid = #{borrowid}
     </update>
 </mapper>

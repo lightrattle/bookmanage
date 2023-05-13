@@ -1,183 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>图书管理-个人中心</title>
-  <script src="../jQuery/jquery-3.5.1.slim.min.js"></script>
-  <script src="../jQuery/jquery-3.5.1.min.js"></script>
-  <link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.min.css">
-  <link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.structure.min.css">
-  <link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.theme.min.css">
-  <script src="../jQueryUI-1.13.2/jquery-ui.min.js"></script>
-  <link rel="stylesheet" href="../css/common.css">
+	<meta charset="UTF-8">
+	<title>图书管理-个人中心</title>
+	<script src="../jQuery/jquery-3.5.1.slim.min.js"></script>
+	<script src="../jQuery/jquery-3.5.1.min.js"></script>
+	<link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.min.css">
+	<link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.structure.min.css">
+	<link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.theme.min.css">
+	<script src="../jQueryUI-1.13.2/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="../css/common.css">
 </head>
 <body>
 <div id="choList">
-  <input type="button" class="ui-button" id="back" style="display: block" value="返回">
+	<input type="button" class="ui-button" id="back" style="display: block" value="返回">
 </div>
 <div id="userInfo">
-  <label for="username">用户名：</label>
-  <input id="username" disabled type="text" value="">
-  <br>
-  <label for="nickname">昵称：</label>
-  <input id="nickname" type="text" value="">
-  <input id="resetNickname" type="button" class="ui-button" value="确认修改">
-  <br>
-  <label for="oldpassword">旧密码：</label>
-  <input id="oldpassword" type="password" value="">
-  <br>
-  <label for="newpassword">新密码：</label>
-  <input id="newpassword" type="password" value="">
-  <br>
-  <label for="passwordAgain">再次输入：</label>
-  <input id="passwordAgain" type="password" value="">
-  <input id="resetPassword" type="button" class="ui-button" value="确认修改">
-  <br>
-  <label for="maxlend">最大借阅数量：</label>
-  <input id="maxlend" disabled type="text" value=""><br>
-  <br>
-  <label for="lended">已经借阅数量：</label>
-  <input id="lended" disabled type="text" value=""><br>
-  <br>
+	<label for="username">用户名：</label>
+	<input id="username" disabled type="text" value="">
+	<br>
+	<label for="nickname">昵称：</label>
+	<input id="nickname" type="text" value="">
+	<input id="resetNickname" type="button" class="ui-button" value="确认修改">
+	<br>
+	<label for="oldpassword">旧密码：</label>
+	<input id="oldpassword" type="password" value="">
+	<br>
+	<label for="newpassword">新密码：</label>
+	<input id="newpassword" type="password" value="">
+	<br>
+	<label for="passwordAgain">再次输入：</label>
+	<input id="passwordAgain" type="password" value="">
+	<input id="resetPassword" type="button" class="ui-button" value="确认修改">
+	<br>
+	<label for="maxlend">最大借阅数量：</label>
+	<input id="maxlend" disabled type="text" value=""><br>
+	<br>
+	<label for="lended">已经借阅数量：</label>
+	<input id="lended" disabled type="text" value=""><br>
+	<br>
 </div>
 <br>
 <div>------------------------------------------------------------------------------</div>
 <br>
 <div>
-  <table>
-    <thead>
-    <tr>
-      <td>序号</td>
-      <td>书名</td>
-      <td>所属分类</td>
-      <td>借出时间</td>
-      <td>状态</td>
-      <td>操作</td>
-    </tr>
-    </thead>
-    <tbody id="showLended">
-    </tbody>
-  </table>
+	<table id="showLended">
+		<tr id="hread">
+			<td>序号</td>
+			<td>书名</td>
+			<td>所属分类</td>
+			<td>借出时间</td>
+			<td>状态</td>
+			<td>操作</td>
+		</tr>
+	</table>
 </div>
 </body>
 <script>
-  $(document).ready(function(){
-    $("#back").on('click', function(){
-      location.href="../home.html";
-    });
-    $("#username").val(localStorage.getItem("loginUser"));
-    $("#nickname").val(localStorage.getItem("nickname"));
-    $("#maxlend").val(localStorage.getItem("maxlend"));
-    $("#lended").val(localStorage.getItem("lended"));
+    $(document).ready(function(){
+        $("#back").on('click', function(){
+            location.href="../home.html";
+        });
+        $("#username").val(localStorage.getItem("loginUser"));
+        $("#nickname").val(localStorage.getItem("nickname"));
+        $("#maxlend").val(localStorage.getItem("maxlend"));
+        $("#lended").val(localStorage.getItem("lended"));
 
-    $("#resetNickname").on('click', function(){
-      var newNickname = $("#nickname").val();
-      $.ajax({
-        url: "../user/resetNickname",
-        type: "post",
-        data: {
-          userid: localStorage.getItem("userid"),
-          nickname: newNickname
-        },
-        dataType: "json",
-        async: false,
-        success: function(data){
-          alert("修改成功！");
-          console.log(data);
-        },
-        error: function (e){
-          console.log(e);
-        }
-      });
-    });
-    $("#resetPassword").on('click', function(){
-      var userid = localStorage.getItem("userid");
-      var oldPassword = $("#oldpassword").val();
-      var newPassword = $("#newpassword").val();
-      if($("#passwordAgain").val() === newPassword){
-        $.ajax({
-          url: "../user/updatePassword",
-          type: "post",
-          data: {
-            userid: Number(userid),
-            oldPassword: oldPassword,
-            newPassword: newPassword
-          },
-          dataType: "json",
-          async: false,
-          success: function(data){
-            alert(data);
-            location.reload();
-          },
-          error: function(e){
-            console.log(e);
-          }
+        $("#resetNickname").on('click', function(){
+            var newNickname = $("#nickname").val();
+            $.ajax({
+                url: "../user/resetNickname",
+                type: "post",
+                data: {
+                    userid: localStorage.getItem("userid"),
+                    nickname: newNickname
+                },
+                dataType: "json",
+                async: false,
+                success: function(data){
+                    alert("修改成功！");
+                    console.log(data);
+                },
+                error: function (e){
+                    console.log(e);
+                }
+            });
         });
-      }
-      else{
-        alert("两次输入密码不一致！");
-      }
-    });
-    $.ajax({
-      url: "../borrows/getBorrowsListByUserid",
-      type: "post",
-      data: {
-        userid: localStorage.getItem("userid")
-      },
-      dataType: "post",
-      async: false,
-      success: function(data){
-        var showLendedBooks = $("#showLended");
-        for(var i = 0; i < data.length; i++){
-          var statusStr = "未知";
-          switch (data[i].status){
-            case '0':
-              statusStr = "借阅中";
-              break;
-            case '1':
-              statusStr = "已归还";
-              break;
-            default:
-              break;
-          }
-          var temp = $("<tr>" +
-                  "<td class='bookid' >" + data[i].bookid + "</td>" +
-                  "<td class='bookname'>" + data[i].bookname + "</td>" +
-                  "<td class='booktype'>" + data[i].booktype + "</td>" +
-                  "<td class='lendtime'>" + data[i].lendtime + "</td>" +
-                  "<td class='status'>" + statusStr + "</td>" +
-                  "<td class='button'>" + (statusStr==="借阅中"?"点击归还":"无需操作") + "</td>" +
-                  "</tr>")
-          showLendedBooks.append(temp);
-        }
-      },
-      error: function(e){
-        console.log(e);
-      }
-    });
-    $(".button").on('click', (e)=>{
-      var bookid = $(this).parent().find(".bookid").html();
-      var userid = localStorage.getItem("userid");
-      if($(this).text()==="点击归还"){
-        $.ajax({
-          url: "../borrows/updateOneStatus",
-          type: "post",
-          data: {
-            userid: userid,
-            bookid: bookid
-          },
-          dataType: "json",
-          async: false,
-          success: function(data){
-            alert("还书成功！");
-            console.log(data);
-          },
-          error: function(e) {
-            console.log(e);
-          }
+        $("#resetPassword").on('click', function(){
+            var userid = localStorage.getItem("userid");
+            var oldPassword = $("#oldpassword").val();
+            var newPassword = $("#newpassword").val();
+            if($("#passwordAgain").val() === newPassword){
+                $.ajax({
+                    url: "../user/updatePassword",
+                    type: "post",
+                    data: {
+                        userid: Number(userid),
+                        oldPassword: oldPassword,
+                        newPassword: newPassword
+                    },
+                    dataType: "json",
+                    async: false,
+                    success: function(data){
+                        alert(data);
+                        location.reload();
+                    },
+                    error: function(e){
+                        console.log(e);
+                    }
+                });
+            }
+            else{
+                alert("两次输入密码不一致！");
+            }
         });
-      }
+        $.ajax({
+            url: "../borrows/getBorrowsListByUserid",
+            type: "post",
+            data: {
+                userid: localStorage.getItem("userid")
+            },
+            dataType: "json",
+            success: function(data){
+                var showLendedBooks = $("#showLended");
+                var head = showLendedBooks.find("#head");
+                showLendedBooks.empty().append(head);
+                for(var i = 0; i < data.length; i++){
+                    var statusStr = "未知";
+                    switch (data[i].status){
+                        case 0:
+                            statusStr = "借阅中";
+                            break;
+                        case 1:
+                            statusStr = "已归还";
+                            break;
+                        default:
+                            break;
+                    }
+                    let but = (statusStr==="借阅中"?"点击归还":"无需操作");
+                    var temp = $("<tr>" +
+                        "<td style='border: 1px solid #000;' class='bookid' id='" + data[i].borrowid + "'>"
+						+ data[i].bookid + "</td>" +
+                        "<td style='border: 1px solid #000;' class='bookname'>" + data[i].bookname + "</td>" +
+                        "<td style='border: 1px solid #000;' class='booktype'>" + data[i].booktype + "</td>" +
+                        "<td style='border: 1px solid #000;' class='lendtime'>" + data[i].lendtime + "</td>" +
+                        "<td style='border: 1px solid #000;' class='status'>" + statusStr + "</td>" +
+                        "<td style='border: 1px solid #000;'>" +
+						`<input type='button' class='ui-button button' value=${but}>` +
+						"</td>" +
+                        "</tr>")
+                    showLendedBooks.append(temp);
+                }
+            },
+            error: function(e){
+                console.log(e);
+            }
+        });
+        $(".button").on('click', (e)=>{
+            var borrowid = $(e.target).parent().parent().find(".bookid").attr("id");
+            var userid = localStorage.getItem("userid");
+            if($(e.target).val()==="点击归还"){
+                $.ajax({
+                    url: "../borrows/updateOneStatus",
+                    type: "post",
+                    data: {
+                        userid: userid,
+                        borrowid: borrowid
+                    },
+                    dataType: "json",
+                    async: false,
+                    success: function(data){
+                        alert("还书成功！");
+                        console.log(data);
+                    },
+                    error: function(e) {
+                        console.log(e);
+                    }
+                });
+            }
+        });
     });
-  });
 </script>
 </html>

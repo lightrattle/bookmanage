@@ -18,5 +18,5 @@ public interface BorrowsMapper {
 
     public boolean insertOneBorrow(int userid, Date lendtime, int bookid);
 
-    public boolean updateOneStatus(int userid, int bookid);
+    public boolean updateOneStatus(int userid, int borrowid);
 }
