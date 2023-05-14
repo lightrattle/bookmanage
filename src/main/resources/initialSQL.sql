@@ -16,7 +16,7 @@ create table `user`(
     `status` int(1) not null null default 2,/*0为管理员，1为专家，2为读者*/
     `maxlend` int(2) not null null default 0,
     `lended` int(2) not null null default 0,
-    primary key (`userid`) using btree
+    primary key (`userid`, `username`) using btree
 ) engine = innodb character set = utf8 collate = utf8_general_ci row_format = compact;
 
 insert into `user`(username, password, nickname, status, maxlend, lended) values ('admin-1', '123456', 'admin', 0, 0, 0);
