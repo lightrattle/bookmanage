@@ -8,3 +8,9 @@ input[type='button']{
     border-radius: 10px;
 
 }
+div::-webkit-scrollbar {
+    display: none;
+}
+textarea::-webkit-scrollbar {
+    display: none;
+}

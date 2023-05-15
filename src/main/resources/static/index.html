@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>图书推荐系统-热门图书</title>
+    <title>图书推荐系统-游客-热门图书</title>
     <script src="./jQuery/jquery-3.5.1.slim.min.js"></script>
     <script src="./jQuery/jquery-3.5.1.min.js"></script>
     <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.min.css">
@@ -13,14 +13,26 @@
 </head>
 <body>
 <div id="root" style="width: 100%;height: auto;position: relative;overflow-y: scroll">
-    <input id="login" type="button" class="ui-button" value="登录">
-    <input type="button" class="ui-button" id="search" value="搜索图书">
-    <div id="show" style="left: 0;width: 100%;height: auto;position: relative;overflow-y: scroll">
+	<div id="header" style="position: absolute;display: block;top: 0;left: 15%;width: 70%;text-align: center;font-size: 64px">
+		游客端
+	</div><br><br><br>
+	<hr style='width: 100%;border: 1px solid #000;' />
+	<div>
+		<input id="login" type="button" class="ui-button" style="float: left;" value="登录">
+		<input type="button" class="ui-button" id="search" style="float: right;" value="搜索图书">
+	</div>
+	<hr style='width: 100%;border: 1px solid #000;' />
+	<div id="footShow" style="display: flex;overflow: hidden;overflow-y: scroll;position: relative;
+width: 100%;height: auto;">
+		<div id="show" style="left: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
+    flex-flow: column;">
 
-    </div>
-    <div id="newContent" style="right: 0;width: 100%;height: auto;position: relative;overflow-y: scroll">
+		</div>
+		<div id="newContent" style="right: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
+    flex-flow: column;">
 
-    </div>
+		</div>
+	</div>
 </div>
 <script>
     $(document).ready(function(){
@@ -32,14 +44,17 @@
             async: false,
             success: function(data){
                 var pthis = $(document).find("#show");
+                pthis.append("<div style='font-size: 48px;float: left;display: block'>热门图书：</div>")
                 for(var i = 0; i < data.length; i++){
                     var oneDiv = $("<div></div>");
-                    oneDiv.append("<input disabled type='text' id='book_" + data[i].bookid +"' value='" + data[i].bookname + "'>" +
-                        "<input disabled type='text' value='" + data[i].booktype + "'>" +
-                        "<input disabled type='text' value='热度:" + data[i].lendnum + "'>" +
-                        "<input disabled type='text' value='剩余数量:" + data[i].remainnum + "'><br>" +
-                        "<img alt='图书封面' src='./images/" + data[i].image + "'><br>" +
-                        "<textarea disabled type='text'>" + data[i].intro + "</textarea><br>");
+                    oneDiv.append(
+                        "<img style='width: 100%' alt='图书封面' src='/images/" + data[i].image + "'><br>" +
+                        "书名:<input disabled type='text' id='book_" + data[i].bookid +"' value='" + data[i].bookname + "'>" +
+                        "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
+                        "<br></br>热度:<input disabled type='text' value='热度:" + data[i].lendnum + "'>" +
+                        "剩余数量:<input disabled type='text' value='剩余数量:" + data[i].remainnum + "'>" +
+                        "<br></br>简介:<textarea style='width: 100%;height: 5em;resize: none' disabled type='text'>" + data[i].intro + "</textarea>" +
+                        "<br><hr style='width: 100%;border: 5px solid #000;' />");
                     pthis.append(oneDiv);
                 }
             },
@@ -58,15 +73,18 @@
             async: false,
             success: function(data){
                 var pthis=$("#newContent");
+                pthis.append("<div style='font-size: 48px;float: left;display: block'>系统公告：</div>")
                 for(var i = 0; i < data.length; i++){
                     var oneDiv = $("<div></div>");
-                    oneDiv.append("时间:<input type='datetime' disabled value='" + data[i].infotime+ "'>" +
-                        "新书:<input disabled type='text' value='" + data[i].bookname + "'>" +
-                        "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
-                        "<textarea id='info_" + data[i].infoid + "' disabled " +
-                        "style='width:100%;height: 75px;resize: none;overflow-y: scroll'>"
+                    oneDiv.append(
+                        "通知信息:<textarea id='info_" + data[i].infoid + "' disabled " +
+                        "style='width:100%;height: 2em;resize: none;overflow-y: scroll'>"
                         + data[i].infocontent +"</textarea>" +
-                        "简介:<input disabled type='text' value='" + data[i].intro + "'>");
+                        "时间:<input type='datetime' disabled value='" + data[i].infotime+ "'>" +
+                        "<br></br>新书:<input disabled type='text' value='" + data[i].bookname + "'>" +
+                        "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
+                        "<br></br>简介:<textarea style='width: 100%;height: 4em;' disabled type='text'>" + data[i].intro + "</textarea>" +
+                        "<br><hr style='width: 100%;border: 5px solid #000;' />");
                     pthis.append(oneDiv);
                 }
             },

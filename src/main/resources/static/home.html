@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>图书推荐系统-猜你喜欢</title>
+    <title>图书推荐系统-首页</title>
     <script src="./jQuery/jquery-3.5.1.slim.min.js"></script>
     <script src="./jQuery/jquery-3.5.1.min.js"></script>
     <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.min.css">
@@ -13,38 +13,57 @@
 </head>
 <body>
 <div id="root" style="width: 100%;height: auto;position: relative;overflow-y: scroll">
+	<div id="header" style="position: absolute;display: block;top: 0;left: 15%;width: 70%;text-align: center;font-size: 64px">
+		XXXXXXX端
+	</div><br><br><br>
+	<hr style='width: 100%;border: 1px solid #000;' />
     <div id="choList">
-        <input type="button" class="ui-button" id="tologgout" value="退出登录">
-        <input disabled type="button" class="ui-button" id="loginUser" value="">
-        <input type="button" class="ui-button" id="search" value="搜索图书">
-        <input type="button" class="ui-button" id="extro" value="专家推荐">
-        <input type="button" class="ui-button" id="insert" style="display: none" value="上传图书">
-        <input type="button" class="ui-button" id="manageUser" style="display: none" value="用户管理">
-        <input type="button" class="ui-button" id="insertExtro" style="display: none" value="填写推荐">
-        <input type="button" class="ui-button" id="userCenter" style="display: none" value="个人中心">
-        <input type="button" class="ui-button" id="managerBooks" style="display: none" value="图书管理">
+        <label for="loginUser">用户名：</label>
+		<input disabled type="text" id="loginUser" value="">
+		<input type="button" class="ui-button" id="tologgout" style="float: right;" value="退出登录">
+        <input type="button" class="ui-button" id="search" style="float: right;display: none" value="搜索图书">
+        <input type="button" class="ui-button" id="extro" style="float: right;display: none" value="专家推荐">
+        <input type="button" class="ui-button" id="insert" style="float: right;display: none" value="上传图书">
+        <input type="button" class="ui-button" id="manageUser" style="float: right;display: none" value="用户管理">
+        <input type="button" class="ui-button" id="insertExtro" style="float: right;display: none" value="填写推荐">
+        <input type="button" class="ui-button" id="userCenter" style="float: right;display: none" value="个人中心">
+        <input type="button" class="ui-button" id="managerBooks" style="float: right;display: none" value="图书管理">
     </div>
-    <div id="showContent" style="left: 0;width: 100%;height: auto;position: relative;overflow-y: scroll">
-
-    </div>
-    <div id="newContent" style="right: 0;width: 100%;height: auto;position: relative;overflow-y: scroll">
-
-    </div>
+	<hr style='width: 100%;border: 1px solid #000;' />
+	<div id="footShow" style="display: flex;overflow: hidden;overflow-y: scroll;position: relative;
+width: 100%;height: auto;">
+		<div id="showContent" style="left: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
+    flex-flow: column;">
+		</div>
+		<div id="newContent" style="right: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
+    flex-flow: column;">
+		</div>
+	</div>
 </div>
 <script>
     $(document).ready(function(){
         if(localStorage.getItem("status") === '0'){
+            $("#header").text("尊敬的管理员，欢迎使用！");
             $("#insert").show();
             $("#manageUser").show();
             $("#managerBooks").show();
+            $("#showContent").remove();
+            $("#newContent").remove();
         }
         if(localStorage.getItem("status") === '1') {
+            $("#header").text("尊敬的专家，欢迎使用！");
             $("#insertExtro").show();
+            $("#showContent").remove();
+            $("#newContent").remove();
         }
         if(localStorage.getItem("status") === '2') {
+            $("#header").text("尊敬的用户，欢迎使用！");
             $("#userCenter").show();
+            $("#extro").show();
+            $("#search").show();
         }
         var pthis = $(document).find("#showContent");
+        pthis.append("<div style='font-size: 48px;float: left;display: block'>个性化推荐：</div>")
         pthis.append("<input id='fresh' type='button' class='ui-button' value='刷新推荐'>");
         $("#loginUser").val(localStorage.getItem("loginUser"));
         $.ajax({
@@ -58,14 +77,15 @@
             success: function(data){
                 var pthis = $(document).find("#showContent");
                 for(var i = 0; i < data.length; i++){
-                    var oneDiv = $("<div></div>");
-                    oneDiv.append("<button class='detail' type='button'>详情</button>" +
-                        "<input disabled type='text' id='book_" + data[i].bookid +"' value='" + data[i].bookname + "'>" +
-                        "<input disabled type='text' value='" + data[i].booktype + "'>" +
-                        "<input disabled type='text' value='热度:" + data[i].lendnum + "'>" +
-                        "<input disabled type='text' value='剩余数量:" + data[i].remainnum + "'><br>" +
-                        "<img alt='图书封面' src='/images/" + data[i].image + "'><br>" +
-                        "<input disabled type='text' value='" + data[i].intro + "'><br>");
+                    var oneDiv = $("<div class='detail' style='display: contents;'></div>");
+                    oneDiv.append(
+                        "<img style='width: 100%' alt='图书封面' src='/images/" + data[i].image + "'><br>" +
+                        "书名:<input disabled type='text' id='book_" + data[i].bookid +"' value='" + data[i].bookname + "'>" +
+                        "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
+                        "<br></br>热度:<input disabled type='text' value='热度:" + data[i].lendnum + "'>" +
+                        "剩余数量:<input disabled type='text' value='剩余数量:" + data[i].remainnum + "'>" +
+                        "<br></br>简介:<textarea style='width: 100%;height: 5em;resize: none' disabled type='text'>" + data[i].intro + "</textarea>" +
+						"<br><hr style='width: 100%;border: 5px solid #000;' />");
                     pthis.append(oneDiv);
                     $(".detail").on('click', (e)=>{
                         localStorage.setItem("bookid", $(e.target).parent().children("input").eq(0).attr("id").split("_")[1]);
@@ -84,7 +104,7 @@
             }
         });
         var pinfo = $(document).find("#newContent");
-        pinfo.append("<input disabled type='button' class='ui-button' value='通知'>");
+        pinfo.append("<input disabled type='button' class='ui-button' value='个人通知'>");
         $.ajax({
             url: "/info/getInfoListForUser",
             type: "get",
@@ -94,16 +114,18 @@
             dataType: "json",
             async: false,
             success: function(data){
-                var pthis = $(document).find("#showContent");
+                var pthis = $(document).find("#newContent");
                 for(var i = 0; i < data.length; i++){
                     var oneDiv = $("<div></div>");
-                    oneDiv.append("时间:<input type='datetime' disabled value='" + data[i].infotime+ "'>" +
-                        "新书:<input disabled type='text' value='" + data[i].bookname + "'>" +
-                        "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
-                        "<textarea id='info_" + data[i].infoid + "' disabled " +
-                        "style='width:100%;height: 75px;resize: none;overflow-y: scroll'>"
+                    oneDiv.append(
+                        "通知信息:<textarea id='info_" + data[i].infoid + "' disabled " +
+                        "style='width:100%;height: 2em;resize: none;overflow-y: scroll'>"
                         + data[i].infocontent +"</textarea>" +
-                        "简介:<input disabled type='text' value='" + data[i].intro + "'>");
+                        "时间:<input disabled type='datetime' value='" + data[i].infotime+ "'>" +
+                        "<br></br>新书:<input disabled type='text' value='" + data[i].bookname + "'>" +
+                        "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
+                        "<br></br>简介:<textarea style='width: 100%;height: 4em;' disabled type='text'>" + data[i].intro + "</textarea>" +
+                        "<br><hr style='width: 100%;border: 5px solid #000;' />");
                     pthis.append(oneDiv);
                 }
             },

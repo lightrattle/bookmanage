@@ -25,8 +25,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         // 获取用户信息，如果没有用户信息直接返回提示信息
         Object userInfo = session.getAttribute("loginUser");
         if (userInfo == null) {
-            request.setAttribute("msg","请登录！");
-            request.getRequestDispatcher("/login.html").forward(request, response);
+            request.getRequestDispatcher("/").forward(request, response);
             return false;
         }
 
