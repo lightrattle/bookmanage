@@ -7,6 +7,7 @@ import java.util.Map;
 
 @Mapper
 public interface RecomMapper {
+    public List<Map<String, Object>> getRecomList();
     public List<Map<String, Object>> getExtroName();
 
     public List<Map<String, Object>> getExtroMajor();

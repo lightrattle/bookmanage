@@ -14,16 +14,20 @@
 </head>
 <body>
 <div id="root">
-    <input id="back" type="button" class="ui-button" value="返回">
-    <div id="showDetail" style="border: 1px solid #000;height: auto;width: 100%">
+    <input id="back" type="button" class="ui-button" value="返回" style="font-size: 36px;">
+	<br>
+	<hr style='width: 100%;border: 1px solid #000;' />
+    <div id="showDetail" style="border: 1px solid #000;height: auto;width: 100%;display: contents;font-size: 48px;">
     </div>
     <br>
-    <input id="lendOne" type="button" class="ui-button" value="借阅">
+    <input id="lendOne" type="button" class="ui-button" value="点击借阅本书"
+		   style="text-align: center;width: 100%;height: auto;font-size: 48px;">
     <br>
     <div id="showComment" style="border: 1px solid #000;height: auto;width: 100%">
     </div>
-    <input disabled type="button" class="ui-button" value="↓↓↓相关图书推↓↓↓"
-           style="width: 100%;height: 30px;position: relative;border: 1px solid #000" >
+    <div style="width: 100%;height: 30px;position: relative;border: 1px solid #000;text-align: center" >
+		↓↓↓相关图书推荐↓↓↓
+	</div>
     <div id="suggest">
 
     </div>
@@ -32,13 +36,14 @@
 <script>
     $(document).ready(function(){
         $(document).find("#showDetail").append(
-            "<input disabled type='text' id='oneBook_" + localStorage.getItem("bookid") + "' value='"
+            "<img src='../" + localStorage.getItem("image") + "' alt='图书封面' style='width: 75px;height: 100px'>" +
+            "书名:<input disabled type='text' id='oneBook_" + localStorage.getItem("bookid") + "' value='"
             + localStorage.getItem("bookname") + "'>" +
             "图书类别:<input disabled type='text' value='" + localStorage.getItem("booktype") + "'>" +
-            "历史借阅:<input disabled type='number' value='" + localStorage.getItem("lendnum") + "'>" +
+            "<br></br>历史借阅:<input disabled type='number' value='" + localStorage.getItem("lendnum") + "'>" +
             "剩余数量:<input disabled type='number' value='" + localStorage.getItem("remainnum") + "'>" +
-            "<img src='../" + localStorage.getItem("image") + "' alt='图书封面' style='width: 75px;height: 100px'>" +
-            "<textarea disabled style='border: 1px solid #000'>" + localStorage.getItem("intro") + "</textarea>"
+            "简介:<textarea disabled style='border: 1px solid #000;resize: none;width: inherit;height: 5em;'>" +
+			localStorage.getItem("intro") + "</textarea>"
         );
         $("#lendOne").on('click', (e)=>{
            var bookid = ($("#showDetail").children("input").eq(0).attr("id")).toString().split("_")[1];
@@ -78,7 +83,7 @@
             success: function(data){
                 var pthis=$("#suggest");
                 for(var i = 0; i < data.length; i++){
-                    pthis.append("<div class='detail'>" +
+                    pthis.append("<div class='detail' style='display:inline-grid;width: 20%;'>" +
                         "<input disabled type='text' id='oneBook_" + data[i].bookid + "' value='"
                         + data[i].bookname + "'>" +
                         "图书类别:<input disabled type='text' value='" + data[i].booktype + "'>" +

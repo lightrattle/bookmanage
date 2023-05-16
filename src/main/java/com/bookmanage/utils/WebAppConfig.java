@@ -21,6 +21,7 @@ public class WebAppConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/login.html")
                 .excludePathPatterns("/index.html")
                 .excludePathPatterns("/search.html")
+                .excludePathPatterns("/createUser.html")
                 .excludePathPatterns("../images/**")
                 .excludePathPatterns("../books/**")
                 .excludePathPatterns("../info/**")

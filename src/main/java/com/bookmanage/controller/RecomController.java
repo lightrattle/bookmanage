@@ -18,6 +18,11 @@ public class RecomController {
     @Autowired
     private RecomService recomService;
 
+    @RequestMapping("/getRecomList")
+    public List<Map<String, Object>> getRecomList() {
+        return recomService.getRecomList();
+    }
+
     @RequestMapping("/getExtroName")
     public List<Map<String, Object>> getExtroName(){
         return recomService.getExtroName();

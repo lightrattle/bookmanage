@@ -16,6 +16,10 @@ public class RecomService implements RecomServiceImpl {
     @Autowired
     UserMapper userMapper;
 
+    @Override
+    public List<Map<String, Object>> getRecomList() {
+        return recomMapper.getRecomList();
+    }
 
     @Override
     public List<Map<String, Object>> getExtroName() {

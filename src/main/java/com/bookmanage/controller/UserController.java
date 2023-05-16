@@ -64,14 +64,14 @@ public class UserController {
             return map;
         }
     }
-    @PostMapping("/createUser")
+    @RequestMapping("/createUser")
     //注册功能，保存数据
-    public String createUser(String nickname, String username, String password){
+    public boolean createUser(String nickname, String username, String password){
         if(userService.createUser(nickname, username, password)) {
-            return "注册成功！";
+            return true;
         }
         else {
-            return "注册失败！";
+            return false;
         }
     }
 

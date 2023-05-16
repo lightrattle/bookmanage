@@ -16,9 +16,12 @@
     <input id="back" type="button" class="ui-button" value="返回">
     <label for="bookname">输入书名搜索图书:</label>
     <input id="bookname" type="text" placeholder="书名">
-    <input id="sureSearch" type="button" class="ui-button" value="搜索"><br>
+    <input id="sureSearch" type="button" class="ui-button" value="搜索">
+	<br><hr style='width: 100%;border: 1px solid #000;' />
     <div id="result" style="position: relative;overflow-y: scroll;height: auto;width: 100%;">
-
+		<div style="text-align: center;font-size: 64px;position: relative;width: 70%;left: 15%;display: block">
+			搜索结果将显示在此处。
+		</div>
     </div>
 </div>
 </body>
@@ -37,15 +40,18 @@
                 success: function(data){
                     var pthis = $("#result").empty();
                     for(var i = 0; i < data.length; i++){
-                        pthis.append("<div>" +
+                        pthis.append("<div style='display: grid;'>" +
                             "<button class='detail' type='button'>详情</button>" +
                             "<input disabled type='text' id='oneBook_" + data[i].bookid + "' value='"
                             + data[i].bookname + "'>" +
                             "图书类别:<input disabled type='text' value='" + data[i].booktype + "'>" +
                             "历史借阅:<input disabled type='number' value='" + data[i].lendnum + "'>" +
                             "剩余数量:<input disabled type='number' value='" + data[i].remainnum + "'>" +
-                            "<img src='/images/" + data[i].image + "' alt='图书封面' style='width: 75px;height: 100px'>" +
-                            "<textarea disabled style='border: 1px solid #000'>" + data[i].intro + "</textarea>" +
+                            "<img src='/images/" + data[i].image + "' alt='图书封面' " +
+							"style='width: 70%;height: auto;left: 15%;position: relative;'>" +
+                            "<textarea disabled " +
+							"style='border: 1px solid #000;resize: none;width: 100%;height: 10em;'>" +
+							data[i].intro + "</textarea>" +
                             "</div>");
                         $(".detail").on('click', (e)=>{
                             localStorage.setItem("bookid", $(e.target).parent().children("input").eq(0).attr("id").split("_")[1]);

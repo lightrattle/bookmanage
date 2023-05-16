@@ -13,53 +13,60 @@
 </head>
 <body>
 <div id="root">
-    <input id="nickname" type="text" placeholder="昵称">
-    <input id="username" type="text" placeholder="用户名">
-    <input id="password" type="password" placeholder="密码">
-    <input id="papasswordAgainssword" type="password" placeholder="再次输入密码">
-    <input id="sure" type="button" class="ui-button" value="确认">
-    <input id="back" type="button" class="ui-button" value="返回">
+	<div id="showCreate" style="position: fixed;display: grid;border:1px solid #000;height: 60%;width: 60%;top: 20%;left: 20%;background-color: #cccccc">
+		<label for="newNickname">昵称</label><input id="newNickname" type="text" placeholder="昵称"><br>
+		<label for="newUsername">用户名</label><input id="newUsername" type="text" placeholder="用户名"><br>
+		<label for="newPassword">密码</label><input id="newPassword" type="password" placeholder="密码"><br>
+		<label for="againPassword">再次输入</label><input id="againPassword" type="password" placeholder="再次输入"><br>
+		<input id="sureToCreate" type="button" value="注册">
+		<input id="cancel" type="button" value="返回">
+	</div>
 </div>
 <script>
     $(document).ready(function(){
         $(document).keydown(function(event){
             if(event.keyCode === 13){
-                document.getElementById("sure").click();
+                document.getElementById("sureToCreate").click();
             }
         });
-        $("sure").on('click', function(){
-            var nickname=$("#nickname").val();
-            var username=$("#username").val();
-            var password=$("#password").val();
-            var passagain=$("#papasswordAgainssword").val();
-            $.ajax({
-                url: "/user/createUser",
-                type: "post",
-                data: {
-                    nickname: nickname,
-                    username: username,
-                    password: password,
-                    password_2: passagain
-                },
-                dataType: "json",
-                async: false,
-                success: function(data){
-                    if(data === "login.html"){
-                        alert("注册成功！");
-                    }
-                    else if(data === "createUser.html"){
-                        alert("注册出错！");
-                    }
-                    location.href=data;
-                },
-                error: function(e){
-                    console.log(e);
-                }
-            });
+        $("#cancel").on('click', function(){
+            location.href = "login.html";
         });
-        $("#back").on('click', function(){
-            location.href="index.html";
-        });
+        $("#sureToCreate").on('click', function(){
+            var nickname = $("#newNickname").val();
+            var username = $("#newUsername").val();
+            var password = $("#newPassword").val();
+            var again = $("#againPassword").val();
+            if(again === password){
+                $.ajax({
+                    url: "/user/createUser",
+                    type: "post",
+                    data: {
+                        nickname: nickname,
+                        username: username,
+                        password: password
+                    },
+                    dataType: "text",
+                    success: function (data) {
+                        if(data) {
+                            alert("注册成功！");
+                            location.href = "login.html";
+                        }
+                        else{
+                            alert("注册出错！");
+						}
+                    },
+                    error: function (errorMsg) {
+                        console.log(errorMsg);
+                    }
+                });
+
+            }
+            else{
+                alert("两次密码不一致！");
+            }
+            location.reload();
+        })
     });
 </script>
 </body>

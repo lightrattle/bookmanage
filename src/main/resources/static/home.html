@@ -52,7 +52,15 @@ width: 100%;height: auto;">
         }
         if(localStorage.getItem("status") === '1') {
             $("#header").text("尊敬的专家，欢迎使用！");
-            $("#insertExtro").show();
+            var insertOneExtro = $("#insertExtro").css({
+                "position": "absolute",
+                "left": "15%",
+                "width": "70%",
+                "height": "auto",
+                "top": "30%",
+                "font-size": "48px",
+			});
+            $("#footShow").append(insertOneExtro);
             $("#showContent").remove();
             $("#newContent").remove();
         }
@@ -77,22 +85,22 @@ width: 100%;height: auto;">
             success: function(data){
                 var pthis = $(document).find("#showContent");
                 for(var i = 0; i < data.length; i++){
-                    var oneDiv = $("<div class='detail' style='display: contents;'></div>");
+                    var oneDiv = $("<div class='detail' style='display: grid;border: 2px solid;'></div>");
                     oneDiv.append(
                         "<img style='width: 100%' alt='图书封面' src='/images/" + data[i].image + "'><br>" +
                         "书名:<input disabled type='text' id='book_" + data[i].bookid +"' value='" + data[i].bookname + "'>" +
                         "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
-                        "<br></br>热度:<input disabled type='text' value='热度:" + data[i].lendnum + "'>" +
+                        "热度:<input disabled type='text' value='热度:" + data[i].lendnum + "'>" +
                         "剩余数量:<input disabled type='text' value='剩余数量:" + data[i].remainnum + "'>" +
-                        "<br></br>简介:<textarea style='width: 100%;height: 5em;resize: none' disabled type='text'>" + data[i].intro + "</textarea>" +
+                        "<br>简介:<textarea style='width: 100%;height: 5em;resize: none' disabled type='text'>" + data[i].intro + "</textarea>" +
 						"<br><hr style='width: 100%;border: 5px solid #000;' />");
                     pthis.append(oneDiv);
                     $(".detail").on('click', (e)=>{
                         localStorage.setItem("bookid", $(e.target).parent().children("input").eq(0).attr("id").split("_")[1]);
                         localStorage.setItem("bookname", $(e.target).parent().children("input").eq(0).val());
                         localStorage.setItem("booktype", $(e.target).parent().children("input").eq(1).val());
-                        localStorage.setItem("lendnum", $(e.target).parent().children("input").eq(2).val());
-                        localStorage.setItem("remainnum", $(e.target).parent().children("input").eq(3).val());
+                        localStorage.setItem("lendnum", $(e.target).parent().children("input").eq(2).val().split(":")[1]);
+                        localStorage.setItem("remainnum", $(e.target).parent().children("input").eq(3).val().split(":")[1]);
                         localStorage.setItem("image", ".."+$(e.target).parent().find("img").attr("src"));
                         localStorage.setItem("intro", $(e.target).parent().find("textarea").val());
                         location.href="iframe/detail.html";
@@ -104,7 +112,7 @@ width: 100%;height: auto;">
             }
         });
         var pinfo = $(document).find("#newContent");
-        pinfo.append("<input disabled type='button' class='ui-button' value='个人通知'>");
+        pinfo.append(`<div style="font-size: 48px;float: left;display: block">个人通知：</div>`);
         $.ajax({
             url: "/info/getInfoListForUser",
             type: "get",
@@ -116,7 +124,7 @@ width: 100%;height: auto;">
             success: function(data){
                 var pthis = $(document).find("#newContent");
                 for(var i = 0; i < data.length; i++){
-                    var oneDiv = $("<div></div>");
+                    var oneDiv = $("<div style='display: grid;border: 2px solid;'></div>");
                     oneDiv.append(
                         "通知信息:<textarea id='info_" + data[i].infoid + "' disabled " +
                         "style='width:100%;height: 2em;resize: none;overflow-y: scroll'>"

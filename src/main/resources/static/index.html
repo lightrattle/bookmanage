@@ -46,7 +46,7 @@ width: 100%;height: auto;">
                 var pthis = $(document).find("#show");
                 pthis.append("<div style='font-size: 48px;float: left;display: block'>热门图书：</div>")
                 for(var i = 0; i < data.length; i++){
-                    var oneDiv = $("<div></div>");
+                    var oneDiv = $("<div style='display: grid;border: 2px solid;'></div>");
                     oneDiv.append(
                         "<img style='width: 100%' alt='图书封面' src='/images/" + data[i].image + "'><br>" +
                         "书名:<input disabled type='text' id='book_" + data[i].bookid +"' value='" + data[i].bookname + "'>" +
@@ -75,7 +75,7 @@ width: 100%;height: auto;">
                 var pthis=$("#newContent");
                 pthis.append("<div style='font-size: 48px;float: left;display: block'>系统公告：</div>")
                 for(var i = 0; i < data.length; i++){
-                    var oneDiv = $("<div></div>");
+                    var oneDiv = $("<div style='display: grid;border: 2px solid;'></div>");
                     oneDiv.append(
                         "通知信息:<textarea id='info_" + data[i].infoid + "' disabled " +
                         "style='width:100%;height: 2em;resize: none;overflow-y: scroll'>"
