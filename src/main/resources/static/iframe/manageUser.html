@@ -10,38 +10,41 @@
 	<link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.theme.min.css">
 	<script src="../jQueryUI-1.13.2/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/b5.css">
 </head>
 <body>
-<div id="choList">
-	<input type="button" class="ui-button" id="back" style="display: block;font-size: 48px" value="返回">
-</div>
-<br><hr style='width: 100%;border: 1px solid #000;' /><br>
-<div style="display: flex;justify-content: center;flex-wrap: wrap;">
-	<table style="border: 1px solid #000;text-align: center;">
-		<colgroup>
-			<col style="width: 12.5%">
-			<col style="width: 12.5%">
-			<col style="width: 12.5%">
-			<col style="width: 12.5%">
-			<col style="width: 12.5%">
-			<col style="width: 12.5%">
-			<col style="width: 12.5%">
-			<col style="width: 12.5%">
-		</colgroup>
-		<thead>
-		<tr>
-			<td style="border: 1px solid #000;">用户ID</td>
-			<td style="border: 1px solid #000;">用户名</td>
-			<td style="border: 1px solid #000;">昵称</td>
-			<td style="border: 1px solid #000;">权限等级</td>
-			<td style="border: 1px solid #000;">最大借阅数</td>
-			<td rowspan="2" style="border: 1px solid #000;">操作</td>
-		</tr>
-		</thead>
-		<tbody id="showUser">
-		</tbody>
-	</table>
+<div id="root">
+	<div id="choList">
+		<input type="button" class="ui-button" id="back" style="display: block;font-size: 48px" value="返回">
+	</div>
 	<br><hr style='width: 100%;border: 1px solid #000;' /><br>
+	<div style="display: flex;justify-content: center;flex-wrap: wrap;">
+		<table style="border: 1px solid #000;text-align: center;">
+			<colgroup>
+				<col style="width: 12.5%">
+				<col style="width: 12.5%">
+				<col style="width: 12.5%">
+				<col style="width: 12.5%">
+				<col style="width: 12.5%">
+				<col style="width: 12.5%">
+				<col style="width: 12.5%">
+				<col style="width: 12.5%">
+			</colgroup>
+			<thead>
+			<tr>
+				<td style="border: 1px solid #000;">用户ID</td>
+				<td style="border: 1px solid #000;">用户名</td>
+				<td style="border: 1px solid #000;">昵称</td>
+				<td style="border: 1px solid #000;">权限等级</td>
+				<td style="border: 1px solid #000;">最大借阅数</td>
+				<td rowspan="2" style="border: 1px solid #000;">操作</td>
+			</tr>
+			</thead>
+			<tbody id="showUser">
+			</tbody>
+		</table>
+		<br><hr style='width: 100%;border: 1px solid #000;' /><br>
+	</div>
 </div>
 </body>
 <script>

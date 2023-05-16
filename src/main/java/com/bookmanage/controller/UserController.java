@@ -78,9 +78,7 @@ public class UserController {
     @RequestMapping("/logout")//退出登录
     public String logout(HttpSession session) {
         session.invalidate();
-        return "<script>" +
-                "location.href='/login.html';" +
-                "</script>";
+        return "true";
     }
 
     @PostMapping("/removeUser")

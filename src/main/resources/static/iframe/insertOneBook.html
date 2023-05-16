@@ -10,25 +10,28 @@
 	<link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.theme.min.css">
 	<script src="../jQueryUI-1.13.2/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/b3.css">
 </head>
 <body>
-<div id="choList">
-	<input type="button" class="ui-button" id="back" style="display: block;font-size: 36px" value="返回">
-</div>
-<div id="insertOneBook" style="display: grid;">
-	<label for="bookname">图书名:</label>
-	<input type="text" id="bookname" placeholder="图书名"><br>
-	<label for="insertclassify">分类:</label>
-	<input type="text" id="insertclassify" placeholder="图书所属类别"><br>
-	<label for="insertimage">封面:</label>
-	<input type="file" id="insertimage" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"><br>
-	<label for="allnum">上架数量:</label>
-	<input type="number" id="allnum" placeholder="数量"><br>
-	<label for="intro">图书简介:</label>
-	<textarea type="text" id="intro" placeholder="图书简介" style="width: 100%;height: 10em;"></textarea><br>
-	<input id="sureInsert" type="button" class="ui-button"  value="提交">
-	<img id="showimage" src="" alt="请上传图片" style="width: 50%;position: relative;left: 25%;height: auto;">
-	<div id="path"></div>
+<div id="root">
+	<div id="choList">
+		<input type="button" class="ui-button" id="back" style="display: block;font-size: 36px" value="返回">
+	</div>
+	<div id="insertOneBook" style="display: grid;">
+		<label for="bookname">图书名:</label>
+		<input type="text" id="bookname" placeholder="图书名"><br>
+		<label for="insertclassify">分类:</label>
+		<input type="text" id="insertclassify" placeholder="图书所属类别"><br>
+		<label for="insertimage">封面:</label>
+		<input type="file" id="insertimage" accept="image/gif,image/jpeg,image/jpg,image/png,image/svg"><br>
+		<label for="allnum">上架数量:</label>
+		<input type="number" id="allnum" placeholder="数量"><br>
+		<label for="intro">图书简介:</label>
+		<textarea type="text" id="intro" placeholder="图书简介" style="width: 100%;height: 10em;"></textarea><br>
+		<input id="sureInsert" type="button" class="ui-button"  value="提交">
+		<img id="showimage" src="" alt="请上传图片" style="width: 50%;position: relative;left: 25%;height: auto;">
+		<div id="path"></div>
+	</div>
 </div>
 </body>
 <script>

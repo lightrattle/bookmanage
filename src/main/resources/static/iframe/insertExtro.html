@@ -10,22 +10,25 @@
 	<link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.theme.min.css">
 	<script src="../jQueryUI-1.13.2/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/b2.css">
 </head>
 <body>
-<div id="choList">
-	<input type="button" class="ui-button" id="back" style="display: block" value="返回">
-</div>
-<br><hr style='width: 100%;border: 1px solid #000;' />
-<div id="insertOneExtro" style="display: grid;font-size: 36px;">
-	<label for="bookname">图书名:</label>
-	<select id="bookname" style="height: auto;font-size: 36px;"></select><br>
-	<label for="major">专业所属:</label>
-	<input type="text" id="major" placeholder="专业所属" style="font-size: 36px;"><br>
-	<label for="develop">研究方向:</label>
-	<input type="number" id="develop" placeholder="研究方向" style="font-size: 36px;"><br>
-	<label for="reason">推荐原因:</label>
-	<textarea id="reason" style="width: 100%;height: 10em;resize: none;font-size: 36px;" placeholder="推荐原因"></textarea><br>
-	<input id="sureInsert" type="button" class="ui-button" value="提交" style="font-size: 36px;">
+<div id="root">
+	<div id="choList">
+		<input type="button" class="ui-button" id="back" style="display: block" value="返回">
+	</div>
+	<br><hr style='width: 100%;border: 1px solid #000;' />
+	<div id="insertOneExtro" style="display: grid;font-size: 36px;">
+		<label for="bookname">图书名:</label>
+		<select id="bookname" style="height: auto;font-size: 36px;"></select><br>
+		<label for="major">专业所属:</label>
+		<input type="text" id="major" placeholder="专业所属" style="font-size: 36px;"><br>
+		<label for="develop">研究方向:</label>
+		<input type="number" id="develop" placeholder="研究方向" style="font-size: 36px;"><br>
+		<label for="reason">推荐原因:</label>
+		<textarea id="reason" style="width: 100%;height: 10em;resize: none;font-size: 36px;" placeholder="推荐原因"></textarea><br>
+		<input id="sureInsert" type="button" class="ui-button" value="提交" style="font-size: 36px;">
+	</div>
 </div>
 </body>
 <script>

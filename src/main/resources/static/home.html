@@ -10,33 +10,36 @@
     <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.theme.min.css">
     <script src="./jQueryUI-1.13.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="./css/common.css">
+	<link rel="stylesheet" href="./css/b3.css">
 </head>
 <body>
-<div id="root" style="width: 100%;height: auto;position: relative;overflow-y: scroll">
-	<div id="header" style="position: absolute;display: block;top: 0;left: 15%;width: 70%;text-align: center;font-size: 64px">
-		XXXXXXX端
-	</div><br><br><br>
-	<hr style='width: 100%;border: 1px solid #000;' />
-    <div id="choList">
-        <label for="loginUser">用户名：</label>
-		<input disabled type="text" id="loginUser" value="">
-		<input type="button" class="ui-button" id="tologgout" style="float: right;" value="退出登录">
-        <input type="button" class="ui-button" id="search" style="float: right;display: none" value="搜索图书">
-        <input type="button" class="ui-button" id="extro" style="float: right;display: none" value="专家推荐">
-        <input type="button" class="ui-button" id="insert" style="float: right;display: none" value="上传图书">
-        <input type="button" class="ui-button" id="manageUser" style="float: right;display: none" value="用户管理">
-        <input type="button" class="ui-button" id="insertExtro" style="float: right;display: none" value="填写推荐">
-        <input type="button" class="ui-button" id="userCenter" style="float: right;display: none" value="个人中心">
-        <input type="button" class="ui-button" id="managerBooks" style="float: right;display: none" value="图书管理">
-    </div>
-	<hr style='width: 100%;border: 1px solid #000;' />
-	<div id="footShow" style="display: flex;overflow: hidden;overflow-y: scroll;position: relative;
-width: 100%;height: auto;">
-		<div id="showContent" style="left: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
-    flex-flow: column;">
+<div id="root">
+	<div id="contents" style="width: 100%;height: auto;position: relative;overflow-y: scroll">
+		<div id="header" style="position: absolute;display: block;top: 0;left: 15%;width: 70%;text-align: center;font-size: 64px">
+			XXXXXXX端
+		</div><br><br><br>
+		<hr style='width: 100%;border: 1px solid #000;' />
+		<div id="choList">
+			<label for="loginUser">用户名：</label>
+			<input disabled type="text" id="loginUser" value="">
+			<input type="button" class="ui-button" id="tologgout" style="float: right;" value="退出登录">
+			<input type="button" class="ui-button" id="search" style="float: right;display: none" value="搜索图书">
+			<input type="button" class="ui-button" id="extro" style="float: right;display: none" value="专家推荐">
+			<input type="button" class="ui-button" id="insert" style="float: right;display: none" value="上传图书">
+			<input type="button" class="ui-button" id="manageUser" style="float: right;display: none" value="用户管理">
+			<input type="button" class="ui-button" id="insertExtro" style="float: right;display: none" value="填写推荐">
+			<input type="button" class="ui-button" id="userCenter" style="float: right;display: none" value="个人中心">
+			<input type="button" class="ui-button" id="managerBooks" style="float: right;display: none" value="图书管理">
 		</div>
-		<div id="newContent" style="right: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
+		<hr style='width: 100%;border: 1px solid #000;' />
+		<div id="footShow" style="display: flex;overflow: hidden;overflow-y: scroll;position: relative;
+width: 100%;height: auto;">
+			<div id="showContent" style="left: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
     flex-flow: column;">
+			</div>
+			<div id="newContent" style="right: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
+    flex-flow: column;">
+			</div>
 		</div>
 	</div>
 </div>
@@ -146,7 +149,7 @@ width: 100%;height: auto;">
                 url: "user/logout",
                 type: "post",
                 data: {},
-                dataType: "json",
+                dataType: "text",
                 async: false,
                 success: function(data){
                     localStorage.removeItem("loginUser");
@@ -154,7 +157,9 @@ width: 100%;height: auto;">
                     localStorage.removeItem("status");
                     alert("退出登录成功！");
                 },
-                error: function (error) {}
+                error: function (error) {
+
+				}
             });
             location.reload();
         });

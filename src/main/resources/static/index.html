@@ -10,27 +10,30 @@
     <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.theme.min.css">
     <script src="./jQueryUI-1.13.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="./css/common.css">
+	<link rel="stylesheet" href="./css/b4.css">
 </head>
 <body>
-<div id="root" style="width: 100%;height: auto;position: relative;overflow-y: scroll">
-	<div id="header" style="position: absolute;display: block;top: 0;left: 15%;width: 70%;text-align: center;font-size: 64px">
-		游客端
-	</div><br><br><br>
-	<hr style='width: 100%;border: 1px solid #000;' />
-	<div>
-		<input id="login" type="button" class="ui-button" style="float: left;" value="登录">
-		<input type="button" class="ui-button" id="search" style="float: right;" value="搜索图书">
-	</div>
-	<hr style='width: 100%;border: 1px solid #000;' />
-	<div id="footShow" style="display: flex;overflow: hidden;overflow-y: scroll;position: relative;
-width: 100%;height: auto;">
-		<div id="show" style="left: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
-    flex-flow: column;">
-
+<div id="root">
+	<div id="contents" style="width: 100%;height: auto;position: relative;overflow-y: scroll">
+		<div id="header" style="position: absolute;display: block;top: 0;left: 15%;width: 70%;text-align: center;font-size: 64px">
+			游客端
+		</div><br><br><br>
+		<hr style='width: 100%;border: 1px solid #000;' />
+		<div>
+			<input id="login" type="button" class="ui-button" style="float: left;" value="登录">
+			<input type="button" class="ui-button" id="search" style="float: right;" value="搜索图书">
 		</div>
-		<div id="newContent" style="right: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
+		<hr style='width: 100%;border: 1px solid #000;' />
+		<div id="footShow" style="display: flex;overflow: hidden;overflow-y: scroll;position: relative;
+width: 100%;height: auto;">
+			<div id="show" style="left: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
     flex-flow: column;">
 
+			</div>
+			<div id="newContent" style="right: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
+    flex-flow: column;">
+
+			</div>
 		</div>
 	</div>
 </div>

@@ -10,19 +10,22 @@
     <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.theme.min.css">
     <script src="./jQueryUI-1.13.2/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="./css/common.css">
+	<link rel="stylesheet" href="./css/b1.css">
 </head>
 <body>
-<div id="root" style="position: relative;overflow-y: scroll;height: auto;width: 100%">
-    <input id="back" type="button" class="ui-button" value="返回">
-    <label for="bookname">输入书名搜索图书:</label>
-    <input id="bookname" type="text" placeholder="书名">
-    <input id="sureSearch" type="button" class="ui-button" value="搜索">
-	<br><hr style='width: 100%;border: 1px solid #000;' />
-    <div id="result" style="position: relative;overflow-y: scroll;height: auto;width: 100%;">
-		<div style="text-align: center;font-size: 64px;position: relative;width: 70%;left: 15%;display: block">
-			搜索结果将显示在此处。
+<div id="root">
+	<div id="contents" style="position: relative;overflow-y: scroll;height: auto;width: 100%">
+		<input id="back" type="button" class="ui-button" value="返回">
+		<label for="bookname">输入书名搜索图书:</label>
+		<input id="bookname" type="text" placeholder="书名">
+		<input id="sureSearch" type="button" class="ui-button" value="搜索">
+		<br><hr style='width: 100%;border: 1px solid #000;' />
+		<div id="result" style="position: relative;overflow-y: scroll;height: auto;width: 100%;">
+			<div style="text-align: center;font-size: 64px;position: relative;width: 70%;left: 15%;display: block">
+				搜索结果将显示在此处。
+			</div>
 		</div>
-    </div>
+	</div>
 </div>
 </body>
 <script>
@@ -54,14 +57,19 @@
 							data[i].intro + "</textarea>" +
                             "</div>");
                         $(".detail").on('click', (e)=>{
-                            localStorage.setItem("bookid", $(e.target).parent().children("input").eq(0).attr("id").split("_")[1]);
-                            localStorage.setItem("bookname", $(e.target).parent().children("input").eq(0).val());
-                            localStorage.setItem("booktype", $(e.target).parent().children("input").eq(1).val());
-                            localStorage.setItem("lendnum", $(e.target).parent().children("input").eq(2).val());
-                            localStorage.setItem("remainnum", $(e.target).parent().children("input").eq(3).val());
-                            localStorage.setItem("image", ".."+$(e.target).parent().find("img").attr("src"));
-                            localStorage.setItem("intro", $(e.target).parent().find("textarea").val());
-                            location.href="iframe/detail.html";
+                            if(localStorage.getItem("loginUser") != "") {
+                                localStorage.setItem("bookid", $(e.target).parent().children("input").eq(0).attr("id").split("_")[1]);
+                                localStorage.setItem("bookname", $(e.target).parent().children("input").eq(0).val());
+                                localStorage.setItem("booktype", $(e.target).parent().children("input").eq(1).val());
+                                localStorage.setItem("lendnum", $(e.target).parent().children("input").eq(2).val());
+                                localStorage.setItem("remainnum", $(e.target).parent().children("input").eq(3).val());
+                                localStorage.setItem("image", ".." + $(e.target).parent().find("img").attr("src"));
+                                localStorage.setItem("intro", $(e.target).parent().find("textarea").val());
+                                location.href = "iframe/detail.html";
+                            }
+                            else{
+                                alert("请先登录！");
+							}
                         });
                     }
                 },
@@ -71,6 +79,7 @@
             });
         });
         $("#back").on('click', function(){
+
             location.href="home.html";
         });
     });

@@ -10,58 +10,61 @@
 	<link rel = "stylesheet" href = "../jQueryUI-1.13.2/jquery-ui.theme.min.css">
 	<script src="../jQueryUI-1.13.2/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="../css/common.css">
+	<link rel="stylesheet" href="../css/b1.css">
 </head>
 <body>
-<div id="choList">
-	<input type="button" class="ui-button" id="back" style="display: block" value="返回">
-	<br><br><br>
-	<hr style='width: 100%;border: 1px solid #000;' />
-</div>
-<div id="userInfo" style="display: grid;font-size: 48px;">
-	<label for="username">用户名：</label>
-	<input id="username" style="font-size: 48px;" disabled type="text" value="">
+<div id="root">
+	<div id="choList">
+		<input type="button" class="ui-button" id="back" style="display: block" value="返回">
+		<br><br><br>
+		<hr style='width: 100%;border: 1px solid #000;' />
+	</div>
+	<div id="userInfo" style="display: grid;font-size: 48px;">
+		<label for="username">用户名：</label>
+		<input id="username" style="font-size: 48px;" disabled type="text" value="">
+		<br>
+		<label for="nickname">昵称：</label>
+		<input id="nickname" style="font-size: 48px;" type="text" value="">
+		<input id="resetNickname" style="font-size: 48px;" type="button" class="ui-button" value="确认修改">
+		<br>
+		<label for="oldpassword">旧密码：</label>
+		<input id="oldpassword" style="font-size: 48px;" type="password" value="">
+		<br>
+		<label for="newpassword">新密码：</label>
+		<input id="newpassword" style="font-size: 48px;" type="password" value="">
+		<br>
+		<label for="passwordAgain">再次输入：</label>
+		<input id="passwordAgain" style="font-size: 48px;" type="password" value="">
+		<input id="resetPassword" style="font-size: 48px;" type="button" class="ui-button" value="确认修改">
+		<br>
+		<label for="maxlend">最大借阅数量：</label>
+		<input id="maxlend" style="font-size: 48px;" disabled type="text" value=""><br>
+		<br>
+		<label for="lended">已经借阅数量：</label>
+		<input id="lended" style="font-size: 48px;" disabled type="text" value=""><br>
+		<br>
+	</div>
 	<br>
-	<label for="nickname">昵称：</label>
-	<input id="nickname" style="font-size: 48px;" type="text" value="">
-	<input id="resetNickname" style="font-size: 48px;" type="button" class="ui-button" value="确认修改">
+	<div style="text-align: center">
+		------------------------------------------------------------------------------</div>
 	<br>
-	<label for="oldpassword">旧密码：</label>
-	<input id="oldpassword" style="font-size: 48px;" type="password" value="">
+	<div style="position: relative;width: 70%;height: auto;font-size: 36px;left: 15%;text-align: center">借阅记录</div>
 	<br>
-	<label for="newpassword">新密码：</label>
-	<input id="newpassword" style="font-size: 48px;" type="password" value="">
+	<div style="text-align: center">
+		------------------------------------------------------------------------------</div>
 	<br>
-	<label for="passwordAgain">再次输入：</label>
-	<input id="passwordAgain" style="font-size: 48px;" type="password" value="">
-	<input id="resetPassword" style="font-size: 48px;" type="button" class="ui-button" value="确认修改">
-	<br>
-	<label for="maxlend">最大借阅数量：</label>
-	<input id="maxlend" style="font-size: 48px;" disabled type="text" value=""><br>
-	<br>
-	<label for="lended">已经借阅数量：</label>
-	<input id="lended" style="font-size: 48px;" disabled type="text" value=""><br>
-	<br>
-</div>
-<br>
-<div style="text-align: center">
-	------------------------------------------------------------------------------</div>
-<br>
-<div style="position: relative;width: 70%;height: auto;font-size: 36px;left: 15%;text-align: center">借阅记录</div>
-<br>
-<div style="text-align: center">
-	------------------------------------------------------------------------------</div>
-<br>
-<div>
-	<table id="showLended" style="font-size: 36px;text-align: center;left: 5%;position: relative;">
-		<tr id="hread">
-			<td>序号</td>
-			<td>书名</td>
-			<td>所属分类</td>
-			<td>借出时间</td>
-			<td>状态</td>
-			<td>操作</td>
-		</tr>
-	</table>
+	<div>
+		<table id="showLended" style="font-size: 36px;text-align: center;left: 5%;position: relative;">
+			<tr id="hread">
+				<td>序号</td>
+				<td>书名</td>
+				<td>所属分类</td>
+				<td>借出时间</td>
+				<td>状态</td>
+				<td>操作</td>
+			</tr>
+		</table>
+	</div>
 </div>
 </body>
 <script>

@@ -10,28 +10,31 @@
 	<link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.theme.min.css">
 	<script src="./jQueryUI-1.13.2/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="./css/common.css">
+	<link rel="stylesheet" href="./css/b2.css">
 </head>
 <body>
-<div id="root" style="width: 100%;height: auto;position: relative;overflow-y: scroll">
-	<input id="back" type="button" class="ui-button" value="返回" style="font-size: 36px;">
-	<br><hr style='width: 100%;border: 1px solid #000;' />
-	<label for="booktype">按分类显示：</label>
-	<select id="booktype">
-		<option value="全部" selected>全部</option>
-	</select>
-	<br><hr style='width: 100%;border: 1px solid #000;' />
-	<label for="extroName">专家姓名：</label>
-	<select id="extroName">
-	</select>
-	<label for="extroMajor">主要专业：</label>
-	<select id="extroMajor">
-	</select>
-	<label for="extroDevelop">发展方向：</label>
-	<select id="extroDevelop">
-	</select>
-	<input id="chearSelect" class="ui-button" type="button" value="清空筛选条件">
-	<br>
-	<div id="show" style="position: relative">
+<div id="root">
+	<div id="contents" style="width: 100%;height: auto;position: relative;overflow-y: scroll">
+		<input id="back" type="button" class="ui-button" value="返回" style="font-size: 36px;">
+		<br><hr style='width: 100%;border: 1px solid #000;' />
+		<label for="booktype">按分类显示：</label>
+		<select id="booktype">
+			<option value="全部" selected>全部</option>
+		</select>
+		<br><hr style='width: 100%;border: 1px solid #000;' />
+		<label for="extroName">专家姓名：</label>
+		<select id="extroName">
+		</select>
+		<label for="extroMajor">主要专业：</label>
+		<select id="extroMajor">
+		</select>
+		<label for="extroDevelop">发展方向：</label>
+		<select id="extroDevelop">
+		</select>
+		<input id="chearSelect" class="ui-button" type="button" value="清空筛选条件">
+		<br>
+		<div id="show" style="position: relative">
+		</div>
 	</div>
 </div>
 </body>
