@@ -22,7 +22,7 @@ public class UserController {
     @PostMapping("/loginUser")
     //登录功能
     public Map<String, Object> loginUser(@RequestParam("username") String username, @RequestParam("password") String password,
-                            Model model, HttpSession session){
+                                         Model model, HttpSession session){
         Map<String, Object> map = new HashMap<>();
         System.out.println(username);
         System.out.println(password);
@@ -76,9 +76,11 @@ public class UserController {
     }
 
     @RequestMapping("/logout")//退出登录
-    public String logout(HttpSession session) {
+    public Map<String, Object> logout(HttpSession session) {
+        Map<String, Object> res = new HashMap<>();
         session.invalidate();
-        return "true";
+        res.put("result", true);
+        return res;
     }
 
     @PostMapping("/removeUser")

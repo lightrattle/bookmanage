@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>图书推荐系统-首页</title>
-    <script src="./jQuery/jquery-3.5.1.slim.min.js"></script>
-    <script src="./jQuery/jquery-3.5.1.min.js"></script>
-    <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.min.css">
-    <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.structure.min.css">
-    <link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.theme.min.css">
-    <script src="./jQueryUI-1.13.2/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="./css/common.css">
+	<meta charset="UTF-8">
+	<title>图书推荐系统-首页</title>
+	<script src="./jQuery/jquery-3.5.1.slim.min.js"></script>
+	<script src="./jQuery/jquery-3.5.1.min.js"></script>
+	<link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.min.css">
+	<link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.structure.min.css">
+	<link rel = "stylesheet" href = "./jQueryUI-1.13.2/jquery-ui.theme.min.css">
+	<script src="./jQueryUI-1.13.2/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="./css/common.css">
 	<link rel="stylesheet" href="./css/b3.css">
 </head>
 <body>
@@ -19,7 +19,7 @@
 			XXXXXXX端
 		</div><br><br><br>
 		<hr style='width: 100%;border: 1px solid #000;' />
-		<div id="choList">
+		<div class="addBackground" id="choList">
 			<label for="loginUser">用户名：</label>
 			<input disabled type="text" id="loginUser" value="">
 			<input type="button" class="ui-button" id="tologgout" style="float: right;" value="退出登录">
@@ -32,162 +32,164 @@
 			<input type="button" class="ui-button" id="managerBooks" style="float: right;display: none" value="图书管理">
 		</div>
 		<hr style='width: 100%;border: 1px solid #000;' />
-		<div id="footShow" style="display: flex;overflow: hidden;overflow-y: scroll;position: relative;
+		<div class="addBackground" id="footShow" style="display: flex;overflow: hidden;overflow-y: scroll;position: relative;
 width: 100%;height: auto;">
-			<div id="showContent" style="left: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
+			<div class="addBackground" id="showContent" style="left: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
     flex-flow: column;">
 			</div>
-			<div id="newContent" style="right: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
+			<div class="addBackground" id="newContent" style="right: 0;width: 50%;height: auto;position: relative;overflow-y: scroll;display: flex;
     flex-flow: column;">
 			</div>
 		</div>
 	</div>
 </div>
 <script>
-    $(document).ready(function(){
-        if(localStorage.getItem("status") === '0'){
-            $("#header").text("尊敬的管理员，欢迎使用！");
-            $("#insert").show();
-            $("#manageUser").show();
-            $("#managerBooks").show();
-            $("#showContent").remove();
-            $("#newContent").remove();
-        }
-        if(localStorage.getItem("status") === '1') {
-            $("#header").text("尊敬的专家，欢迎使用！");
-            var insertOneExtro = $("#insertExtro").css({
-                "position": "absolute",
-                "left": "15%",
-                "width": "70%",
-                "height": "auto",
-                "top": "30%",
-                "font-size": "48px",
+	$(document).ready(function(){
+		if(localStorage.getItem("status") === '0'){
+			$("#header").text("尊敬的管理员，欢迎使用！");
+			$("#insert").show();
+			$("#manageUser").show();
+			$("#managerBooks").show();
+			$("#showContent").remove();
+			$("#newContent").remove();
+		}
+		if(localStorage.getItem("status") === '1') {
+			$("#header").text("尊敬的专家，欢迎使用！");
+			var insertOneExtro = $("#insertExtro").css({
+				"position": "absolute",
+				"left": "15%",
+				"width": "70%",
+				"height": "auto",
+				"top": "30%",
+				"font-size": "48px",
 			});
-            $("#footShow").append(insertOneExtro);
-            $("#showContent").remove();
-            $("#newContent").remove();
-        }
-        if(localStorage.getItem("status") === '2') {
-            $("#header").text("尊敬的用户，欢迎使用！");
-            $("#userCenter").show();
-            $("#extro").show();
-            $("#search").show();
-        }
-        var pthis = $(document).find("#showContent");
-        pthis.append("<div style='font-size: 48px;float: left;display: block'>个性化推荐：</div>")
-        pthis.append("<input id='fresh' type='button' class='ui-button' value='刷新推荐'>");
-        $("#loginUser").val(localStorage.getItem("loginUser"));
-        $.ajax({
-            url: "/books/getBooksByHistory",
-            type: "get",
-            data: {
-                userid: localStorage.getItem("userid")
-            },
-            dataType: "json",
-            async: false,
-            success: function(data){
-                var pthis = $(document).find("#showContent");
-                for(var i = 0; i < data.length; i++){
-                    var oneDiv = $("<div class='detail' style='display: grid;border: 2px solid;'></div>");
-                    oneDiv.append(
-                        "<img style='width: 100%' alt='图书封面' src='/images/" + data[i].image + "'><br>" +
-                        "书名:<input disabled type='text' id='book_" + data[i].bookid +"' value='" + data[i].bookname + "'>" +
-                        "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
-                        "热度:<input disabled type='text' value='热度:" + data[i].lendnum + "'>" +
-                        "剩余数量:<input disabled type='text' value='剩余数量:" + data[i].remainnum + "'>" +
-                        "<br>简介:<textarea style='width: 100%;height: 5em;resize: none' disabled type='text'>" + data[i].intro + "</textarea>" +
-						"<br><hr style='width: 100%;border: 5px solid #000;' />");
-                    pthis.append(oneDiv);
-                    $(".detail").on('click', (e)=>{
-                        localStorage.setItem("bookid", $(e.target).parent().children("input").eq(0).attr("id").split("_")[1]);
-                        localStorage.setItem("bookname", $(e.target).parent().children("input").eq(0).val());
-                        localStorage.setItem("booktype", $(e.target).parent().children("input").eq(1).val());
-                        localStorage.setItem("lendnum", $(e.target).parent().children("input").eq(2).val().split(":")[1]);
-                        localStorage.setItem("remainnum", $(e.target).parent().children("input").eq(3).val().split(":")[1]);
-                        localStorage.setItem("image", ".."+$(e.target).parent().find("img").attr("src"));
-                        localStorage.setItem("intro", $(e.target).parent().find("textarea").val());
-                        location.href="iframe/detail.html";
-                    });
-                }
-            },
-            error: function(e){
-                console.log(e);
-            }
-        });
-        var pinfo = $(document).find("#newContent");
-        pinfo.append(`<div style="font-size: 48px;float: left;display: block">个人通知：</div>`);
-        $.ajax({
-            url: "/info/getInfoListForUser",
-            type: "get",
-            data: {
-                userid: localStorage.getItem("userid")
-            },
-            dataType: "json",
-            async: false,
-            success: function(data){
-                var pthis = $(document).find("#newContent");
-                for(var i = 0; i < data.length; i++){
-                    var oneDiv = $("<div style='display: grid;border: 2px solid;'></div>");
-                    oneDiv.append(
-                        "通知信息:<textarea id='info_" + data[i].infoid + "' disabled " +
-                        "style='width:100%;height: 2em;resize: none;overflow-y: scroll'>"
-                        + data[i].infocontent +"</textarea>" +
-                        "时间:<input disabled type='datetime' value='" + data[i].infotime+ "'>" +
-                        "<br></br>新书:<input disabled type='text' value='" + data[i].bookname + "'>" +
-                        "分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
-                        "<br></br>简介:<textarea style='width: 100%;height: 4em;' disabled type='text'>" + data[i].intro + "</textarea>" +
-                        "<br><hr style='width: 100%;border: 5px solid #000;' />");
-                    pthis.append(oneDiv);
-                }
-            },
-            error: function(e){
-                console.log(e);
-            }
-        });
-        $(document).on('click', '#tologgout', function () {
-            $.ajax({
-                url: "user/logout",
-                type: "post",
-                data: {},
-                dataType: "text",
-                async: false,
-                success: function(data){
-                    localStorage.removeItem("loginUser");
-                    localStorage.removeItem("userid");
-                    localStorage.removeItem("status");
-                    alert("退出登录成功！");
-                    location.href = "index.html";
-                },
-                error: function (error) {
-                    console.log(error);
+			$("#footShow").append(insertOneExtro);
+			$("#showContent").remove();
+			$("#newContent").remove();
+		}
+		if(localStorage.getItem("status") === '2') {
+			$("#header").text("尊敬的用户，欢迎使用！");
+			$("#userCenter").show();
+			$("#extro").show();
+			$("#search").show();
+		}
+		var pthis = $(document).find("#showContent");
+		pthis.append("<div style='font-size: 48px;float: left;display: block'>个性化推荐：</div>")
+		pthis.append("<input id='fresh' type='button' class='ui-button' value='刷新推荐'>");
+		$("#loginUser").val(localStorage.getItem("loginUser"));
+		$.ajax({
+			url: "/books/getBooksByHistory",
+			type: "get",
+			data: {
+				userid: localStorage.getItem("userid")
+			},
+			dataType: "json",
+			async: false,
+			success: function(data){
+				var pthis = $(document).find("#showContent");
+				for(var i = 0; i < data.length; i++){
+					var oneDiv = $("<div class='detail' style='display: grid;border: 2px solid;'></div>");
+					oneDiv.append(
+							"<img style='width: 100%' alt='图书封面' src='/images/" + data[i].image + "'><br>" +
+							"书名:<input disabled type='text' id='book_" + data[i].bookid +"' value='" + data[i].bookname + "'>" +
+							"分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
+							"热度:<input disabled type='text' value='热度:" + data[i].lendnum + "'>" +
+							"剩余数量:<input disabled type='text' value='剩余数量:" + data[i].remainnum + "'>" +
+							"<br>简介:<textarea style='width: 100%;height: 5em;resize: none' disabled type='text'>" + data[i].intro + "</textarea>" +
+							"<br><hr style='width: 100%;border: 5px solid #000;' />");
+					pthis.append(oneDiv);
+					$(".detail").on('click', (e)=>{
+						localStorage.setItem("bookid", $(e.target).parent().children("input").eq(0).attr("id").split("_")[1]);
+						localStorage.setItem("bookname", $(e.target).parent().children("input").eq(0).val());
+						localStorage.setItem("booktype", $(e.target).parent().children("input").eq(1).val());
+						localStorage.setItem("lendnum", $(e.target).parent().children("input").eq(2).val().split(":")[1]);
+						localStorage.setItem("remainnum", $(e.target).parent().children("input").eq(3).val().split(":")[1]);
+						localStorage.setItem("image", ".."+$(e.target).parent().find("img").attr("src"));
+						localStorage.setItem("intro", $(e.target).parent().find("textarea").val());
+						location.href="iframe/detail.html";
+					});
 				}
-            });
-        });
-        $(document).on('click', '#fresh', function(){
-            location.reload();
-        });
-        $("#extro").on('click', function(){
-            location.href="extro.html"
-        });
-        $("#search").on('click', function(){
-            location.href="search.html";
-        });
-        $("#insert").on('click', function(){
-            location.href="./iframe/insertOneBook.html";
-        });
-        $("#insertExtro").on('click', function(){
-            location.href="./iframe/insertExtro.html";
-        });
-        $("#manageUser").on('click', function(){
-            location.href="./iframe/manageUser.html";
-        });
-        $("#userCenter").on('click', function(){
-            location.href="./iframe/userCenter.html";
-        });
-        $("#managerBooks").on('click', function(){
-            location.href="./iframe/managerBooks.html";
-        });
-    });
+			},
+			error: function(e){
+				console.log(e);
+			}
+		});
+		var pinfo = $(document).find("#newContent");
+		pinfo.append(`<div style="font-size: 48px;float: left;display: block">个人通知：</div>`);
+		$.ajax({
+			url: "/info/getInfoListForUser",
+			type: "get",
+			data: {
+				userid: localStorage.getItem("userid")
+			},
+			dataType: "json",
+			async: false,
+			success: function(data){
+				var pthis = $(document).find("#newContent");
+				for(var i = 0; i < data.length; i++){
+					var oneDiv = $("<div style='display: grid;border: 2px solid;'></div>");
+					oneDiv.append(
+							"通知信息:<textarea id='info_" + data[i].infoid + "' disabled " +
+							"style='width:100%;height: 2em;resize: none;overflow-y: scroll'>"
+							+ data[i].infocontent +"</textarea>" +
+							"时间:<input disabled type='datetime' value='" + data[i].infotime+ "'>" +
+							"<br></br>新书:<input disabled type='text' value='" + data[i].bookname + "'>" +
+							"分类:<input disabled type='text' value='" + data[i].booktype + "'>" +
+							"<br></br>简介:<textarea style='width: 100%;height: 4em;' disabled type='text'>" + data[i].intro + "</textarea>" +
+							"<br><hr style='width: 100%;border: 5px solid #000;' />");
+					pthis.append(oneDiv);
+				}
+			},
+			error: function(e){
+				console.log(e);
+			}
+		});
+		$(document).on('click', '#tologgout', function () {
+			$.ajax({
+				url: "user/logout",
+				type: "post",
+				data: {},
+				dataType: "json",
+				async: false,
+				success: function(data){
+					if(data.result) {
+						localStorage.removeItem("loginUser");
+						localStorage.removeItem("userid");
+						localStorage.removeItem("status");
+						alert("退出登录成功！");
+						location.href = "index.html";
+					}
+				},
+				error: function (error) {
+					console.log(error);
+				}
+			});
+		});
+		$(document).on('click', '#fresh', function(){
+			location.reload();
+		});
+		$("#extro").on('click', function(){
+			location.href="extro.html"
+		});
+		$("#search").on('click', function(){
+			location.href="search.html";
+		});
+		$("#insert").on('click', function(){
+			location.href="./iframe/insertOneBook.html";
+		});
+		$("#insertExtro").on('click', function(){
+			location.href="./iframe/insertExtro.html";
+		});
+		$("#manageUser").on('click', function(){
+			location.href="./iframe/manageUser.html";
+		});
+		$("#userCenter").on('click', function(){
+			location.href="./iframe/userCenter.html";
+		});
+		$("#managerBooks").on('click', function(){
+			location.href="./iframe/managerBooks.html";
+		});
+	});
 </script>
 </body>
 </html>

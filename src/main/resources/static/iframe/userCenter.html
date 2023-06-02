@@ -19,7 +19,7 @@
 		<br><br><br>
 		<hr style='width: 100%;border: 1px solid #000;' />
 	</div>
-	<div id="userInfo" style="display: grid;font-size: 48px;">
+	<div id="userInfo" class="addBackground" style="display: grid;font-size: 48px;">
 		<label for="username">用户名：</label>
 		<input id="username" style="font-size: 48px;" disabled type="text" value="">
 		<br>
@@ -45,15 +45,15 @@
 		<br>
 	</div>
 	<br>
-	<div style="text-align: center">
+	<div class="addBackground" style="text-align: center">
 		------------------------------------------------------------------------------</div>
 	<br>
-	<div style="position: relative;width: 70%;height: auto;font-size: 36px;left: 15%;text-align: center">借阅记录</div>
+	<div class="addBackground" style="position: relative;width: 70%;height: auto;font-size: 36px;left: 15%;text-align: center">借阅记录</div>
 	<br>
-	<div style="text-align: center">
+	<div class="addBackground" style="text-align: center">
 		------------------------------------------------------------------------------</div>
 	<br>
-	<div>
+	<div class="addBackground">
 		<table id="showLended" style="font-size: 36px;text-align: center;left: 5%;position: relative;">
 			<tr id="hread">
 				<td>序号</td>
@@ -157,37 +157,40 @@
                         "<td style='border: 1px solid #000;' class='lendtime'>" + data[i].lendtime + "</td>" +
                         "<td style='border: 1px solid #000;' class='status'>" + statusStr + "</td>" +
                         "<td style='border: 1px solid #000;'>" +
-						`<input type='button' class='ui-button button' value=${but}>` +
+						`<input type='button' class='ui-button toReturn' value=${but}>` +
 						"</td>" +
                         "</tr>")
                     showLendedBooks.append(temp);
+					$(".toReturn").on('click', (e)=>{
+						var borrowid = $(e.target).parent().parent().find(".bookid").attr("id");
+						var userid = localStorage.getItem("userid");
+						if($(e.target).val()==="点击归还"){
+							$.ajax({
+								url: "../borrows/updateOneStatus",
+								type: "post",
+								data: {
+									userid: userid,
+									borrowid: borrowid
+								},
+								dataType: "json",
+								async: false,
+								success: function(data){
+									alert("还书成功！");
+									localStorage.setItem("lended", localStorage.getItem("lended") - 1);
+									$("#lended").val(localStorage.getItem("lended"));
+									console.log(data);
+									location.reload();
+								},
+								error: function(e) {
+									console.log(e);
+								}
+							});
+						}
+					});
                 }
             },
             error: function(e){
                 console.log(e);
-            }
-        });
-        $(".button").on('click', (e)=>{
-            var borrowid = $(e.target).parent().parent().find(".bookid").attr("id");
-            var userid = localStorage.getItem("userid");
-            if($(e.target).val()==="点击归还"){
-                $.ajax({
-                    url: "../borrows/updateOneStatus",
-                    type: "post",
-                    data: {
-                        userid: userid,
-                        borrowid: borrowid
-                    },
-                    dataType: "json",
-                    async: false,
-                    success: function(data){
-                        alert("还书成功！");
-                        console.log(data);
-                    },
-                    error: function(e) {
-                        console.log(e);
-                    }
-                });
             }
         });
     });
