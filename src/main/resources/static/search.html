@@ -14,14 +14,14 @@
 </head>
 <body>
 <div id="root">
-	<div id="contents" style="position: relative;overflow-y: scroll;height: auto;width: 100%">
+	<div class="addBackground"  id="contents" style="position: relative;overflow-y: scroll;height: auto;width: 100%">
 		<input id="back" type="button" class="ui-button" value="返回">
 		<label for="bookname">输入书名搜索图书:</label>
 		<input id="bookname" type="text" placeholder="书名">
 		<input id="sureSearch" type="button" class="ui-button" value="搜索">
 		<br><hr style='width: 100%;border: 1px solid #000;' />
-		<div id="result" style="position: relative;overflow-y: scroll;height: auto;width: 100%;">
-			<div style="text-align: center;font-size: 64px;position: relative;width: 70%;left: 15%;display: block">
+		<div class="addBackground" id="result" style="position: relative;overflow-y: scroll;height: auto;width: 100%;">
+			<div class="addBackground" style="text-align: center;font-size: 64px;position: relative;width: 70%;left: 15%;display: block">
 				搜索结果将显示在此处。
 			</div>
 		</div>
@@ -43,7 +43,7 @@
                 success: function(data){
                     var pthis = $("#result").empty();
                     for(var i = 0; i < data.length; i++){
-                        pthis.append("<div style='display: grid;'>" +
+                        pthis.append("<div class='addBackground' style='display: grid;'>" +
                             "<button class='detail' type='button'>详情</button>" +
                             "<input disabled type='text' id='oneBook_" + data[i].bookid + "' value='"
                             + data[i].bookname + "'>" +

@@ -55,15 +55,7 @@ width: 100%;height: auto;">
 		}
 		if(localStorage.getItem("status") === '1') {
 			$("#header").text("尊敬的专家，欢迎使用！");
-			var insertOneExtro = $("#insertExtro").css({
-				"position": "absolute",
-				"left": "15%",
-				"width": "70%",
-				"height": "auto",
-				"top": "30%",
-				"font-size": "48px",
-			});
-			$("#footShow").append(insertOneExtro);
+			$("#insertExtro").show();
 			$("#showContent").remove();
 			$("#newContent").remove();
 		}

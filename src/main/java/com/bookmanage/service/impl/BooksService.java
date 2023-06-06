@@ -38,7 +38,7 @@ public class BooksService implements BooksServiceImpl {
     @Override
     public List<Map<String, Object>> getBooksByHistory(int userid) {
         //根据历史借阅推荐，个性化推荐的核心部分
-        // 根据userid获取该用户历史查阅书籍
+        // 根据userid获取该用户历史借阅书籍
         List<Map<String, Object>> historyList = borrowsMapper.getBorrowsListByUserid(userid);
         // 遍历获得该用户所借阅书籍的分类及每种分类所借数量
         Map<String, Double> lengNumberList = new HashMap<>();
@@ -56,21 +56,21 @@ public class BooksService implements BooksServiceImpl {
         }
         // 将各种数量求和得到每类的百分比
         int allLendNum = len;
-        double count = 0.0;
         int num = 0;
         double[] lunpan = new double[lengNumberList.size()];
         if(lunpan.length != 0 && len != 0){
+            double item = 0.0;
             for(Map.Entry<String, Double> entry: lengNumberList.entrySet()){
-                double item = entry.getValue()/(allLendNum * 1.0) + count;
-                count+= item;
+                item = entry.getValue()/(allLendNum * 1.0) + item;
                 entry.setValue(item);
-                lunpan[num] = count;
+                lunpan[num] = item;
+                num++;
             }
             //生成五次随机数，并根据百分比得到这五个随机数处于哪一类
             int[] chooses = new int[5];
             for(int i = 0; i < 5; i++){
                 int cho = 0;
-                double item = Math.random();
+                item = Math.random();
                 for(int j = 0; j < lunpan.length; j++){
                     if(item <= lunpan[j]){
                         break;
@@ -92,11 +92,28 @@ public class BooksService implements BooksServiceImpl {
             }
             // 在对应的类别中选取一本书
             List<Map<String, Object>> books = new ArrayList<>();
+            int chos[] = new int[5];
             for(int i = 0; i< 5; i++){
                 // 获得对于类别的所有书籍
                 List<Map<String, Object>> booksList = booksMapper.getBooksByTypes(choosesType[i]);
                 // 生成在最大数量范围内的随机数
-                int chooseOne = (int)(Math.random() * booksList.size() + 0);
+                boolean cannot = true;
+                int chooseOne;
+                do {
+                    chooseOne = (int) (Math.random() * booksList.size() + 0);
+                    for (int l = 0; l < chos.length
+
+                            ; l++) {
+                        if (chooseOne == chos[l]) {
+                            cannot = false;
+                            break;
+                        }
+                        else{
+                            cannot = true;
+                            chos[l] = chooseOne;
+                        }
+                    }
+                }while (!cannot);
                 // 选取该随机数对应的书，并加入List
                 Map<String, Object> oneBook = booksList.get(chooseOne);
                 books.add(oneBook);

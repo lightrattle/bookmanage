@@ -1,6 +1,7 @@
 package com.bookmanage.service.impl;
 
 import com.bookmanage.mapper.BorrowsMapper;
+import com.bookmanage.mapper.UserMapper;
 import com.bookmanage.service.BorrowsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ import java.util.Map;
 public class BorrowsService implements BorrowsServiceImpl {
     @Autowired
     BorrowsMapper borrowsMapper;
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     public List<Map<String, Object>> getBorrowsListByUserid(int userid) {
@@ -36,6 +39,7 @@ public class BorrowsService implements BorrowsServiceImpl {
 
     @Override
     public boolean updateOneStatus(int userid, int borrowid) {
+        userMapper.lendedSub(userid);
         return borrowsMapper.updateOneStatus(userid, borrowid);
     }
 }

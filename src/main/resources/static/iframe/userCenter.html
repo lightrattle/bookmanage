@@ -19,29 +19,29 @@
 		<br><br><br>
 		<hr style='width: 100%;border: 1px solid #000;' />
 	</div>
-	<div id="userInfo" class="addBackground" style="display: grid;font-size: 48px;">
+	<div id="userInfo" class="addBackground" style="display: inline-block;font-size: 24px;">
 		<label for="username">用户名：</label>
-		<input id="username" style="font-size: 48px;" disabled type="text" value="">
+		<input id="username" style="font-size: 24px;" disabled type="text" value="">
 		<br>
 		<label for="nickname">昵称：</label>
-		<input id="nickname" style="font-size: 48px;" type="text" value="">
-		<input id="resetNickname" style="font-size: 48px;" type="button" class="ui-button" value="确认修改">
+		<input id="nickname" style="font-size: 24px;" type="text" value="">
+		<input id="resetNickname" style="font-size: 24px;" type="button" class="ui-button" value="确认修改">
 		<br>
 		<label for="oldpassword">旧密码：</label>
-		<input id="oldpassword" style="font-size: 48px;" type="password" value="">
+		<input id="oldpassword" style="font-size: 24px;" type="password" value="">
 		<br>
 		<label for="newpassword">新密码：</label>
-		<input id="newpassword" style="font-size: 48px;" type="password" value="">
+		<input id="newpassword" style="font-size: 24px;" type="password" value="">
 		<br>
 		<label for="passwordAgain">再次输入：</label>
-		<input id="passwordAgain" style="font-size: 48px;" type="password" value="">
-		<input id="resetPassword" style="font-size: 48px;" type="button" class="ui-button" value="确认修改">
+		<input id="passwordAgain" style="font-size: 24px;" type="password" value="">
+		<input id="resetPassword" style="font-size: 24px;" type="button" class="ui-button" value="确认修改">
 		<br>
 		<label for="maxlend">最大借阅数量：</label>
-		<input id="maxlend" style="font-size: 48px;" disabled type="text" value=""><br>
+		<input id="maxlend" style="font-size: 24px;" disabled type="text" value=""><br>
 		<br>
 		<label for="lended">已经借阅数量：</label>
-		<input id="lended" style="font-size: 48px;" disabled type="text" value=""><br>
+		<input id="lended" style="font-size: 24px;" disabled type="text" value=""><br>
 		<br>
 	</div>
 	<br>
@@ -161,7 +161,7 @@
 						"</td>" +
                         "</tr>")
                     showLendedBooks.append(temp);
-					$(".toReturn").on('click', (e)=>{
+					$(".toReturn").unbind('click').on('click', (e)=>{
 						var borrowid = $(e.target).parent().parent().find(".bookid").attr("id");
 						var userid = localStorage.getItem("userid");
 						if($(e.target).val()==="点击归还"){

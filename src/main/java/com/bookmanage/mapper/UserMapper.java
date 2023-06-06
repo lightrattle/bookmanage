@@ -40,4 +40,6 @@ public interface UserMapper {
     boolean updatePassword(int userid, String password);
 
     boolean updateLended(int userid);
+
+    boolean lendedSub(int userid);
 }

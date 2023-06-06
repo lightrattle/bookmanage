@@ -69,6 +69,10 @@
         update `user` set lended = lended + 1 where userid = #{userid}
     </update>
 
+    <update id="lendedSub">
+        update `user` set lended = lended - 1 where userid = #{userid}
+    </update>
+
     <update id="updatePassword">
         update `user` set
             password = #{password} where userid = #{userid}
